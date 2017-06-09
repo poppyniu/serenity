@@ -7,169 +7,77 @@
     <groupId>HKLand</groupId>
     <artifactId>Cucumber</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <name>HK LAND Tests</name>
+
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <xmlFileName>${basedir}/Suite.xml</xmlFileName>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.test.skip>false</maven.test.skip>
+        <report.space.key>undefined</report.space.key>
+        <report.parent.page>undefined</report.parent.page>
+        <report.confluence.baseUrl>undefined</report.confluence.baseUrl>
+        <report.confluence.basic.auth>undefined</report.confluence.basic.auth>
+        <report.url>undefined</report.url>
+        <report.serenity.dir>target/site/serenity</report.serenity.dir>
+        <report.title>HK LAND</report.title>
         <serenity.version>1.2.2</serenity.version>
-        <serenity-cucumber.version>1.1.8</serenity-cucumber.version>
     </properties>
-    <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>http://10.0.245.111:8081/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-    <dependencies>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>2.45.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.7</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-java</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-junit</artifactId>
-            <version>1.2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-core</artifactId>
-            <version>${serenity.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-rest-assured</artifactId>
-            <version>${serenity.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-cucumber</artifactId>
-            <version>${serenity-cucumber.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-htmlunit-driver</artifactId>
-            <version>2.44.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>1.7.12</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>3.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-excelant</artifactId>
-            <version>3.13</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.3</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.kevinsawicki</groupId>
-            <artifactId>http-request</artifactId>
-            <version>5.6</version>
-        </dependency>
-        <dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <classifier>jdk15</classifier>
-        </dependency>
-        <dependency>
-            <groupId>website.automate</groupId>
-            <artifactId>jwebrobot</artifactId>
-            <version>0.5.1</version>
-        </dependency>
-    </dependencies>
-    <profiles>
-        <profile>
-            <id>
-                hkland
-            </id>
-            <!--<properties>-->
-                <!--<path>UISuite.xml</path>-->
-            <!--</properties>-->
-            <activation><activeByDefault>true</activeByDefault></activation>
-        </profile>
-    </profiles>
+
     <build>
         <plugins>
+            <!--<plugin>-->
+            <!--<groupId>com.aswatson.taf</groupId>-->
+            <!--<artifactId>report-maven-plugin</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<configuration>-->
+            <!--<spaceKey>${report.space.key}</spaceKey>-->
+            <!--<parentPage>${report.parent.page}</parentPage>-->
+            <!--<baseUrl>${report.confluence.baseUrl}</baseUrl>-->
+            <!--<baseAuth>${report.confluence.basic.auth}</baseAuth>-->
+            <!--<reportUrl>${report.url}</reportUrl>-->
+            <!--<serenityDir>${report.serenity.dir}</serenityDir>-->
+            <!--<title>${report.title}</title>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.17</version>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
                 <configuration>
-                    <systemPropertyVariables>
-                        <browser>${project.build.testOutputDirectory}/$browser</browser>
-                        <testdata>D:\HKLand\src\test\resources\test.jpg</testdata>
-                    </systemPropertyVariables>
-                    <!--<suiteXmlFiles>-->
-                        <!--<suiteXmlFile>${project.build.testOutputDirectory}/${path}</suiteXmlFile>-->
-                    <!--</suiteXmlFiles>-->
+                    <includes>
+                        <include>**/TestSuite.java</include>
+                    </includes>
+                    <argLine>-Xmx512m</argLine>
+                    <systemProperties>
+                        <property>
+                            <name>env.config</name>
+                            <value>prod.properties</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
+                <version>3.2</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>net.serenity-bdd.maven.plugins</groupId>
                 <artifactId>serenity-maven-plugin</artifactId>
-                <version>1.1.2</version>
+                <version>${serenity.version}</version>
                 <executions>
                     <execution>
                         <id>serenity-reports</id>
@@ -183,4 +91,36 @@
         </plugins>
     </build>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>1.1.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-excelant</artifactId>
+            <version>3.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <version>1.7.12</version>
+        </dependency>
+    </dependencies>
 </project>

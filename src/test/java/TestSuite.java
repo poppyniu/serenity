@@ -1,4 +1,5 @@
 import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 import net.serenitybdd.cucumber.CucumberWithSerenity;
 import org.junit.runner.RunWith;
 
@@ -8,9 +9,9 @@ import org.junit.runner.RunWith;
 //@RunWith(Cucumber.class)
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        format={"pretty","html:target/html/"},
-        features="src/test/resources/",
-        tags={"@poppy"}
+        format = {"pretty", "html:target/html/"},
+        features = "src/test/resources/"
+//        tags = {"@poppy"}
 )
 public class TestSuite {
 }

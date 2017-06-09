@@ -1,4 +1,4 @@
-package common.steps;
+package constants;
 
 public class CommonException extends RuntimeException {
     public CommonException() {
