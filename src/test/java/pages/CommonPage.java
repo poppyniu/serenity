@@ -36,13 +36,15 @@ public class CommonPage extends PageObject{
         }
     }
 
-    public static void elementExist(WebElement element)
+    public static boolean elementExist(WebElement element)
             throws Exception{
         boolean elementExist= element.isDisplayed();
         if(elementExist==true)
         {
             Assert.assertTrue(true);
+            return elementExist;
         }
+        return elementExist;
     }
 
 
