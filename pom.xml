@@ -27,20 +27,16 @@
 
     <build>
         <plugins>
-            <!--<plugin>-->
-            <!--<groupId>com.aswatson.taf</groupId>-->
-            <!--<artifactId>report-maven-plugin</artifactId>-->
-            <!--<version>1.0</version>-->
-            <!--<configuration>-->
-            <!--<spaceKey>${report.space.key}</spaceKey>-->
-            <!--<parentPage>${report.parent.page}</parentPage>-->
-            <!--<baseUrl>${report.confluence.baseUrl}</baseUrl>-->
-            <!--<baseAuth>${report.confluence.basic.auth}</baseAuth>-->
-            <!--<reportUrl>${report.url}</reportUrl>-->
-            <!--<serenityDir>${report.serenity.dir}</serenityDir>-->
-            <!--<title>${report.title}</title>-->
-            <!--</configuration>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.17</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <testdata>D:\HKLand\src\test\resources\test.jpg</testdata>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.18.1</version>
@@ -88,6 +84,24 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.5.3</version>
+                <executions>
+                    <execution>
+                        <id>create-my-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/jar-with-dependencies.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -121,6 +135,22 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.12</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.10-FINAL</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>xml-apis</groupId>
+                    <artifactId>xml-apis</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.0.8</version>
         </dependency>
     </dependencies>
 </project>

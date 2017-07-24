@@ -14,6 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+
 /**
  * Created by Poppy_Zhang on 2017/6/8.
  */
@@ -153,4 +157,31 @@ public class CommonPage extends PageObject{
         }
         return message;
     }
+
+    public void selectWorkingHoursDrodownByItemAndNumber(Integer Number,String item)
+            throws Exception {
+        getDriver().findElement(By.xpath("//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div["+Number+"]/ul/li/span/span[contains(text(),'"+item+"')]")).click();
+    }
+
+    public void selectWorkingHoursDrodownByItem(String item)
+            throws Exception {
+        getDriver().findElement(By.xpath("//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[1]/ul/li/span/span[contains(text(),'"+item+"')]")).click();
+    }
+
+    public void selectWorkingHoursDrodown2ByItem(String item)
+            throws Exception {
+        getDriver().findElement(By.xpath("//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[2]/ul/li/span/span[contains(text(),'"+item+"')]")).click();
+    }
+
+    public  void sendKeysOnElement(WebElement element, String sendValue) {
+        String insertedValue = element.getAttribute("value");
+        while ( !insertedValue.equals(sendValue) ) {
+            element.clear();
+            for(int i=0; i<sendValue.length(); i++){
+                element.sendKeys(sendValue.substring(i,i+1));
+            }
+            insertedValue = element.getAttribute("value");
+        }
+    }
+
 }
