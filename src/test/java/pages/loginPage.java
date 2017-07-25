@@ -120,6 +120,7 @@ public class loginPage extends PageObject {
     public void hkldUserLogin(String userName, String UserPwd) throws Exception{
         commonPage.sendKeysOnElement(UserNameTextbox, userName);
         commonPage.sendKeysOnElement(UserPwdTextbox, UserPwd);
+        Thread.sleep(2000);
         loginBtn.click();
         Thread.sleep(6000);
     }

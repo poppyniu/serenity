@@ -1,0 +1,4 @@
+"Story","Title","Result","Date","Stability","Duration (s)"
+"HKLD admin user is able to do configuration on settings page.","Add a new location","SUCCESS","2017-07-25T16:30:14.461+08:00","0.0","55.38"
+"HKLD admin user is able to do configuration on settings page.","Add a new security Groups","SUCCESS","2017-07-25T16:31:11.085+08:00","0.0","114.27"
+"HKLD admin user is able to do configuration on settings page.","Edit a user","SUCCESS","2017-07-25T16:33:07.047+08:00","0.0","21.53"

@@ -1,0 +1,142 @@
+<acceptance-test-run title="Add a new security Groups" name="Add a new security Groups" description="" steps="20" successful="20" failures="0" skipped="0" ignored="0" pending="0" result="SUCCESS" duration="114265" timestamp="2017-07-25T16:31:11.085+08:00" session-id="f8bf51b6-bb21-4a3b-a222-ed30fedc7864">
+  <user-story id="hkld-admin-user-is-able-to-do-configuration-on-settings-page." name="HKLD admin user is able to do configuration on settings page." path="settingsPage/settings.feature"/>
+  <tags>
+    <tag name="HKLD admin user is able to do configuration on settings page." type="feature"/>
+    <tag name="setting" type="tag"/>
+  </tags>
+  <examples>
+    <datasets>
+      <dataset startRow="0" rowCount="0" name="" description=""/>
+    </datasets>
+    <headers>
+      <header>Group Name</header>
+      <header>Description</header>
+    </headers>
+    <rows>
+      <row result="SUCCESS">
+        <value>General Users</value>
+        <value>HKLD General Engineer</value>
+      </row>
+      <row result="SUCCESS">
+        <value>Approver</value>
+        <value>HKLD Tender Manager</value>
+      </row>
+      <row result="SUCCESS">
+        <value>IT Admin</value>
+        <value>HKLD Administrator</value>
+      </row>
+      <row result="SUCCESS">
+        <value>Super Admin</value>
+        <value>Super Administrator</value>
+      </row>
+    </rows>
+  </examples>
+  <test-group name="[1] {Group Name=General Users, Description=HKLD General Engineer}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="5638">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="9711">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="632">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Security Groups setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="1823">
+        <description>Select settings option: Security Groups</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new security group with General Users and HKLD General Engineer" result="SUCCESS">
+      <test-step result="SUCCESS" duration="10839">
+        <description>Add new security group: General Users, HKLD General Engineer</description>
+      </test-step>
+    </test-group>
+  </test-group>
+  <test-group name="[1] {Group Name=Approver, Description=HKLD Tender Manager}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="3282">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="10316">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="663">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Security Groups setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="4926">
+        <description>Select settings option: Security Groups</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new security group with Approver and HKLD Tender Manager" result="SUCCESS">
+      <test-step result="SUCCESS" duration="8704">
+        <description>Add new security group: Approver, HKLD Tender Manager</description>
+      </test-step>
+    </test-group>
+  </test-group>
+  <test-group name="[1] {Group Name=IT Admin, Description=HKLD Administrator}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="5553">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="9543">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="550">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Security Groups setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="1986">
+        <description>Select settings option: Security Groups</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new security group with IT Admin and HKLD Administrator" result="SUCCESS">
+      <test-step result="SUCCESS" duration="8654">
+        <description>Add new security group: IT Admin, HKLD Administrator</description>
+      </test-step>
+    </test-group>
+  </test-group>
+  <test-group name="[1] {Group Name=Super Admin, Description=Super Administrator}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="3381">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="10290">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="671">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Security Groups setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="4824">
+        <description>Select settings option: Security Groups</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new security group with Super Admin and Super Administrator" result="SUCCESS">
+      <test-step result="SUCCESS" duration="9514">
+        <description>Add new security group: Super Admin, Super Administrator</description>
+      </test-step>
+    </test-group>
+  </test-group>
+</acceptance-test-run>
