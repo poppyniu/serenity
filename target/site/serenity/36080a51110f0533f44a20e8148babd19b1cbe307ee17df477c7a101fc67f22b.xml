@@ -1,0 +1,83 @@
+<acceptance-test-run title="Add a new location" name="Add a new location" description="" steps="10" successful="10" failures="0" skipped="0" ignored="0" pending="0" result="SUCCESS" duration="55376" timestamp="2017-07-25T16:30:14.461+08:00" session-id="b6dd0282-b9cb-4039-be19-e7c2284156a0">
+  <user-story id="hkld-admin-user-is-able-to-do-configuration-on-settings-page." name="HKLD admin user is able to do configuration on settings page." path="settingsPage/settings.feature"/>
+  <tags>
+    <tag name="HKLD admin user is able to do configuration on settings page." type="feature"/>
+    <tag name="setting" type="tag"/>
+  </tags>
+  <examples>
+    <datasets>
+      <dataset startRow="0" rowCount="0" name="" description=""/>
+    </datasets>
+    <headers>
+      <header>Location Short Form</header>
+      <header>Description</header>
+      <header>HKL Company</header>
+    </headers>
+    <rows>
+      <row result="SUCCESS">
+        <value>AH</value>
+        <value>AH description</value>
+        <value>HKLD</value>
+      </row>
+      <row result="SUCCESS">
+        <value>PB</value>
+        <value>PB description</value>
+        <value>HKLD</value>
+      </row>
+    </rows>
+  </examples>
+  <test-group name="[1] {Location Short Form=AH, Description=AH description, HKL Company=HKLD}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="5897">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="9776">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="601">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Location setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="1818">
+        <description>Select settings option: Location</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new location with AH and AH description and HKLD" result="SUCCESS">
+      <test-step result="SUCCESS" duration="8408">
+        <description>Add new location: AH, AH description, HKLD</description>
+      </test-step>
+    </test-group>
+  </test-group>
+  <test-group name="[1] {Location Short Form=PB, Description=PB description, HKL Company=HKLD}" result="SUCCESS">
+    <test-group name="Given Open ETender system login page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="3566">
+        <description>Open login page</description>
+      </test-step>
+    </test-group>
+    <test-group name="And the user logs in as the user type HKLD Admin" result="SUCCESS">
+      <test-step result="SUCCESS" duration="10390">
+        <description>Hkld login: HKLD Admin</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user access settings page" result="SUCCESS">
+      <test-step result="SUCCESS" duration="696">
+        <description>Click setting link</description>
+      </test-step>
+    </test-group>
+    <test-group name="When user access Location setting" result="SUCCESS">
+      <test-step result="SUCCESS" duration="4906">
+        <description>Select settings option: Location</description>
+      </test-step>
+    </test-group>
+    <test-group name="And user add a new location with PB and PB description and HKLD" result="SUCCESS">
+      <test-step result="SUCCESS" duration="8196">
+        <description>Add new location: PB, PB description, HKLD</description>
+      </test-step>
+    </test-group>
+  </test-group>
+</acceptance-test-run>

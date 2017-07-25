@@ -1,0 +1,435 @@
+{
+  "name": "Add a new security Groups",
+  "testSteps": [
+    {
+      "number": 1,
+      "description": "[1] {Group Name\u003dGeneral Users, Description\u003dHKLD General Engineer}",
+      "duration": 28666,
+      "startTime": 1500971471085,
+      "result": "SUCCESS",
+      "children": [
+        {
+          "number": 2,
+          "description": "Given Open ETender system login page",
+          "duration": 5638,
+          "startTime": 1500971471085,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 3,
+              "description": "Open login page",
+              "duration": 5638,
+              "startTime": 1500971471085,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "description": "And the user logs in as the user type HKLD Admin",
+          "duration": 9711,
+          "startTime": 1500971476723,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 5,
+              "description": "Hkld login: HKLD Admin",
+              "duration": 9711,
+              "startTime": 1500971476723,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 6,
+          "description": "And user access settings page",
+          "duration": 653,
+          "startTime": 1500971486434,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 7,
+              "description": "Click setting link",
+              "duration": 632,
+              "startTime": 1500971486455,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 8,
+          "description": "When user access Security Groups setting",
+          "duration": 1824,
+          "startTime": 1500971487087,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 9,
+              "description": "Select settings option: Security Groups",
+              "duration": 1823,
+              "startTime": 1500971487087,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 10,
+          "description": "And user add a new security group with General Users and HKLD General Engineer",
+          "duration": 10839,
+          "startTime": 1500971488912,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 11,
+              "description": "Add new security group: General Users, HKLD General Engineer",
+              "duration": 10839,
+              "startTime": 1500971488912,
+              "result": "SUCCESS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "description": "[1] {Group Name\u003dApprover, Description\u003dHKLD Tender Manager}",
+      "duration": 27897,
+      "startTime": 1500971500990,
+      "result": "SUCCESS",
+      "children": [
+        {
+          "number": 13,
+          "description": "Given Open ETender system login page",
+          "duration": 3283,
+          "startTime": 1500971500990,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 14,
+              "description": "Open login page",
+              "duration": 3282,
+              "startTime": 1500971500990,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 15,
+          "description": "And the user logs in as the user type HKLD Admin",
+          "duration": 10319,
+          "startTime": 1500971504273,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 16,
+              "description": "Hkld login: HKLD Admin",
+              "duration": 10316,
+              "startTime": 1500971504274,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 17,
+          "description": "And user access settings page",
+          "duration": 665,
+          "startTime": 1500971514592,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 18,
+              "description": "Click setting link",
+              "duration": 663,
+              "startTime": 1500971514594,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 19,
+          "description": "When user access Security Groups setting",
+          "duration": 4926,
+          "startTime": 1500971515257,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 20,
+              "description": "Select settings option: Security Groups",
+              "duration": 4926,
+              "startTime": 1500971515257,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 21,
+          "description": "And user add a new security group with Approver and HKLD Tender Manager",
+          "duration": 8704,
+          "startTime": 1500971520183,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 22,
+              "description": "Add new security group: Approver, HKLD Tender Manager",
+              "duration": 8704,
+              "startTime": 1500971520183,
+              "result": "SUCCESS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "description": "[1] {Group Name\u003dIT Admin, Description\u003dHKLD Administrator}",
+      "duration": 26290,
+      "startTime": 1500971529641,
+      "result": "SUCCESS",
+      "children": [
+        {
+          "number": 24,
+          "description": "Given Open ETender system login page",
+          "duration": 5553,
+          "startTime": 1500971529641,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 25,
+              "description": "Open login page",
+              "duration": 5553,
+              "startTime": 1500971529641,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 26,
+          "description": "And the user logs in as the user type HKLD Admin",
+          "duration": 9544,
+          "startTime": 1500971535194,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 27,
+              "description": "Hkld login: HKLD Admin",
+              "duration": 9543,
+              "startTime": 1500971535194,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 28,
+          "description": "And user access settings page",
+          "duration": 553,
+          "startTime": 1500971544738,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 29,
+              "description": "Click setting link",
+              "duration": 550,
+              "startTime": 1500971544741,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 30,
+          "description": "When user access Security Groups setting",
+          "duration": 1986,
+          "startTime": 1500971545291,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 31,
+              "description": "Select settings option: Security Groups",
+              "duration": 1986,
+              "startTime": 1500971545291,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 32,
+          "description": "And user add a new security group with IT Admin and HKLD Administrator",
+          "duration": 8654,
+          "startTime": 1500971547277,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 33,
+              "description": "Add new security group: IT Admin, HKLD Administrator",
+              "duration": 8654,
+              "startTime": 1500971547277,
+              "result": "SUCCESS"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 34,
+      "description": "[1] {Group Name\u003dSuper Admin, Description\u003dSuper Administrator}",
+      "duration": 28699,
+      "startTime": 1500971556651,
+      "result": "SUCCESS",
+      "children": [
+        {
+          "number": 35,
+          "description": "Given Open ETender system login page",
+          "duration": 3384,
+          "startTime": 1500971556652,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 36,
+              "description": "Open login page",
+              "duration": 3381,
+              "startTime": 1500971556655,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 37,
+          "description": "And the user logs in as the user type HKLD Admin",
+          "duration": 10290,
+          "startTime": 1500971560036,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 38,
+              "description": "Hkld login: HKLD Admin",
+              "duration": 10290,
+              "startTime": 1500971560036,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 39,
+          "description": "And user access settings page",
+          "duration": 686,
+          "startTime": 1500971570326,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 40,
+              "description": "Click setting link",
+              "duration": 671,
+              "startTime": 1500971570341,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 41,
+          "description": "When user access Security Groups setting",
+          "duration": 4824,
+          "startTime": 1500971571012,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 42,
+              "description": "Select settings option: Security Groups",
+              "duration": 4824,
+              "startTime": 1500971571012,
+              "result": "SUCCESS"
+            }
+          ]
+        },
+        {
+          "number": 43,
+          "description": "And user add a new security group with Super Admin and Super Administrator",
+          "duration": 9514,
+          "startTime": 1500971575836,
+          "result": "SUCCESS",
+          "children": [
+            {
+              "number": 44,
+              "description": "Add new security group: Super Admin, Super Administrator",
+              "duration": 9514,
+              "startTime": 1500971575836,
+              "result": "SUCCESS"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "userStory": {
+    "id": "hkld-admin-user-is-able-to-do-configuration-on-settings-page.",
+    "storyName": "HKLD admin user is able to do configuration on settings page.",
+    "path": "settingsPage/settings.feature",
+    "type": "feature"
+  },
+  "title": "Add a new security Groups",
+  "description": "",
+  "backgroundTitle": "",
+  "backgroundDescription": "",
+  "tags": [
+    {
+      "name": "HKLD admin user is able to do configuration on settings page.",
+      "type": "feature"
+    },
+    {
+      "name": "setting",
+      "type": "tag"
+    }
+  ],
+  "startTime": 1500971471085,
+  "duration": 114265,
+  "sessionId": "f8bf51b6-bb21-4a3b-a222-ed30fedc7864",
+  "driver": "iexplorer",
+  "dataTable": {
+    "headers": [
+      "Group Name",
+      "Description"
+    ],
+    "rows": [
+      {
+        "values": [
+          "General Users",
+          "HKLD General Engineer"
+        ],
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "Approver",
+          "HKLD Tender Manager"
+        ],
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "IT Admin",
+          "HKLD Administrator"
+        ],
+        "result": "SUCCESS"
+      },
+      {
+        "values": [
+          "Super Admin",
+          "Super Administrator"
+        ],
+        "result": "SUCCESS"
+      }
+    ],
+    "predefinedRows": true,
+    "currentRow": {
+      "value": 3
+    },
+    "dataSetDescriptors": [
+      {
+        "startRow": 0,
+        "rowCount": 0,
+        "name": "",
+        "description": ""
+      }
+    ]
+  },
+  "manual": false,
+  "result": "SUCCESS"
+}

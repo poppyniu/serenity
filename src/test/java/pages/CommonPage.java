@@ -174,6 +174,7 @@ public class CommonPage extends PageObject{
     }
 
     public  void sendKeysOnElement(WebElement element, String sendValue) {
+        element.click();
         String insertedValue = element.getAttribute("value");
         while ( !insertedValue.equals(sendValue) ) {
             element.click();

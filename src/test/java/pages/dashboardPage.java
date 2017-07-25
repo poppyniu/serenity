@@ -27,6 +27,13 @@ public class dashboardPage extends PageObject {
     @FindBy(xpath = ".//*[@id='logo']/img")
     WebElement HKLDLogo;
 
+    @FindBy(id = "hamburger")
+    WebElement hamburgerIcon;
+    @FindBy(id = "hamburger3")
+    WebElement settingLink;
 
-
+    public void clickSettingLink(){
+        hamburgerIcon.click();
+        settingLink.click();
+    }
 }
