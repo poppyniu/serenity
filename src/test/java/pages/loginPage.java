@@ -117,4 +117,11 @@ public class loginPage extends PageObject {
             System.out.println("Input invalid email address does not see the correct popup window, test fail!");
     }
 
+    public void hkldUserLogin(String userName, String UserPwd) throws Exception{
+        commonPage.sendKeysOnElement(UserNameTextbox, userName);
+        commonPage.sendKeysOnElement(UserPwdTextbox, UserPwd);
+        loginBtn.click();
+        Thread.sleep(6000);
+    }
+
 }
