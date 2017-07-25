@@ -10,4 +10,10 @@ public class TestAccountsConstants {
     public static String InvalidHKLDUserPwd = "aaa";
     public static String InvalidHKLDUserName1 = "poppy@126.com";
     public static String InvalidHKLDUserPwd1 = "bbbbbb";
+
+    public static String HKLDAdminName = "Elon";
+    public static String HKLDAdminPwd = "aaaaaa";
+
+    public static String HKLDApproverName = "Elon";
+    public static String HKLDApproverPwd = "aaaaaa";
 }

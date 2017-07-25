@@ -1,6 +1,9 @@
 package serenity;
 
+import constants.TestAccountsConstants;
 import net.thucydides.core.annotations.Step;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pages.itqPage;
 import pages.loginPage;
 
@@ -35,6 +38,23 @@ public class loginSteps {
         loginpage.loginDisabled();
     }
 
+    @Step
+    public void hkld_login(String userType) throws Exception {
+        switch (userType) {
+            case "HKLD Admin":
+                loginpage.hkldUserLogin(TestAccountsConstants.HKLDAdminName, TestAccountsConstants.HKLDAdminPwd);
+                break;
+            case "HKLD Engineer":
+                loginpage.hkldUserLogin(TestAccountsConstants.HKLDUserName, TestAccountsConstants.HKLDUserPwd);
+                break;
+            case "HKLD Approver":
+                loginpage.hkldUserLogin(TestAccountsConstants.HKLDApproverName, TestAccountsConstants.HKLDApproverPwd);
+                break;
+            default:
+                LOGGER.warn(("Unexpected user type: " + userType));
+        }
+    }
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(loginSteps.class);
 
 }
