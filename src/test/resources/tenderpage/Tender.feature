@@ -11,7 +11,7 @@ Feature:Test function on tender page
   Scenario Outline: HKLD engineer create and save tender and submit tender for approve
     Then Click create tender button and crate a tender
     Then Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
-#    Then Input scope of work tab info <GeneralDescriptionofWork> <GeneralSpecifications> <ParticularSpecifications>
+    Then Input scope of work tab info <GeneralDescriptionofWork> <GeneralSpecifications> <ParticularSpecifications>
     Then Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
     Then Input attachments tab info <ProjectDescription> and save tender
     Then Submit the new tender for approve
