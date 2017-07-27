@@ -1,13 +1,13 @@
 package serenity;
 
 import net.thucydides.core.annotations.Step;
-import pages.dashboardPage;
+import pages.DashboardPage;
 
 /**
  * Created by Maggie_Ping on 7/25/2017.
  */
 public class DashboardPageSteps {
-    dashboardPage dashboardPage;
+    DashboardPage dashboardPage;
 
     @Step
     public void click_settingLink(){

@@ -40,7 +40,7 @@ public class CommonPage extends PageObject{
         }
     }
 
-    public static boolean elementExist(WebElement element)
+    public boolean elementExist(WebElement element)
             throws Exception{
         boolean elementExist= element.isDisplayed();
         if(elementExist==true)
