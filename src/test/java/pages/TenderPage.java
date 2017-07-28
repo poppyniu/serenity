@@ -260,7 +260,6 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(),2);
         previewSubmitBtn.click();
         commonPage.wait(getDriver(),1);
-        commonPage.wait(getDriver(),1);
         if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Preview and submit succeed,test pass!");
         }

@@ -15,5 +15,10 @@ public class ITQSteps {
         itqPage.clickCreateITQ();
     }
 
+    @Step
+    public void preview_and_issue_itq() throws Exception {
+        itqPage.previewIssueITQ();
+    }
+
 
 }

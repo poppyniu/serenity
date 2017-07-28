@@ -1,5 +1,6 @@
 package steps.definition;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
@@ -18,4 +19,8 @@ public class ITQStepDefinitions {
         itqSteps.click_create_itq();
     }
 
+    @And("^HKLD engineer preview and issue itq")
+    public void hkld_engineer_preview_and_issue_itq() throws Throwable {
+        itqSteps.preview_and_issue_itq();
+    }
 }

@@ -13,6 +13,7 @@ Feature:Test function on itq page
     And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
     And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
     And Input attachments tab info <ProjectDescription> and save tender
+    And HKLD engineer preview and issue itq
     Then Clear tender test data in db
     Examples:
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |
