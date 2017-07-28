@@ -30,27 +30,27 @@ public class ITQPage extends PageObject {
 
 
     public void createITQ() throws Exception {
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         createITQTenderBtn.click();
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         createITQTenderEnterBtn.click();
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
     }
 
     public void navigateCreateITQ()throws Exception {
         String currentUrl=getDriver().getCurrentUrl();
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         commonPage.navigatePage(currentUrl);
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
     }
 
     public void selectDropdown()throws Exception {
         dropDownOne.click();
-        Thread.sleep(1000);
+        commonPage.wait(getDriver(),1000);
         dropDownOneItem.click();
-        Thread.sleep(1000);
+        commonPage.wait(getDriver(),1000);
         dropDownTwo.click();
-        Thread.sleep(1000);
+        commonPage.wait(getDriver(),1000);
         dropDownTwoItem.click();
     }
 }

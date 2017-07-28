@@ -21,17 +21,17 @@ public class NavigationPage extends PageObject {
     WebElement itqTenderPageContent;
 
     public void clickHamburger() throws Exception {
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         hamburgerBtn.click();
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         itqTenders.click();
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
     }
 
     public void navigateITQTenders()throws Exception {
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         commonPage.elementExist(itqTenderPageContent);
         boolean textExist=itqTenderPageContent.getText().contains("ITQ / Tender List Page");
         if(textExist==true){

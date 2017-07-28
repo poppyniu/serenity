@@ -35,26 +35,26 @@ public class DashboardPage extends PageObject {
     WebElement settingLink;
 
     public void selectCreateTenderDropdown(String item) throws Exception {
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         createTenderBtn.click();
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         selectTypeDropdown.click();
-        Thread.sleep(1000);
+        commonPage.wait(getDriver(),1000);
         selectTypeDropdown.click();
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         if(item.contains("tender")) {
             selectTypeDropdownItemTender.click();
         }
         if(item.contains("itq")) {
             selectTypeDropdownItemITQ.click();
         }
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         selectTypeEnterBtn.click();
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
         String currentUrl = getDriver().getCurrentUrl();
-        Thread.sleep(2000);
+        commonPage.wait(getDriver(),2000);
         commonPage.navigatePage(currentUrl);
-        Thread.sleep(3000);
+        commonPage.wait(getDriver(),3000);
     }
 
     public void clickSettingLink(){
