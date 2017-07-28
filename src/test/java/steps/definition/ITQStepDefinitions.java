@@ -10,20 +10,12 @@ import serenity.ITQSteps;
  */
 public class ITQStepDefinitions {
     @Steps
-    ITQSteps itqsteps;
+    ITQSteps itqSteps;
 
-    @When("^Click create new button and click enter$")
-    public void click_create_new_button_and_click_enter() throws Throwable {
-        itqsteps.create_new_itq();
+
+    @Then("^Click create itq button and crate a itq$")
+    public void click_create_itq_button_and_crate_a_itq() throws Throwable {
+        itqSteps.click_create_itq();
     }
 
-    @Then("^Navigate to create ITQ page$")
-    public void navigate_to_create_ITQ_page() throws Throwable {
-        itqsteps.navigate_create_itq();
-    }
-
-    @Then("^Select a dropdownlist$")
-    public void select_dropdownlist() throws Throwable {
-        itqsteps.select_dropdownlist();
-    }
 }

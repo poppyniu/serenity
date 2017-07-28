@@ -19,9 +19,6 @@ import java.sql.SQLException;
  * Created by Poppy_Zhang on 2017/7/19.
  */
 public class TenderPage extends PageObject {
-    static String sql = null;
-    static DBHelper db1 = null;
-    static ResultSet ret = null;
     String testDataPath = System.getProperty("testdata");
     String currentUrl;
     CommonPage commonPage;
@@ -135,105 +132,105 @@ public class TenderPage extends PageObject {
 
     public void inputGeneralTabInfo(String Description, String Location, String ProjectStart, String Duration, String WorkingHours1, String WorkingHours2, String WorkingHours3, String WorkingHours4, String Period, String Retention, String DefectsLiabilityPeriod, String LiquidatedDamages, String SuretyBond, String PRNumber) throws Exception {
         commonPage.sendKeysOnElement(projectDescriptionTextbox,Description);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         commonPage.sendKeysOnElement(projectLocationTextbox,Location);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         commonPage.sendKeysOnElement(tentativeProjectStartTextbox,ProjectStart);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         commonPage.sendKeysOnElement(projectDurationTextbox,Duration);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         //select working hours dropdown1
         workingHoursDropdown1.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.selectWorkingHoursDrodownByItemAndNumber(1,WorkingHours1);
         //select working hours dropdown2
         workingHoursDropdown2.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.selectWorkingHoursDrodownByItemAndNumber(2,WorkingHours2);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         workingHoursDropdown3.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.selectWorkingHoursDrodownByItemAndNumber(3,WorkingHours3);
         workingHoursDropdown4.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.selectWorkingHoursDrodownByItemAndNumber(4,WorkingHours4);
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
         addWorkingHoursBtn.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         periodTextbox.clear();
         commonPage.sendKeysOnElement(periodTextbox,Period);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         commonPage.sendKeysOnElement(prNumberTextbox,PRNumber);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         prNumberAddBtn.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         prNumberInfoSaveBtn.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
     }
 
     public void inputScopeOfWorkTabInfo(String GeneralDescriptionofWork, String GeneralSpecifications, String ParticularSpecifications) throws Exception {
         scopeOfWorkTab.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         getDriver().switchTo().frame(scopeOfWorkFreame1);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         scopeOfWorkTextBox.click();
         scopeOfWorkTextBox.sendKeys(GeneralDescriptionofWork);
         getDriver().switchTo().defaultContent();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         getDriver().switchTo().frame(scopeOfWorkFreame2);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         scopeOfWorkTextBox.click();
         scopeOfWorkTextBox.sendKeys(GeneralSpecifications);
         getDriver().switchTo().defaultContent();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         getDriver().switchTo().frame(scopeOfWorkFreame3);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         scopeOfWorkTextBox.click();
         scopeOfWorkTextBox.sendKeys(ParticularSpecifications);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         Actions actions=new Actions(getDriver());
         actions.sendKeys(Keys.TAB).perform();
         actions.sendKeys(Keys.UP).perform();
         actions.sendKeys(Keys.UP).perform();
         actions.sendKeys(Keys.UP).perform();
         actions.sendKeys(Keys.UP).perform();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         getDriver().switchTo().defaultContent();
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
     }
 
     public void inputItemsServicesTabInfo(String SectionTitle1, String DescriptionofWork1,String QTY1,String UNIT1) throws Exception {
         itemsServicesTab.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.sendKeysOnElement(addSectionTitleTextbox,SectionTitle1);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         addDescriptionTextbox.clear();
         commonPage.sendKeysOnElement(addDescriptionTextbox,DescriptionofWork1);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         addQTYTextbox.clear();
         commonPage.sendKeysOnElement(addQTYTextbox,QTY1);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         unitDropdown.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         unitDropdownItem.click();
     }
 
     public void inputAttachmentsTabInfo(String ProjectDescription) throws Exception {
         attachmentsTab.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.sendKeysOnElement(attachmentDescription,ProjectDescription);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         //Upload file：
         WebElement uploadFileElement = getDriver().findElements(By.xpath("//input[@type='file']")).get(0);
         JavascriptExecutor removeAttribute = (JavascriptExecutor)getDriver();
         removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         if(testDataPath==null)
         {
             testDataPath= TestDataPathConstants.uploadFilePath;
         }
         uploadFileTextbox.sendKeys(testDataPath);
-        commonPage.wait(getDriver(),4000);
+        commonPage.wait(getDriver(),4);
         boolean uploadFileExist=commonPage.elementExist(uploadedFileName);
         if(uploadFileExist==true){
             System.out.println("Upload file succeed,test pass!");
@@ -241,29 +238,29 @@ public class TenderPage extends PageObject {
         else
             System.out.println("Upload file get error,test fail!");
         saveBtn.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Save succeed,test pass!");
         }
         else
             System.out.println("Save get error,test fail!");
-        commonPage.wait(getDriver(),5000);
+        commonPage.wait(getDriver(),5);
     }
 
     public void submitTenderForApprove() throws Exception {
         dashboardPage.hkldLogo.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         dashboardPage.itqTenderItemOne.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         previewSubmitBtn.click();
-        commonPage.wait(getDriver(),1000);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
+        commonPage.wait(getDriver(),1);
         if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Preview and submit succeed,test pass!");
         }
@@ -271,26 +268,26 @@ public class TenderPage extends PageObject {
             System.out.println("Preview and submit get error,test fail!");
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         submitBtn.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         chooseApproveDropdown.click();
-//        commonPage.wait(getDriver(),4000);
+//        commonPage.wait(getDriver(),4);
 //        chooseApproveDropdown.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         approveDropdownItem.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         chooseApproveEnterBtn.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         if(sendForApproveInfo.getText().contains("Your tender has been sent for approval, Stay tuned"))
         {
             System.out.println("Send tender for approve succeed, test pass!");
             sendForApproveInfo.click();
             Actions action=new Actions(getDriver());
             action.sendKeys(Keys.TAB).perform();
-            commonPage.wait(getDriver(),1000);
+            commonPage.wait(getDriver(),1);
             action.sendKeys(Keys.ENTER).perform();
-            commonPage.wait(getDriver(),2000);
+            commonPage.wait(getDriver(),2);
         }
         else
             System.out.println("Send tender for approve get error, test fail!");
@@ -298,15 +295,15 @@ public class TenderPage extends PageObject {
 
     public void adminApprove() throws Exception{
         getDriver().get(URLConstants.hkldLoginPage);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         loginPage.Login(TestAccountsConstants.hkldAdmin,TestAccountsConstants.hkldUserPwd);
         dashboardPage.itqTenderItemOne.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         adminApproveBtn.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         if(saveSuccessInfo.getText().contains("Approve ITQ/Tender: Success")){
             System.out.println("Admin approve tender succeed,test pass!");
         }
@@ -318,20 +315,20 @@ public class TenderPage extends PageObject {
         commonPage.navigatePage(URLConstants.hkldLoginPage);
         loginPage.Login(TestAccountsConstants.hkldUserName,TestAccountsConstants.hkldUserPwd);
         dashboardPage.itqTenderItemOne.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         closingDateDropdown1.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         closingDateDropdown1LeftBtn.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         closingDateNextPageItem1.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         closingDateDropdown2.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         closingDateDropdown2item.click();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         engineerIssueBtn.click();
         if(saveSuccessInfo.getText().contains("Issue ITQ/Tender: Success")){
             System.out.println("Engineer issue tender succeed,test pass!");
@@ -341,23 +338,7 @@ public class TenderPage extends PageObject {
     }
 
     public void clearTenderFromDb() throws Exception {
-        //SQL语句
-        sql = "Delete from tenders where 1=1";
-        //创建DBHelper对象
-        db1 = new DBHelper(sql);
-        try {
-            //执行语句，得到结果集
-           int result= db1.pst.executeUpdate();
-           if(result==1) {
-               System.out.println("Clear data in tenders table from database succeed, test pass!");
-           }
-           else
-            System.out.println("Clear data in tenders table from database get error, test fail!");
-            //关闭连接
-            db1.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        DBHelper.clearDataFromDB("tenders");
     }
 
 

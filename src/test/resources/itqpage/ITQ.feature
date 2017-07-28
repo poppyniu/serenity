@@ -1,4 +1,4 @@
-Feature:Test function on tender page
+Feature:Test function on itq page
 
   Background:
     Then Clear tender test data in db
@@ -7,18 +7,14 @@ Feature:Test function on tender page
     Then HKLD engineer login to ETender system succeed
 
 
-  @Tender
-  Scenario Outline: HKLD engineer create and save tender and submit tender for approve
-    And Click create tender button and crate a tender
+  @ITQ
+  Scenario Outline: HKLD engineer create and save itq
+    And Click create itq button and crate a itq
     And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
-    And Input scope of work tab info <GeneralDescriptionofWork> <GeneralSpecifications> <ParticularSpecifications>
     And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
     And Input attachments tab info <ProjectDescription> and save tender
-    And Submit the new tender for approve
-    And HKLD Admin login to approve tender
-    And HKLD engineer login to issue tender
     Then Clear tender test data in db
     Examples:
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |
-      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 57070    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 57556    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |
 

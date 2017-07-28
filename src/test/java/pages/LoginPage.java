@@ -29,42 +29,40 @@ public class LoginPage extends PageObject {
     WebElement namePwdInvalidInfo;
 
     public void validLogin() throws Exception {
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
         userNameTextbox.click();
-        //UserNameTextbox.sendKeys(TestAccountsConstants.HKLDUserName);
         commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.hkldUserName);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         userPwdTextbox.click();
-        //UserPwdTextbox.sendKeys(TestAccountsConstants.HKLDUserPwd);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.hkldUserPwd);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         loginBtn.click();
-        commonPage.wait(getDriver(),5000);
+        commonPage.wait(getDriver(),5);
     }
 
     public void Login(String name,String password) throws Exception {
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
         userNameTextbox.click();
         userNameTextbox.clear();
         commonPage.sendKeysOnElement(userNameTextbox,name);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         userPwdTextbox.click();
         userPwdTextbox.clear();
         commonPage.sendKeysOnElement(userPwdTextbox,password);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         loginBtn.click();
-        commonPage.wait(getDriver(),5000);
+        commonPage.wait(getDriver(),5);
         currentUrl = getDriver().getCurrentUrl();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
     }
 
     public void checkLoginSucceed() throws Exception {
         currentUrl = getDriver().getCurrentUrl();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
         String userNameText = dashboardpage.userName.getAttribute("innerHTML");
         String AmoutText = dashboardpage.hkldAmount.getText();
         if (AmoutText.contains("AMOUNT") && userNameText.contains("sophie")) {
@@ -75,10 +73,10 @@ public class LoginPage extends PageObject {
 
     public void invalidLogin() throws Exception {
         //input invalid username and pwd
-        commonPage.wait(getDriver(),3000);
+        commonPage.wait(getDriver(),3);
         //UserNameTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserName);
         commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         boolean nameInvalidInfoExist = commonPage.elementExist(userNameInvalidInfo);
         if (nameInvalidInfoExist == true) {
             System.out.println("Input invalid name see the correct info, test pass!");
@@ -86,7 +84,7 @@ public class LoginPage extends PageObject {
             System.out.println("Input invalid name does not see the correct info, test fail!");
       //  UserPwdTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserPwd);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         boolean pwdInvalidInfoExist = commonPage.elementExist(userPwdInvalidInfo);
         if (pwdInvalidInfoExist == true) {
             System.out.println("Input invalid pwd see the correct info, test pass!");
@@ -99,10 +97,10 @@ public class LoginPage extends PageObject {
             System.out.println("Input invalid username or pwd the login button is not disabled, test fail!");
         //input empty name and pwd
         userNameTextbox.clear();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         userPwdTextbox.click();
         userPwdTextbox.clear();
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
         if (nameInvalidInfoExist == true) {
             System.out.println("Input empty name see the correct info, test pass!");
         } else
@@ -118,12 +116,12 @@ public class LoginPage extends PageObject {
         //input invlaid email address and pwd
 //        UserNameTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserName1);
         commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName1);
-        commonPage.wait(getDriver(),1000);
+        commonPage.wait(getDriver(),1);
 //        UserPwdTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserPwd1);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd1);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         loginBtn.click();
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
     }
 
     public void loginDisabled() throws Exception {
@@ -139,9 +137,9 @@ public class LoginPage extends PageObject {
     public void hkldUserLogin(String userName, String UserPwd) throws Exception{
         commonPage.sendKeysOnElement(userNameTextbox, userName);
         commonPage.sendKeysOnElement(userPwdTextbox, UserPwd);
-        commonPage.wait(getDriver(),2000);
+        commonPage.wait(getDriver(),2);
         loginBtn.click();
-        commonPage.wait(getDriver(),5000);
+        commonPage.wait(getDriver(),5);
     }
 
 }
