@@ -55,4 +55,20 @@ public class DBHelper {
             e.printStackTrace();
         }
     }
+
+    public static void clearRolesTableFromDB() throws Exception{
+        String sqlCommand = "DELETE FROM `roles` WHERE `id`!= 'ddfad123'";
+        DBHelper db = new DBHelper(sqlCommand);
+        try{
+            int result = db.pst.executeUpdate();
+            if(result==1||result==0) {
+                System.out.println("Clear data in roles table from database succeed, test pass!");
+            }
+            else
+                System.out.println("Clear data in roles table from database get error, test fail!");
+            db.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }

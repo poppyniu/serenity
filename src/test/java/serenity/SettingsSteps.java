@@ -1,10 +1,13 @@
 package serenity;
 
-import constants.UserAttributeDTO;
+import constants.DBHelper;
 import net.thucydides.core.annotations.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pages.SettingsPage;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Maggie_Ping on 7/25/2017.
@@ -57,19 +60,35 @@ public class SettingsSteps {
     }
 
     @Step
-    public void addAttributeOnUserDetails(final UserAttributeDTO attributeDTO){
-        //settingsPage.clickAttributeCheckbox(attributeDTO.getAttribute());
-        settingsPage.addAttribute(attributeDTO.getAttribute());
+    public void addAttributeOnUserDetails(String attribute){
+        List<String> attributeList = Arrays.asList(attribute.split(","));
+        for(String subAttribute : attributeList) {
+            settingsPage.addAttribute(subAttribute);
+        }
     }
 
     @Step
-    public void removeAttributeOnUserDetails(final UserAttributeDTO attributeDTO){
-        settingsPage.removeAttribute(attributeDTO.getAttribute());
+    public void removeAttributeOnUserDetails(String attribute){
+        List<String> attributeList = Arrays.asList(attribute.split(","));
+        for(String subAttribute : attributeList) {
+            settingsPage.removeAttribute(subAttribute);
+        }
     }
 
     @Step
     public void clickSaveBtnForSingleUserDetails(){
         settingsPage.clickUserDetailsSaveBtn();
+        settingsPage.clickBackLinkOnUserDetails();
+    }
+
+    @Step
+    public void clearRolesDataFromDB() throws Exception {
+        DBHelper.clearRolesTableFromDB();
+    }
+
+    @Step
+    public void clearLocationDataFromDB() throws Exception{
+        DBHelper.clearDataFromDB("locations");
     }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsSteps.class);

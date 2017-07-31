@@ -28,28 +28,20 @@ public class SettingsPage extends PageObject {
 
     @FindBy(id = "add_location_a")
     WebElement locationAddBtn;
-    @FindBy(id = "add-location-code")
-    WebElement locationShortFormField;
-    @FindBy(id = "add-location-desc")
-    WebElement locationDecriptionField;
-    @FindBy(id = "add-location-company")
-    WebElement locationCompanyField;
-    @FindBy(xpath = ".//*[@id='addLocationModal']/div[2]/button[2]")
-    WebElement addLocationYesBtn;
+    @FindBy(xpath = ".//a[@class='nav-back']")
+    WebElement locationDetailsBackLink;
 
     @FindBy(id = "settings-engineers-add-group")
     WebElement securityGroupAddBtn;
-    @FindBy(id = "settings-engineers-add-group-name-value")
-    WebElement groupNameField;
-    @FindBy(id = "settings-engineers-add-group-description-value")
-    WebElement groupDescriptionField;
-    @FindBy(xpath = ".//*[@id='groupSettingAddModal']/div[2]/button[2]")
-    WebElement addGroupYesBtn;
+    @FindBy(id = "settings-engineers-security-group-detail-back")
+    WebElement securityGroupDetailsBackLink;
 
     @FindBy(id = "settings-engineers-hkl-user-detail-btn-edit")
     WebElement userDetailsEditBtn;
     @FindBy(id = "settings-engineers-hkl-user-detail-btn-save")
     WebElement userDetailsSaveBtn;
+    @FindBy(id = "settings-engineers-hkl-user-detail-back")
+    WebElement userDetailsBackLink;
 
     public void clickSettingDropDown(){
         settingsDropDown.click();
@@ -75,23 +67,38 @@ public class SettingsPage extends PageObject {
         locationAddBtn.click();
     }
 
-    public void clickSecurityGroupAddBtn() {securityGroupAddBtn.click();}
+    public void clickSecurityGroupAddBtn() {
+        securityGroupAddBtn.click();
+    }
 
     public void clickUserDetailsEditBtn(){userDetailsEditBtn.click();}
 
     public void clickUserDetailsSaveBtn(){userDetailsSaveBtn.click();}
 
     public void inputNewLocationInfo(String locationCode, String description, String company){
+        WebElement element = getDriver().findElements(By.cssSelector("div[style='display: block;']")).get(1);
+        WebElement locationShortFormField = element.findElement(By.id("add-location-code"));
+        WebElement locationDecriptionField = element.findElement(By.id("add-location-desc"));
+        WebElement locationCompanyField = element.findElement(By.id("add-location-company"));
+        WebElement addLocationYesBtn = element.findElement(By.xpath(".//*[@id='addLocationModal']/div[2]/button[2]"));
         commonPage.sendKeysOnElement(locationShortFormField, locationCode);
         commonPage.sendKeysOnElement(locationDecriptionField, description);
         commonPage.sendKeysOnElement(locationCompanyField, company);
         addLocationYesBtn.click();
+        commonPage.wait(getDriver(),2);
+        locationDetailsBackLink.click();
     }
 
     public void inputNewSecurityGroupInfo(String groupName, String groupDescription){
+        WebElement element = getDriver().findElements(By.cssSelector("div[style='display: block;']")).get(1);
+        WebElement groupNameField = element.findElement(By.id("settings-engineers-add-group-name-value"));
+        WebElement groupDescriptionField = element.findElement(By.id("settings-engineers-add-group-description-value"));
+        WebElement addGroupYesBtn = element.findElement(By.xpath(".//*[@id='groupSettingAddModal']/div[2]/button[2]"));
         commonPage.sendKeysOnElement(groupNameField, groupName);
         commonPage.sendKeysOnElement(groupDescriptionField, groupDescription);
         addGroupYesBtn.click();
+        commonPage.wait(getDriver(),2);
+        securityGroupDetailsBackLink.click();
     }
 
     public void clickUserName(String userName){
@@ -104,7 +111,7 @@ public class SettingsPage extends PageObject {
         }
     }
 
-    public void clickAttributeCheckbox(String attribute){
+    private void clickAttributeCheckbox(String attribute){
         List<WebElement> checkboxes = getDriver().findElements(By.cssSelector("label[for^=modules-settings-engineers-hkl-user-checkbox]"));
         List<String> textList = checkboxes.stream().map(element -> {return element.getText();}).collect(Collectors.toList());
         if(!textList.contains(attribute)){
@@ -119,23 +126,26 @@ public class SettingsPage extends PageObject {
         }
     }
 
-    public void addAttribute(String attribute) {
+    private List<String> getSelectedAttributeList(){
         List<WebElement> emphasisElements = getDriver().findElements(By.xpath(".//span[@class='emphasis']"));
-        List<String> textList = emphasisElements.stream().map(element -> {
+        return emphasisElements.stream().map(element -> {
             return element.getText().replace(",","");
         }).collect(Collectors.toList());
-        if (!textList.contains(attribute)) {
+    }
+
+    public void addAttribute(String attribute) {
+        List<String> preAttributes = getSelectedAttributeList();
+        if (!preAttributes.contains(attribute)) {
             clickAttributeCheckbox(attribute);
         }
     }
 
-    public void removeAttribute(String attribute) {
-        List<WebElement> emphasisElements = getDriver().findElements(By.xpath(".//span[@class='emphasis']"));
-        List<String> textList = emphasisElements.stream().map(element -> {
-            return element.getText().replace(",","");
-        }).collect(Collectors.toList());
-        if (textList.contains(attribute)) {
+    public void removeAttribute(String attribute){
+        List<String> preAttributes = getSelectedAttributeList();
+        if (preAttributes.contains(attribute)) {
             clickAttributeCheckbox(attribute);
         }
     }
+
+    public void clickBackLinkOnUserDetails(){userDetailsBackLink.click();}
 }

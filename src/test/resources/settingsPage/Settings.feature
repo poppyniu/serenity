@@ -7,35 +7,37 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And user access settings page
 
   @setting
-  Scenario Outline: Add a new location
+  Scenario: Add new locations
+    And clear locations table from Database
     When user access Location setting
-    And user add a new location with <Location Short Form> and <Description> and <HKL Company>
-    Examples:
-      |Location Short Form | Description    | HKL Company|
+    And user add new locations with Location Short Form, Description and HKL Company
+      |Location Short Form | Location Description    | HKL Company|
       |AH                  | AH description | HKLD       |
       |PB                  | PB description | HKLD       |
 
+
   @setting
-  Scenario Outline: Add a new security Groups
+  Scenario: Add new security Groups
+    And clear roles table from Database
     When user access Security Groups setting
-    And user add a new security group with <Group Name> and <Description>
-    Examples:
-      |Group Name     | Description |
+    And user add new security groups with Group Name and Group Description
+      |Group Name     | Group Description |
       |General Users  | HKLD General Engineer|
       |Approver       | HKLD Tender Manager  |
       |IT Admin       | HKLD Administrator   |
-      |Super Admin    | Super Administrator  |
+
 
 
 
   @setting
-  Scenario: Edit a user
+  Scenario Outline: Edit a user to add setting attributes
     When user access Users setting
-    And he selects a user name sophie@hkland.com from the user list
+    And he selects the user <User Name> from the user list
     And he clicks Edit button for the single user
-    And he add attribute for the single user
-      |attribute|
-      |General Users|
-      |Approver|
-      |AH|
+    And he add attribute <Group Name> and <Location> for the single user
     And he saves the attributes for the single user
+    Examples:
+    |User Name|Group Name|Location|
+    |sophie@hkland.com|General Users|AH,PB|
+    |elon@hkland.com  |Approver     |AH   |
+

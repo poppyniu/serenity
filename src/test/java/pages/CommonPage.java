@@ -186,6 +186,11 @@ public class CommonPage extends PageObject{
         }
     }
 
+    public void scrollToElement(final WebElement element) {
+        final int yCoordinate = element.getLocation().getY();
+        final String script = String.format("window.scrollTo(0,%s);", yCoordinate - 350);
+        getJavascriptExecutorFacade().executeScript(script, element);
+    }
 
 
 }
