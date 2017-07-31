@@ -160,6 +160,7 @@ public class TenderPage extends PageObject {
         periodTextbox.clear();
         commonPage.sendKeysOnElement(periodTextbox,Period);
         commonPage.wait(getDriver(),1);
+        commonPage.scrollToElement(prNumberAddBtn);
         commonPage.sendKeysOnElement(prNumberTextbox,PRNumber);
         commonPage.wait(getDriver(),2);
         prNumberAddBtn.click();
