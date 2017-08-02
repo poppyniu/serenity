@@ -55,5 +55,12 @@ public class TenderSteps {
         tenderPage.clearTenderFromDb();
     }
 
+    public void input_PRNumber(String prNumber){
+        tenderPage.inputPRNumber(prNumber);
+    }
 
+    @Step
+    public void validate_HeaderMessage(String expectedMsg){
+        tenderPage.validateHeaderMessage(expectedMsg);
+    }
 }

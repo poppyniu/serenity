@@ -12,8 +12,8 @@ public class TenderStepDefinitions {
     @Steps
     TenderSteps tenderSteps;
 
-    @And("^Click create tender button and crate a tender$")
-    public void click_create_tender_button_and_crate_a_tender() throws Throwable {
+    @And("^Click create tender button and create a tender$")
+    public void click_create_tender_button_and_create_a_tender() throws Throwable {
         tenderSteps.click_create_tender();
     }
 
@@ -57,7 +57,14 @@ public class TenderStepDefinitions {
         tenderSteps.clear_tender_from_db();
     }
 
+    @And("^user input PR number ([^\"]*)$")
+    public void user_input_PR_number(String prNumber){
+        tenderSteps.input_PRNumber(prNumber);
+    }
 
-
+    @Then("^user gets the expected header message ([^\"]*)$")
+    public void user_gets_the_expected_header_message(String Expectedmessage){
+        tenderSteps.validate_HeaderMessage(Expectedmessage);
+    }
 
 }

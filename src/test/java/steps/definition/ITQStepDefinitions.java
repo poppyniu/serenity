@@ -14,7 +14,7 @@ public class ITQStepDefinitions {
     ITQSteps itqSteps;
 
 
-    @Then("^Click create itq button and crate a itq$")
+    @Then("^Click create itq button and create a itq$")
     public void click_create_itq_button_and_crate_a_itq() throws Throwable {
         itqSteps.click_create_itq();
     }

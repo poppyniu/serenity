@@ -91,5 +91,10 @@ public class SettingsSteps {
         DBHelper.clearDataFromDB("locations");
     }
 
+    @Step
+    public void setThresholdValue(String value){
+        settingsPage.inputThresholdValue(value);
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(SettingsSteps.class);
 }

@@ -38,9 +38,14 @@ public class LoginStepDefinitions {
         loginSteps.login_disabled();
     }
 
-    @When("^the user logs in as the user type ([^\"]*)$")
+    @When("^user logs in as the user type ([^\"]*)$")
     public void the_user_logs_in_as_the_user_type(String userType) throws Exception {
         loginSteps.hkld_login(userType);
+    }
+
+    @When("^user logs in with user name ([^\"]*) and password ([^\"]*)$")
+    public void user_logs_in_with_username_and_password(String userName, String password) throws Exception {
+        loginSteps.anyUser_login(userName, password);
     }
 
 }

@@ -3,7 +3,8 @@ Feature: HKLD admin user is able to do configuration on settings page.
 
   Background:
     Given Open ETender system login page
-    And the user logs in as the user type HKLD Admin
+    And user logs in as the user type HKLD Admin
+    And user click hamburger icon
     And user access settings page
 
   @setting
@@ -24,9 +25,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |Group Name     | Group Description |
       |General Users  | HKLD General Engineer|
       |Approver       | HKLD Tender Manager  |
-      |IT Admin       | HKLD Administrator   |
-
-
+      |Super Admin       | HKLD Super Administrator   |
 
 
   @setting
@@ -34,10 +33,10 @@ Feature: HKLD admin user is able to do configuration on settings page.
     When user access Users setting
     And he selects the user <User Name> from the user list
     And he clicks Edit button for the single user
-    And he add attribute <Group Name> and <Location> for the single user
+    And he add attribute <Attribute> for the single user
     And he saves the attributes for the single user
     Examples:
-    |User Name|Group Name|Location|
-    |sophie@hkland.com|General Users|AH,PB|
-    |elon@hkland.com  |Approver     |AH   |
+    |User Name|Attribute|
+    |sophie|General Users,AH,PB|
+    |elon|Approver,AH          |
 

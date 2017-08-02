@@ -160,7 +160,7 @@ public class CommonPage extends PageObject{
 
     public void selectWorkingHoursDrodownByItemAndNumber(Integer Number,String item)
             throws Exception {
-        getDriver().findElement(By.xpath("//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div["+Number+"]/ul/li/span/span[contains(text(),'"+item+"')]")).click();
+        getDriver().findElement(By.xpath(".//*[@id='tender.general.workingHours']/div[@class='working-hours']/div[2]/div["+Number+"]/ul/li/span/span[contains(text(),'"+item+"')]")).click();
     }
 
     public void selectWorkingHoursDrodownByItem(String item)
