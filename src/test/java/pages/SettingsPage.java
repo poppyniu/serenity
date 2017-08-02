@@ -43,6 +43,13 @@ public class SettingsPage extends PageObject {
     @FindBy(id = "settings-engineers-hkl-user-detail-back")
     WebElement userDetailsBackLink;
 
+    @FindBy(xpath = ".//*[@id='settings-engineers-threshold-form']/div[1]/div[2]/button")
+    WebElement thresholdEditBtn;
+    @FindBy(id = "settings-engineers-threshold-input")
+    WebElement thresholdInputField;
+    @FindBy(xpath = ".//*[@id='settings-engineers-threshold-form']/div[1]/div[2]/button[2]")
+    WebElement thresholdSaveBtn;
+
     public void clickSettingDropDown(){
         settingsDropDown.click();
     }
@@ -109,6 +116,7 @@ public class SettingsPage extends PageObject {
                 break;
             }
         }
+        commonPage.wait(getDriver(),3);
     }
 
     private void clickAttributeCheckbox(String attribute){
@@ -148,4 +156,10 @@ public class SettingsPage extends PageObject {
     }
 
     public void clickBackLinkOnUserDetails(){userDetailsBackLink.click();}
+
+    public void inputThresholdValue(String value){
+        thresholdEditBtn.click();
+        commonPage.sendKeysOnElement(thresholdInputField,value);
+        thresholdSaveBtn.click();
+    }
 }

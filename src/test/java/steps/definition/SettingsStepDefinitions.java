@@ -38,7 +38,6 @@ public class SettingsStepDefinitions {
 
     @When("^he selects the user ([^\"]*) from the user list$")
     public void he_selects_a_user_name_from_the_user_list(String userName){
-        System.out.println(userName);
         settingsSteps.clickUserFromUserList(userName);
     }
 
@@ -47,11 +46,9 @@ public class SettingsStepDefinitions {
         settingsSteps.clickEditBtnForSingleUserDetails();
     }
 
-    @When("^he add attribute ([^\"]*) and ([^\"]*) for the single user$")
-    public void he_add_attributes_for_user(String groupName, String location){
-
-        settingsSteps.addAttributeOnUserDetails(groupName);
-        settingsSteps.addAttributeOnUserDetails(location);
+    @When("^he add attribute ([^\"]*) for the single user$")
+    public void he_add_attributes_for_user(String attribute){
+        settingsSteps.addAttributeOnUserDetails(attribute);
     }
 
     @When("^he removes attribute ([^\"]*) for the single user$")
@@ -72,5 +69,10 @@ public class SettingsStepDefinitions {
     @And("^clear locations table from Database$")
     public void clear_locations_table_from_DB() throws Exception{
         settingsSteps.clearLocationDataFromDB();
+    }
+
+    @And("^user set threshold value as ([^\"]*)$")
+     public void set_threshold_value(String value){
+        settingsSteps.setThresholdValue(value);
     }
 }

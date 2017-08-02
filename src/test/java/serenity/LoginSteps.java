@@ -56,6 +56,11 @@ public class LoginSteps {
         }
     }
 
+    @Step
+    public void anyUser_login(String userName, String password) throws Exception{
+        loginPage.hkldUserLogin(userName, password);
+    }
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
 }

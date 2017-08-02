@@ -2,6 +2,7 @@ package pages;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -32,7 +33,7 @@ public class DashboardPage extends PageObject {
     @FindBy(id = "hamburger")
     WebElement hamburgerIcon;
     @FindBy(id = "hamburger3")
-    WebElement settingLink;
+    WebElementFacade settingLink;
 
     public void selectCreateTenderDropdown(String item) throws Exception {
         commonPage.wait(getDriver(),2);
@@ -57,9 +58,20 @@ public class DashboardPage extends PageObject {
         commonPage.wait(getDriver(),3);
     }
 
-    public void clickSettingLink(){
+    public void clickHamburgerIcon(){
         hamburgerIcon.click();
+    }
+
+    public void clickSettingLink(){
         settingLink.click();
+    }
+
+    public boolean settingLinkVisible(){
+        return settingLink.isVisible();
+    }
+
+    public void clickHKLDLogo(){
+        hkldLogo.click();
     }
 
 }

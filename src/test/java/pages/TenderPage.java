@@ -6,11 +6,13 @@ import constants.TestDataPathConstants;
 import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
+import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,31 +30,31 @@ public class TenderPage extends PageObject {
     @FindBy(xpath="html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/a[2]")
     WebElement saveBtn;
     //General tab elements
-    @FindBy(xpath = "//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[1]/div[@class='multiselect__select']")
+    @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[1]/div[1]")
     WebElement workingHoursDropdown1;
-    @FindBy(xpath = "//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[2]/div[@class='multiselect__select']")
+    @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[2]/div[2]")
     WebElement workingHoursDropdown2;
-    @FindBy(xpath = "//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[3]/div[@class='multiselect__select']")
+    @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[3]/div[1]")
     WebElement workingHoursDropdown3;
-    @FindBy(xpath = "//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[4]/div[@class='multiselect__select']")
+    @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[4]/div[2]")
     WebElement workingHoursDropdown4;
     @FindBy(xpath = "//div[contains(@id,'workingHours')]/div[contains(@id,'add')]/div[1]/ul/li/span/span[contains(text(),'Friday')]")
     WebElement workingHoursDropdown1Item1;
-    @FindBy(xpath=".//*[@id='tender.general.projectDescription']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectDescription']/div/textarea")
     WebElement projectDescriptionTextbox;
-    @FindBy(xpath=".//*[@id='tender.general.projectLocation']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectLocation']/div/textarea")
     WebElement projectLocationTextbox;
-    @FindBy(xpath=".//*[@id='tender.general.projectStart']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectStart']/div/textarea")
     WebElement tentativeProjectStartTextbox;
-    @FindBy(xpath=".//*[@id='tender.general.estimatedProjectDuration']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-estimatedProjectDuration']/div/textarea")
     WebElement projectDurationTextbox;
-    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-working-hour-add']")
+    @FindBy(xpath=".//*[@id='modules-tenders-workingHours-add']")
     WebElement addWorkingHoursBtn;
-    @FindBy(xpath=".//*[@id='tender.general.validityPeriod']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-validityPeriod']")
     WebElement periodTextbox;
     @FindBy(xpath=".//*[@id='tender.general.prNo']")
     WebElement prNumberTextbox;
-    @FindBy(xpath="//a[contains(@id,'modules-tenders-edit-general-pr-add')][text()='Add']")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-pr-add']")
     WebElement prNumberAddBtn;
     @FindBy(xpath=".//*[@id='tender.general.contractData.save']")
     WebElement prNumberInfoSaveBtn;
@@ -122,7 +124,8 @@ public class TenderPage extends PageObject {
     @FindBy(xpath=" .//*[@id='edit-closing-date-picker']/div[2]/ul/li[2]/span/span")
     WebElement closingDateDropdown2item;
 
-
+    @FindBy(xpath = ".//div[@class='mini-toastr-notification__message']")
+    WebElementFacade headerMessage;
 
 
 
@@ -341,5 +344,13 @@ public class TenderPage extends PageObject {
         DBHelper.clearDataFromDB("tenders");
     }
 
+    public void inputPRNumber(String prNumber){
+        commonPage.sendKeysOnElement(prNumberTextbox, prNumber);
+        prNumberAddBtn.click();
+    }
 
+    public void validateHeaderMessage(String ExpectedMsg){
+        Assert.assertTrue(headerMessage.isVisible(), "Header message is not shown");
+        Assert.assertTrue(headerMessage.getText().contains(ExpectedMsg), "Header message is not as expected");
+    }
 }
