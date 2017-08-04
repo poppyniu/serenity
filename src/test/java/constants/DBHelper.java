@@ -59,7 +59,7 @@ public class DBHelper {
     }
 
     public static void clearRolesTableFromDB() throws Exception{
-        String sqlCommand = "DELETE FROM `roles` WHERE `id`!= 'ddfad123'";
+        String sqlCommand = "DELETE FROM `roles` WHERE `id`!= '5976ee2f2c71f53d43471940'";
         DBHelper db = new DBHelper(sqlCommand);
         try{
             int result = db.pst.executeUpdate();
