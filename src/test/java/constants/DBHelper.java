@@ -1,4 +1,6 @@
 package constants;
+import org.junit.Assert;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -70,5 +72,25 @@ public class DBHelper {
         }catch (SQLException e){
             e.printStackTrace();
         }
+    }
+
+    public static void changeClosingDate(String currentDateBefore)throws Exception{
+        String sqlCommand = "UPDATE tenders SET closingDate = '"+currentDateBefore+"' WHERE prNo = '59000'";
+        //创建DBHelper对象
+        dbHelper = new DBHelper(sqlCommand);
+        try {
+            //执行语句，得到结果集
+            int result= dbHelper.pst.executeUpdate();
+            if(result==1||result==0) {
+                System.out.println("Update closing date in tenders table succeed, test pass!");
+            }
+            else
+                System.out.println("Update closing date in tenders table get error, test fail!");
+            //关闭连接
+            dbHelper.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

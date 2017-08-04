@@ -11,4 +11,6 @@ public class TestAccountsConstants {
     public static String invalidHKLDUserName1 = "poppy@126.com";
     public static String invalidHKLDUserPwd1 = "bbbbbb";
     public static String hkldAdmin="elon";
+    public static String contractorName="poppy_zhang@epam.com";
+    public static String contractorPwd="aaaaaa";
 }

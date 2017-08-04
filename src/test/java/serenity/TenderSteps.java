@@ -49,6 +49,26 @@ public class TenderSteps {
         tenderPage.engineerIssueTender();
     }
 
+    @Step
+    public void check_vendor_submit_status() throws Exception {
+        tenderPage.checkVendorSubmitStatus();
+    }
+
+    @Step
+    public void change_tender_status_in_db() throws Exception {
+        tenderPage.changeTenderStatusInDB();
+    }
+
+    @Step
+    public void check_tender_status() throws Exception {
+        tenderPage.checkTenderStatus();
+    }
+
+
+    @Step
+    public void contractor_submit() throws Exception {
+        tenderPage.contractorSubmitTender();
+    }
 
     @Step
     public void clear_tender_from_db() throws Exception {

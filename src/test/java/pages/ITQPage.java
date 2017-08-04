@@ -2,6 +2,7 @@ package pages;
 
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 /**
@@ -38,7 +39,7 @@ public class ITQPage extends PageObject {
             System.out.println("Preview and submit succeed,test pass!");
         }
         else
-            System.out.println("Preview and submit get error,test fail!");
+            Assert.fail("Preview and submit get error,test fail!");
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(),2);
@@ -57,8 +58,7 @@ public class ITQPage extends PageObject {
             System.out.println("Engineer issue itq succeed,test pass!");
         }
         else
-            System.out.println("Engineer issue itq get error,test fail!");
-
+            Assert.fail("Engineer issue itq get error,test fail!");
     }
 
 

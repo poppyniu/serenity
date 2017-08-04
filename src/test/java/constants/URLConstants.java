@@ -5,4 +5,5 @@ package constants;
  */
 public class URLConstants {
     public static String hkldLoginPage = "http://hkld-qa.princeton.epam.com/#/login";
+    public static String contractorLoginPage = "http://hkld-qa.princeton.epam.com/#/vendors/login";
 }

@@ -52,6 +52,26 @@ public class TenderStepDefinitions {
         tenderSteps.engineer_issue();
     }
 
+    @And("^HKLD engineer login to check if contractor has submitted tender$")
+    public void hkld_engineer_login_to_check_if_contractor_has_submitted_tender() throws Throwable {
+        tenderSteps.check_vendor_submit_status();
+    }
+
+    @And("^Change tender status in db$")
+    public void change_tender_status_in_db() throws Throwable {
+        tenderSteps.change_tender_status_in_db();
+    }
+
+    @And("^HKLD engineer check current tender status$")
+    public void hkld_engineer_check_current_tender_status() throws Throwable {
+        tenderSteps.check_tender_status();
+    }
+
+    @And("^Contractor login to submit tender$")
+    public void contractor_login_to_submit_tender() throws Throwable {
+        tenderSteps.contractor_submit();
+    }
+
     @Then("^Clear tender test data in db$")
     public void clear_tender_test_data_in_db() throws Throwable {
         tenderSteps.clear_tender_from_db();

@@ -13,9 +13,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
+import org.testng.AssertJUnit;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Poppy_Zhang on 2017/7/19.
@@ -95,6 +98,8 @@ public class TenderPage extends PageObject {
     WebElement uploadedFileName;
     @FindBy(xpath=".//*[@id='mini-toastr']/div/div")
     WebElement saveSuccessInfo;
+    @FindBy(xpath=".//*[@id='mini-toastr']/div[2]/div")
+    WebElement saveSuccessInfo111;
     @FindBy(xpath=".//*[@class='clearfix']/div[2]/a[3]")
     WebElement previewSubmitBtn;
     @FindBy(xpath=".//*[@id='submit_tender']")
@@ -123,9 +128,35 @@ public class TenderPage extends PageObject {
     WebElement closingDateDropdown2;
     @FindBy(xpath=" .//*[@id='edit-closing-date-picker']/div[2]/ul/li[2]/span/span")
     WebElement closingDateDropdown2item;
-
     @FindBy(xpath = ".//div[@class='mini-toastr-notification__message']")
     WebElementFacade headerMessage;
+    @FindBy(xpath = ".//*[@id='items-services-form']/div[1]/table/tbody/tr[1]/td[3]/input")
+    WebElementFacade qtyTextbox;
+    @FindBy(xpath = ".//*[@id='items-services-form']/div[1]/table/tbody/tr[1]/td[5]/input")
+    WebElementFacade rateTextbox;
+    @FindBy(xpath = ".//*[@id='bid-discount-panel']/tr/td[3]/div/div[1]")
+    WebElementFacade discountDropdown;
+    @FindBy(xpath = ".//*[@id='bid-discount-panel']/tr/td[3]/div/ul/li[2]/span/span")
+    WebElementFacade discountDropdownItem;
+    @FindBy(xpath = ".//*[@id='tab-tnc-label']")
+    WebElementFacade termsTab;
+    @FindBy(xpath = ".//*[@id='tnc-agree']")
+    WebElementFacade termsCheckbox1;
+    @FindBy(xpath = ".//*[@id='tnc-agree-perform']")
+    WebElementFacade termsCheckbox2;
+    @FindBy(xpath = ".//*[@id='tnc-agree-name']")
+    WebElementFacade termsNameTextbox;
+    @FindBy(xpath = ".//*[@id='tnc-agree-position']")
+    WebElementFacade termsPositionTextbox;
+    @FindBy(xpath = ".//*[@id='alertSubmitModal']/div[1]/p")
+    WebElementFacade contractorSubmitInfo;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr/td[3]")
+    WebElementFacade statusColumn;
+    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[3]/div[1]")
+    WebElementFacade tenderStatus;
+    @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[1]/td[3]")
+    WebElementFacade vendorSubmitStatus;
+
 
 
 
@@ -240,14 +271,14 @@ public class TenderPage extends PageObject {
             System.out.println("Upload file succeed,test pass!");
         }
         else
-            System.out.println("Upload file get error,test fail!");
+            Assert.fail("Upload file get error,test fail!");
         saveBtn.click();
         commonPage.wait(getDriver(),1);
         if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Save succeed,test pass!");
         }
         else
-            System.out.println("Save get error,test fail!");
+            Assert.fail("Save get error,test fail!");
         commonPage.wait(getDriver(),5);
     }
 
@@ -268,7 +299,7 @@ public class TenderPage extends PageObject {
             System.out.println("Preview and submit succeed,test pass!");
         }
         else
-            System.out.println("Preview and submit get error,test fail!");
+            Assert.fail("Preview and submit get error,test fail!");
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(),2);
@@ -293,7 +324,7 @@ public class TenderPage extends PageObject {
             commonPage.wait(getDriver(),2);
         }
         else
-            System.out.println("Send tender for approve get error, test fail!");
+            Assert.fail("Send tender for approve get error, test fail!");
     }
 
     public void adminApprove() throws Exception{
@@ -306,12 +337,12 @@ public class TenderPage extends PageObject {
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(),2);
         adminApproveBtn.click();
-        commonPage.wait(getDriver(),1);
-        if(saveSuccessInfo.getText().contains("Approve ITQ/Tender: Success")){
+        commonPage.wait(getDriver(),2);
+        if(saveSuccessInfo111.getText().contains("Success")){
             System.out.println("Admin approve tender succeed,test pass!");
         }
         else
-            System.out.println("Admin approve tender get error,test fail!");
+            Assert.fail("Admin approve tender get error,test fail!");
     }
 
     public void engineerIssueTender() throws Exception{
@@ -331,13 +362,106 @@ public class TenderPage extends PageObject {
         closingDateDropdown2.click();
         commonPage.wait(getDriver(),1);
         closingDateDropdown2item.click();
-        commonPage.wait(getDriver(),1);
+        commonPage.wait(getDriver(),2);
         engineerIssueBtn.click();
-        if(saveSuccessInfo.getText().contains("Issue ITQ/Tender: Success")){
+        if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Engineer issue tender succeed,test pass!");
         }
         else
-            System.out.println("Engineer issue tender get error,test fail!");
+            Assert.fail("Engineer issue tender get error,test fail!");
+    }
+
+    public void contractorSubmitTender()throws Exception {
+        //contractor login
+        getDriver().get(URLConstants.contractorLoginPage);
+        commonPage.wait(getDriver(),2);
+        loginPage.Login(TestAccountsConstants.contractorName,TestAccountsConstants.contractorPwd);
+        dashboardPage.itqTenderItemOne.click();
+        commonPage.wait(getDriver(),2);
+        currentUrl=getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(),2);
+        //input info under items/service tab
+        itemsServicesTab.click();
+        commonPage.wait(getDriver(),2);
+        qtyTextbox.clear();
+        commonPage.sendKeysOnElement(qtyTextbox,"10");
+        commonPage.wait(getDriver(),1);
+        rateTextbox.clear();
+        commonPage.sendKeysOnElement(rateTextbox,"10");
+        commonPage.scrollToElement(discountDropdown);
+        commonPage.wait(getDriver(),1);
+        discountDropdown.click();
+        commonPage.wait(getDriver(),1);
+        discountDropdownItem.click();
+        commonPage.wait(getDriver(),2);
+        commonPage.scrollToElement(termsTab);
+        commonPage.wait(getDriver(),1);
+        //input info under terms tab
+        termsTab.click();
+        commonPage.wait(getDriver(),2);
+        termsCheckbox1.click();
+        commonPage.sendKeysOnElement(termsNameTextbox,TestDataPathConstants.testInfo);
+        commonPage.wait(getDriver(),1);
+        commonPage.sendKeysOnElement(termsPositionTextbox,TestDataPathConstants.testInfo);
+        commonPage.wait(getDriver(),1);
+        termsCheckbox2.click();
+        commonPage.wait(getDriver(),2);
+        //contractor submit
+        saveBtn.click();
+        commonPage.wait(getDriver(),2);
+        contractorSubmitInfo.click();
+        Actions actions=new Actions(getDriver());
+        actions.sendKeys(Keys.TAB).perform();
+        commonPage.wait(getDriver(),2);
+        actions.sendKeys(Keys.TAB).perform();
+        commonPage.wait(getDriver(),2);
+        actions.sendKeys(Keys.TAB).perform();
+        commonPage.wait(getDriver(),2);
+        actions.sendKeys(Keys.ENTER).perform();
+        commonPage.wait(getDriver(),2);
+        if(saveSuccessInfo.getText().contains("Success")){
+            System.out.println("Contractor issue tender succeed,test pass!");
+        }
+        else
+            Assert.fail("Contractor issue tender get error,test fail!");
+    }
+
+    public void checkVendorSubmitStatus() throws Exception {
+        commonPage.navigatePage(URLConstants.hkldLoginPage);
+        loginPage.Login(TestAccountsConstants.hkldUserName,TestAccountsConstants.hkldUserPwd);
+        dashboardPage.itqTenderItemOne.click();
+        commonPage.wait(getDriver(),2);
+        currentUrl=getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(),4);
+        if(tenderStatus.getText().contains("ISSUED")&&vendorSubmitStatus.getText().contains("SUBMITTED")){
+            System.out.println("After contractor submit, the tender status and company submit status is correct,test pass!");
+        }
+        else
+            Assert.fail("After contractor submit, the tender status and company submit status is not correct,test fail!");
+    }
+
+    public void changeTenderStatusInDB() throws Exception {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentDate=df.format(new Date());
+        String currentDateBefore=commonPage.getSpecifiedDayBefore(currentDate);
+        DBHelper.changeClosingDate(currentDateBefore);
+    }
+
+    public void checkTenderStatus() throws Exception {
+        commonPage.wait(getDriver(),2);
+        getDriver().navigate().refresh();
+        commonPage.wait(getDriver(),5);
+        currentUrl=getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(),2);
+        if(tenderStatus.getText().contains("REVIEW")){
+            System.out.println("Tender is after closing date the status changed to review,test pass!");
+        }
+        else
+            Assert.fail("Tender is after closing date the status does not changed to review,test fail!");
+
     }
 
     public void clearTenderFromDb() throws Exception {

@@ -17,6 +17,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Poppy_Zhang on 2017/6/8.
@@ -190,6 +194,23 @@ public class CommonPage extends PageObject{
         final int yCoordinate = element.getLocation().getY();
         final String script = String.format("window.scrollTo(0,%s);", yCoordinate - 350);
         getJavascriptExecutorFacade().executeScript(script, element);
+    }
+
+    public static String getSpecifiedDayBefore(String specifiedDay){
+        //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar c = Calendar.getInstance();
+        Date date=null;
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(specifiedDay);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        c.setTime(date);
+        int day=c.get(Calendar.DATE);
+        c.set(Calendar.DATE,day-1);
+
+        String dayBefore=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(c.getTime());
+        return dayBefore;
     }
 
 

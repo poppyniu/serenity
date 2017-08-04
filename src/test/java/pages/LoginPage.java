@@ -4,6 +4,7 @@ import constants.TestAccountsConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 
@@ -68,7 +69,7 @@ public class LoginPage extends PageObject {
         if (AmoutText.contains("AMOUNT") && userNameText.contains("sophie")) {
             System.out.println("HkLD engineer login succeed, test pass!");
         } else
-            System.out.println("HkLD engineer login get error, test fail!");
+            Assert.fail("HkLD engineer login get error, test fail!");
     }
 
     public void invalidLogin() throws Exception {
@@ -81,7 +82,7 @@ public class LoginPage extends PageObject {
         if (nameInvalidInfoExist == true) {
             System.out.println("Input invalid name see the correct info, test pass!");
         } else
-            System.out.println("Input invalid name does not see the correct info, test fail!");
+            Assert.fail("Input invalid name does not see the correct info, test fail!");
       //  UserPwdTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserPwd);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd);
         commonPage.wait(getDriver(),2);
@@ -89,12 +90,12 @@ public class LoginPage extends PageObject {
         if (pwdInvalidInfoExist == true) {
             System.out.println("Input invalid pwd see the correct info, test pass!");
         } else
-            System.out.println("Input invalid pwd does not see the correct info, test fail!");
+            Assert.fail("Input invalid pwd does not see the correct info, test fail!");
         boolean loginBtnEnable = loginBtn.isEnabled();
         if (loginBtnEnable == false) {
             System.out.println("Input invalid username or pwd the login button is disabled, test pass!");
         } else
-            System.out.println("Input invalid username or pwd the login button is not disabled, test fail!");
+            Assert.fail("Input invalid username or pwd the login button is not disabled, test fail!");
         //input empty name and pwd
         userNameTextbox.clear();
         commonPage.wait(getDriver(),1);
@@ -104,15 +105,15 @@ public class LoginPage extends PageObject {
         if (nameInvalidInfoExist == true) {
             System.out.println("Input empty name see the correct info, test pass!");
         } else
-            System.out.println("Input empty name does not see the correct info, test fail!");
+            Assert.fail("Input empty name does not see the correct info, test fail!");
         if (pwdInvalidInfoExist == true) {
             System.out.println("Input empty pwd see the correct info, test pass!");
         } else
-            System.out.println("Input empty pwd does not see the correct info, test fail!");
+            Assert.fail("Input empty pwd does not see the correct info, test fail!");
         if (loginBtnEnable == false) {
             System.out.println("Input invalid username or pwd the login button is disabled, test pass!");
         } else
-            System.out.println("Input invalid username or pwd the login button is not disabled, test fail!");
+            Assert.fail("Input invalid username or pwd the login button is not disabled, test fail!");
         //input invlaid email address and pwd
 //        UserNameTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserName1);
         commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName1);
@@ -131,7 +132,7 @@ public class LoginPage extends PageObject {
             System.out.println("Input invalid email address and pwd see the correct popup window, test pass!");
             alert.accept();
         } else
-            System.out.println("Input invalid email address does not see the correct popup window, test fail!");
+            Assert.fail("Input invalid email address does not see the correct popup window, test fail!");
     }
 
     public void hkldUserLogin(String userName, String UserPwd) throws Exception{
