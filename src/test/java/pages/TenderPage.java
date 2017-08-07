@@ -13,12 +13,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
-import org.testng.AssertJUnit;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Poppy_Zhang on 2017/7/19.
@@ -73,6 +70,8 @@ public class TenderPage extends PageObject {
     @FindBy(xpath=".//iframe[@id='particularDesc_ifr']")
     WebElement scopeOfWorkFreame3;
     //Items Services tab elements
+    @FindBy(xpath = ".//*[@id='items-services-edit-form']/div")
+    List<WebElement> sections;
     @FindBy(xpath=".//*[@id='tab-services-label']")
     WebElement itemsServicesTab;
     @FindBy(xpath=".//*[@id='tender.section.title_0']")
@@ -156,9 +155,6 @@ public class TenderPage extends PageObject {
     WebElementFacade tenderStatus;
     @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[1]/td[3]")
     WebElementFacade vendorSubmitStatus;
-
-
-
 
     public void clickCreateTender() throws Exception {
         dashboardPage.selectCreateTenderDropdown("tender");
@@ -473,8 +469,162 @@ public class TenderPage extends PageObject {
         prNumberAddBtn.click();
     }
 
+    public void clickPRInfoSaveBtn(){
+        prNumberInfoSaveBtn.click();
+    }
+
+    public void clickSaveBtn(){
+        saveBtn.click();
+        commonPage.wait(getDriver(),5);
+    }
+
     public void validateHeaderMessage(String ExpectedMsg){
         Assert.assertTrue(headerMessage.isVisible(), "Header message is not shown");
         Assert.assertTrue(headerMessage.getText().contains(ExpectedMsg), "Header message is not as expected");
     }
+
+    public void clickItemsServicesTab(){
+        itemsServicesTab.click();
+        commonPage.wait(getDriver(),2);
+    }
+
+    public void inputSectionTitle(int index, String sectionTitle){
+        String id = String.format("tender.section.title_" + (index - 1));
+        System.out.println(id);
+        WebElement sectionTitleField = getDriver().findElement(By.id(id));
+        commonPage.sendKeysOnElement(sectionTitleField,sectionTitle);
+    }
+
+    private void clickSectionActionsDropdown(int index){
+        String xpath = String.format(".//*[@id='section-actions-dropdown_"+(index-1))+"']/li/i";
+        WebElement sectionActionDropdown = getDriver().findElement(By.xpath(xpath));
+        sectionActionDropdown.click();
+    }
+
+    private void cilckItemsActionsDropdown(int sectionIndex, int itemIndex){
+        String xpath = String.format(".//*[@id='line-actions-dropdown_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/li/i");
+        WebElement itemActionDropdown = getDriver().findElement(By.xpath(xpath));
+        itemActionDropdown.click();
+    }
+
+    public void clickSectionAction(int index, String action){
+        clickSectionActionsDropdown(index);
+        String id = String.format("section.action_"+(index-1));
+        switch (action){
+            case "Add Section":
+                id = id+"_addSection";
+                break;
+            case "Add Section Description":
+                id = id+"_addSectionDesc";
+                break;
+            case"Add Line":
+                id = id+"_addLine";
+                break;
+            case"Delete":
+                id = id+"_deleteSection";
+                break;
+            default:
+                System.out.println(action + "option is not found for section action");
+        }
+        getDriver().findElement(By.id(id)).click();
+    }
+
+    public int sectionsQuantity(){
+        return sections.size();
+    }
+
+    public int itemsQuantity(int sectionIndex){
+        List<WebElement> itemNumbers = sections.get(sectionIndex-1).findElements(By.xpath(".//td[@class='number']"));
+        return itemNumbers.size();
+    }
+
+    public void inputItemDescription(int sectionIndex, int itemIndex, String description){
+        String id = String.format("line.desc_"+(sectionIndex-1)+"_"+(itemIndex-1));
+        WebElement itemDescriptionField = getDriver().findElement(By.id(id));
+        commonPage.sendKeysOnElement(itemDescriptionField, description);
+    }
+
+    public void inputItemQty(int sectionIndex, int itemIndex, String qty){
+        String id = String.format("line.qty_"+(sectionIndex-1)+"_"+(itemIndex-1));
+        WebElement itemQtyField = getDriver().findElement(By.id(id));
+        commonPage.sendKeysOnElement(itemQtyField, qty);
+    }
+
+    private String getRandomUnit(int sectionIndex, int itemIndex){
+        String id = String.format("line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1));
+        WebElement lineUnit = sections.get(sectionIndex-1).findElement(By.id(id));
+        List<WebElement> unitElements = lineUnit.findElements(By.cssSelector("span[class='multiselect__option'] span"));
+        int index = (int) (Math.random() * unitElements.size());
+        return unitElements.get(index).getAttribute("textContent");
+    }
+
+    public void selectItemUnit(int sectionIndex, int itemIndex) {
+        String xpathInput = String.format(".//*[@id='line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/div[1]/div[2]/input");
+        String xpathSelectedUnit = String.format(".//*[@id='line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/div[1]/ul/li[1]/span");
+        WebElement unitInputField = getDriver().findElement(By.xpath(xpathInput));
+        WebElement dropDownSelectedUnit = getDriver().findElement(By.xpath(xpathSelectedUnit));
+        String randomUnit = getRandomUnit(sectionIndex, itemIndex);
+        commonPage.sendKeysOnElement(unitInputField, randomUnit);
+        dropDownSelectedUnit.click();
+    }
+
+    public void clickItemAction(int sectionIndex, int itemIndex, String action){
+        cilckItemsActionsDropdown(sectionIndex, itemIndex);
+        String id = String.format("line.action_"+(sectionIndex-1)+"_"+(itemIndex-1));
+        switch(action){
+            case "Add Line":
+                id = id+"_addLine";
+                break;
+            case "Add Option":
+                id = id+"_addOption";
+                break;
+            case "Add Section":
+                id = id+"_addSection";
+                break;
+            case "Duplicate":
+                id = id+"_duplicateLine";
+                break;
+            case "Delete":
+                id = id+"_deleteLine";
+                break;
+            default:
+                System.out.println(action + "option is not found for item action");
+        }
+        getDriver().findElement(By.id(id)).click();
+    }
+
+    private List<WebElement> getOptionDescriptionFields(int sectionIndex, int itemIndex){
+        String id = String.format("[id^='option.desc_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']");
+        return getDriver().findElements(By.cssSelector(id));
+    }
+
+    private void clickOptionActionsDropdown(int sectionIndex, int itemIndex, int optionIndex){
+        String xpath = String.format(".//*[@id='option-actions-dropdown_"+(sectionIndex-1)+"_"+(itemIndex-1)+"_"+(optionIndex-1)+"']/li/i");
+        getDriver().findElement(By.xpath(xpath)).click();
+    }
+
+    public int OptionQuantity(int sectionIndex, int itemIndex){
+        return getOptionDescriptionFields(sectionIndex, itemIndex).size();
+    }
+
+    public void inputOptionDescription(int sectionIndex, int itemIndex, int optionIndex, String optionDescription){
+        commonPage.sendKeysOnElement(getOptionDescriptionFields(sectionIndex, itemIndex).get(optionIndex-1), optionDescription);
+    }
+
+    public void clickOptionAction(int sectionIndex, int itemIndex, int optionIndex, String action){
+        clickOptionActionsDropdown(sectionIndex, itemIndex, optionIndex);
+        String id = String.format("option.action_"+(sectionIndex-1)+"_"+(itemIndex-1));
+        switch (action){
+            case "Add Option":
+                id = id+"_addOption";
+                break;
+            case "Delete":
+                id = id+"_deleteOption";
+                break;
+            default:
+                System.out.println(action + " is not found for option action");
+        }
+        getDriver().findElements(By.id(id)).get(optionIndex-1).click();
+    }
+
 }

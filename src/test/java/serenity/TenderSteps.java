@@ -1,6 +1,8 @@
 package serenity;
 
 import net.thucydides.core.annotations.Step;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Assert;
 import pages.TenderPage;
 
 /**
@@ -75,12 +77,94 @@ public class TenderSteps {
         tenderPage.clearTenderFromDb();
     }
 
+    @Step
     public void input_PRNumber(String prNumber){
         tenderPage.inputPRNumber(prNumber);
+    }
+
+    @Step
+    public void save_PRInfo(){
+        tenderPage.clickPRInfoSaveBtn();
+    }
+
+    @Step
+    public void saveTender(){
+        tenderPage.clickSaveBtn();
     }
 
     @Step
     public void validate_HeaderMessage(String expectedMsg){
         tenderPage.validateHeaderMessage(expectedMsg);
     }
+
+    @Step
+    public void click_itemsServices_tab(){
+        tenderPage.clickItemsServicesTab();
+    }
+
+    @Step
+    public void input_sectionTitle(int index){
+        String sectionTitle = String.format("Section "+index+" Test");
+        tenderPage.inputSectionTitle(index, sectionTitle);
+    }
+
+    @Step
+    public void click_sectionAction(int index, String action){
+        tenderPage.clickSectionAction(index,action);
+    }
+
+    @Step
+    public void add_sections(int quantity){
+        for(int i=1; i<=quantity; i++){
+            tenderPage.clickSectionAction(1, "Add Section");
+        }
+    }
+
+    @Step
+    public void add_items(int sectionIndex, int itemQuantity){
+        for(int i=1; i<=itemQuantity; i++){
+            tenderPage.clickItemAction(sectionIndex, 1, "Add Line");
+        }
+    }
+
+    @Step
+    public void check_itemsQuantity(int itemsNumber, int sectionIndex){
+        Assert.assertEquals(itemsNumber, tenderPage.itemsQuantity(sectionIndex));
+    }
+
+    @Step
+    public void check_sectionsQuantity(int number){
+        Assert.assertEquals(number, tenderPage.sectionsQuantity());
+    }
+
+    @Step
+    public void input_ItemInfo(int sectionIndex, int itemIndex){
+        String randomDescription = String.format("Section "+sectionIndex+" Item "+itemIndex+"\n"+RandomStringUtils.randomAlphabetic(10));
+        String randomQTY = RandomStringUtils.randomNumeric(2);
+        tenderPage.inputItemDescription(sectionIndex, itemIndex, randomDescription);
+        tenderPage.inputItemQty(sectionIndex, itemIndex, randomQTY);
+        tenderPage.selectItemUnit(sectionIndex, itemIndex);
+    }
+
+    @Step
+    public void click_itemAction(int sectionIndex, int itemIndex, String action){
+        tenderPage.clickItemAction(sectionIndex, itemIndex, action);
+    }
+
+    @Step
+    public void check_optionsQuantity(int number, int sectionIndex, int itemIndex){
+        Assert.assertEquals(number, tenderPage.OptionQuantity(sectionIndex, itemIndex));
+    }
+
+    @Step
+    public void input_optionDescriptioin(int sectionIndex, int itemIndex, int optionIndex){
+        String randomDescription = String.format("Section "+sectionIndex+" Item "+itemIndex+" Option "+optionIndex+"\n"+RandomStringUtils.randomAlphabetic(10));
+        tenderPage.inputOptionDescription(sectionIndex, itemIndex, optionIndex, randomDescription);
+    }
+
+    @Step
+    public void click_optionAction(int sectionIndex, int itemIndex, int optionIndex, String action){
+        tenderPage.clickOptionAction(sectionIndex, itemIndex, optionIndex, action);
+    }
+
 }

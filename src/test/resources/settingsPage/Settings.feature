@@ -36,7 +36,15 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And he add attribute <Attribute> for the single user
     And he saves the attributes for the single user
     Examples:
-    |User Name|Attribute|
-    |sophie|General Users,AH,PB|
-    |elon|Approver,AH          |
+      |User Name|Attribute|
+      |sophie|General Users,AH,PB|
+      |elon|Approver,AH          |
 
+  @setting
+  Scenario: Set the threshold for ITQ/Tender
+    Given  Open ETender system login page
+    When user logs in as the user type HKLD Admin
+    And user click hamburger icon
+    And user access settings page
+    And user access Threshold setting
+    And user set threshold value as 300000

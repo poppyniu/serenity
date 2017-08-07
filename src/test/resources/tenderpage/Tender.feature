@@ -31,10 +31,16 @@ Feature:Test function on tender page
 
   Scenario Outline: Validate PR Number
     And Click create tender button and create a tender
+    And user input PR number 52155
+    And user save the PR info
+    And user save the tender
+    And user go back to dashboard page
+    And Click create tender button and create a tender
     And user input PR number <PR Number>
     Then user gets the expected header message <Expected Message>
 
     Examples:
       |PR Number|Expected Message|
+      |52155    |This PR number is in use                         |
       |59004    |The PR amount does not match with the TENDER type|
       |58347    |You are not allowed to view this PR              |
