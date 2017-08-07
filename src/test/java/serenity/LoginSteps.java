@@ -61,6 +61,42 @@ public class LoginSteps {
         loginPage.hkldUserLogin(userName, password);
     }
 
+    @Step
+    public void open_contractor_login_page() throws Exception{
+        loginPage.openContractorLoginPage();
+    }
+
+    @Step
+    public void contractor_valid_login() throws Exception{
+        loginPage.contractorLogin();
+    }
+
+    @Step
+    public void check_contractor_login_succeed() throws Exception{
+        loginPage.checkContractorLogin();
+    }
+
+    @Step
+    public void contractor_invalid_login() throws Exception{
+        loginPage.contractorInvalidLogin();
+    }
+
+    @Step
+    public void check_contractor_login_fail() throws Exception{
+        loginPage.checkContractorLoginFail();
+    }
+
+    @Step
+    public void click_forgot_pwd_send_email() throws Exception{
+        loginPage.forgotPwdSendEmail();
+    }
+
+    @Step
+    public void check_reset_pwd_info() throws Exception{
+        loginPage.checkResetPwdInfo();
+    }
+
+
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
 }

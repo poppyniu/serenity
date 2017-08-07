@@ -1,6 +1,8 @@
 package pages;
 
 import constants.TestAccountsConstants;
+import constants.TestDataPathConstants;
+import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -26,8 +28,19 @@ public class LoginPage extends PageObject {
     WebElement userNameInvalidInfo;
     @FindBy(xpath = "//span[contains(text(),'Please input your password')]")
     WebElement userPwdInvalidInfo;
-    @FindBy(xpath = "")
-    WebElement namePwdInvalidInfo;
+    @FindBy(xpath = ".//*[@id='modules-vendors-login-form']/div[4]/a")
+    WebElement forgotPwdLink;
+    @FindBy(xpath = "html/body/div[1]/div[2]/form/label/input")
+    WebElement emailTextbox;
+    @FindBy(xpath = ".//*[@id='forgotpwd-form-send']")
+    WebElement sendEmailBtn;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/div/span")
+    WebElement resetPwdInfo;
+
+
+
+
+
 
     public void validLogin() throws Exception {
         commonPage.wait(getDriver(),3);
@@ -75,15 +88,8 @@ public class LoginPage extends PageObject {
     public void invalidLogin() throws Exception {
         //input invalid username and pwd
         commonPage.wait(getDriver(),3);
-        //UserNameTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserName);
         commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName);
         commonPage.wait(getDriver(),2);
-        boolean nameInvalidInfoExist = commonPage.elementExist(userNameInvalidInfo);
-        if (nameInvalidInfoExist == true) {
-            System.out.println("Input invalid name see the correct info, test pass!");
-        } else
-            Assert.fail("Input invalid name does not see the correct info, test fail!");
-      //  UserPwdTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserPwd);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd);
         commonPage.wait(getDriver(),2);
         boolean pwdInvalidInfoExist = commonPage.elementExist(userPwdInvalidInfo);
@@ -96,16 +102,10 @@ public class LoginPage extends PageObject {
             System.out.println("Input invalid username or pwd the login button is disabled, test pass!");
         } else
             Assert.fail("Input invalid username or pwd the login button is not disabled, test fail!");
-        //input empty name and pwd
-        userNameTextbox.clear();
-        commonPage.wait(getDriver(),1);
+        //input empty pwd
         userPwdTextbox.click();
         userPwdTextbox.clear();
         commonPage.wait(getDriver(),1);
-        if (nameInvalidInfoExist == true) {
-            System.out.println("Input empty name see the correct info, test pass!");
-        } else
-            Assert.fail("Input empty name does not see the correct info, test fail!");
         if (pwdInvalidInfoExist == true) {
             System.out.println("Input empty pwd see the correct info, test pass!");
         } else
@@ -115,14 +115,11 @@ public class LoginPage extends PageObject {
         } else
             Assert.fail("Input invalid username or pwd the login button is not disabled, test fail!");
         //input invlaid email address and pwd
-//        UserNameTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserName1);
-        commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName1);
         commonPage.wait(getDriver(),1);
-//        UserPwdTextbox.sendKeys(TestAccountsConstants.InvalidHKLDUserPwd1);
         commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd1);
         commonPage.wait(getDriver(),2);
         loginBtn.click();
-        commonPage.wait(getDriver(),2);
+        commonPage.wait(getDriver(),5);
     }
 
     public void loginDisabled() throws Exception {
@@ -141,6 +138,79 @@ public class LoginPage extends PageObject {
         commonPage.wait(getDriver(),2);
         loginBtn.click();
         commonPage.wait(getDriver(),5);
+    }
+
+    public void openContractorLoginPage() throws Exception {
+        getDriver().get(URLConstants.contractorLoginPage);
+        commonPage.wait(getDriver(),2);
+    }
+
+    public void contractorLogin() throws Exception {
+        Login(TestAccountsConstants.contractorNameTender,TestAccountsConstants.contractorPwd);
+    }
+
+    public void checkContractorLogin() throws Exception {
+        dashboardpage.hamburgerIcon.click();
+        commonPage.wait(getDriver(),4);
+        if(dashboardpage.userNameAfterLogin.getText().contains(TestAccountsConstants.afterLoginName)){
+            System.out.println("Input valid contractor name and pwd login succeed, test pass!");
+        } else
+            Assert.fail("Input valid contractor name and pwd login succeed, test fail!");
+
+    }
+
+    public void contractorInvalidLogin() throws Exception {
+        commonPage.wait(getDriver(),3);
+        commonPage.sendKeysOnElement(userNameTextbox,TestAccountsConstants.invalidHKLDUserName);
+        commonPage.wait(getDriver(),2);
+        commonPage.sendKeysOnElement(userPwdTextbox,TestAccountsConstants.invalidHKLDUserPwd);
+        commonPage.wait(getDriver(),2);
+        boolean nameInvalidInfoExist = commonPage.elementExist(userNameInvalidInfo);
+        boolean pwdInvalidInfoExist = commonPage.elementExist(userPwdInvalidInfo);
+        boolean loginBtnEnable = loginBtn.isEnabled();
+        if (nameInvalidInfoExist==true&&pwdInvalidInfoExist == true&&loginBtnEnable==false) {
+            System.out.println("Input invalid name and pwd see the correct info,and login button is disabled, test pass!");
+        } else
+            Assert.fail("Input invalid name and pwd does not see the correct info,,and login button is disabled, test fail!");
+        userNameTextbox.click();
+        userNameTextbox.clear();
+        commonPage.wait(getDriver(),1);
+        userPwdTextbox.click();
+        commonPage.wait(getDriver(),1);
+        userPwdTextbox.clear();
+        commonPage.wait(getDriver(),1);
+        if (nameInvalidInfoExist==true&&pwdInvalidInfoExist == true&&loginBtnEnable==false) {
+            System.out.println("Input empty name and pwd see the correct info,and login button is disabled, test pass!");
+        } else
+            Assert.fail("Input empty name and pwd does not see the correct info,,and login button is disabled, test fail!");
+        commonPage.wait(getDriver(),2);
+        commonPage.sendKeysOnElement(userNameTextbox, TestAccountsConstants.invalidUserName1);
+        commonPage.sendKeysOnElement(userPwdTextbox, TestAccountsConstants.invalidHKLDUserPwd1);
+        commonPage.wait(getDriver(),2);
+        loginBtn.click();
+        commonPage.wait(getDriver(),5);
+    }
+
+    public void checkContractorLoginFail() throws Exception {
+        loginDisabled();
+    }
+
+    public void forgotPwdSendEmail() throws Exception {
+        forgotPwdLink.click();
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.wait(getDriver(),2);
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(),3);
+        commonPage.sendKeysOnElement(emailTextbox,TestAccountsConstants.contractorNameTender);
+        sendEmailBtn.click();
+        commonPage.wait(getDriver(),3);
+    }
+
+    public void checkResetPwdInfo() throws Exception {
+        if(resetPwdInfo.getText().contains(TestDataPathConstants.resetPwdInfo)){
+            System.out.println("Send email to reset pwd see the correct info, test pass!");
+        } else
+            Assert.fail("Send email to reset pwd does not see the correct info, test fail!");
     }
 
 }

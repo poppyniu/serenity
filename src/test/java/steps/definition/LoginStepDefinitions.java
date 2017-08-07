@@ -1,5 +1,6 @@
 package steps.definition;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -46,6 +47,41 @@ public class LoginStepDefinitions {
     @When("^user logs in with user name ([^\"]*) and password ([^\"]*)$")
     public void user_logs_in_with_username_and_password(String userName, String password) throws Exception {
         loginSteps.anyUser_login(userName, password);
+    }
+
+    @Given("^Open contractor login page$")
+    public void open_contractor_login_page() throws Exception {
+        loginSteps.open_contractor_login_page();
+    }
+
+    @When("^Input valid contractor name and pwd and click login button$")
+    public void input_valid_contractor_name_and_pwd_and_click_login_button() throws Exception {
+        loginSteps.contractor_valid_login();
+    }
+
+    @Then("^Contractor login to ETender system succeed$")
+    public void contractor_login_to_ETender_system_succeed() throws Exception {
+        loginSteps.check_contractor_login_succeed();
+    }
+
+    @When("^Input invalid contractor name and pwd and click login button$")
+    public void input_invalid_contractor_name_and_pwd_and_click_login_button() throws Throwable {
+        loginSteps.contractor_invalid_login();
+    }
+
+    @Then("^Contractor login fail$")
+    public void contractor_login_fail() throws Throwable {
+        loginSteps.check_contractor_login_fail();
+    }
+
+    @And("^Click forgot passowrd link to send email$")
+    public void click_forgot_passowrd_link_to_send_email() throws Throwable {
+        loginSteps.click_forgot_pwd_send_email();
+    }
+
+    @Then("^Check the reset passord info is correct$")
+    public void check_the_reset_passord_info_is_correct() throws Throwable {
+        loginSteps.check_reset_pwd_info();
     }
 
 }

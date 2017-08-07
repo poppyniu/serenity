@@ -29,6 +29,9 @@ public class DashboardPage extends PageObject {
     WebElement hamburgerIcon;
     @FindBy(id = "hamburger3")
     WebElementFacade settingLink;
+    @FindBy(xpath = ".//*[@id='user_name']")
+    WebElement userNameAfterLogin;
+
 
     /*
         If get to the dashboard twice in the same scenario, webElements from the pop out of create tender would not be unique.
