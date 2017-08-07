@@ -54,7 +54,7 @@ public class ITQPage extends PageObject {
         tenderPage.closingDateDropdown2item.click();
         commonPage.wait(getDriver(),1);
         itqIssueBtn.click();
-        if(tenderPage.saveSuccessInfo.getText().contains("Issue ITQ/Tender: Success")){
+        if(tenderPage.saveSuccessInfo.getText().contains("Success")){
             System.out.println("Engineer issue itq succeed,test pass!");
         }
         else

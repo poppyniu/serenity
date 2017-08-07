@@ -97,8 +97,6 @@ public class TenderPage extends PageObject {
     WebElement uploadedFileName;
     @FindBy(xpath=".//*[@id='mini-toastr']/div/div")
     WebElement saveSuccessInfo;
-    @FindBy(xpath=".//*[@id='mini-toastr']/div[2]/div")
-    WebElement saveSuccessInfo111;
     @FindBy(xpath=".//*[@class='clearfix']/div[2]/a[3]")
     WebElement previewSubmitBtn;
     @FindBy(xpath=".//*[@id='submit_tender']")
@@ -323,6 +321,10 @@ public class TenderPage extends PageObject {
             Assert.fail("Send tender for approve get error, test fail!");
     }
 
+    public void changeTenderPersonInChargeInDB() throws Exception{
+        DBHelper.changePersonInCharge();
+    }
+
     public void adminApprove() throws Exception{
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(),2);
@@ -334,7 +336,7 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(),2);
         adminApproveBtn.click();
         commonPage.wait(getDriver(),2);
-        if(saveSuccessInfo111.getText().contains("Success")){
+        if(saveSuccessInfo.getText().contains("Success")){
             System.out.println("Admin approve tender succeed,test pass!");
         }
         else
@@ -367,11 +369,16 @@ public class TenderPage extends PageObject {
             Assert.fail("Engineer issue tender get error,test fail!");
     }
 
-    public void contractorSubmitTender()throws Exception {
+    public void contractorSubmitTender(String tenderType)throws Exception {
         //contractor login
         getDriver().get(URLConstants.contractorLoginPage);
         commonPage.wait(getDriver(),2);
-        loginPage.Login(TestAccountsConstants.contractorName,TestAccountsConstants.contractorPwd);
+        if(tenderType.contains("tender")) {
+            loginPage.Login(TestAccountsConstants.contractorNameTender, TestAccountsConstants.contractorPwd);
+        }
+        else if(tenderType.contains("itq")) {
+            loginPage.Login(TestAccountsConstants.contractorNameITQ, TestAccountsConstants.contractorPwd);
+        }
         dashboardPage.itqTenderItemOne.click();
         commonPage.wait(getDriver(),2);
         currentUrl=getDriver().getCurrentUrl();
@@ -438,11 +445,11 @@ public class TenderPage extends PageObject {
             Assert.fail("After contractor submit, the tender status and company submit status is not correct,test fail!");
     }
 
-    public void changeTenderStatusInDB() throws Exception {
+    public void changeTenderStatusInDB(String prNo) throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentDate=df.format(new Date());
         String currentDateBefore=commonPage.getSpecifiedDayBefore(currentDate);
-        DBHelper.changeClosingDate(currentDateBefore);
+        DBHelper.changeClosingDate(currentDateBefore,prNo);
     }
 
     public void checkTenderStatus() throws Exception {

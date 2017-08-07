@@ -45,6 +45,11 @@ public class TenderStepDefinitions {
         tenderSteps.submit_tender_for_approve();
     }
 
+    @And("^Change tender personInCharge in db$")
+    public void change_tender_personInCharge_in_db() throws Throwable {
+        tenderSteps.change_tender_personInCharge_in_db();
+    }
+
     @And("^HKLD Admin login to approve tender$")
     public void hkld_Admin_login_to_approve_tender() throws Throwable {
         tenderSteps.admin_approve();
@@ -60,9 +65,9 @@ public class TenderStepDefinitions {
         tenderSteps.check_vendor_submit_status();
     }
 
-    @And("^Change tender status in db$")
-    public void change_tender_status_in_db() throws Throwable {
-        tenderSteps.change_tender_status_in_db();
+    @And("^Change tender status in db by ([^\"]*)$")
+    public void change_tender_status_in_db(String prNo) throws Throwable {
+        tenderSteps.change_tender_status_in_db(prNo);
     }
 
     @And("^HKLD engineer check current tender status$")
@@ -70,9 +75,9 @@ public class TenderStepDefinitions {
         tenderSteps.check_tender_status();
     }
 
-    @And("^Contractor login to submit tender$")
-    public void contractor_login_to_submit_tender() throws Throwable {
-        tenderSteps.contractor_submit();
+    @And("^([^\"]*) login to submit tender$")
+    public void contractor_login_to_submit_tender(String tenderType) throws Throwable {
+        tenderSteps.contractor_submit(tenderType);
     }
 
     @Then("^Clear tender test data in db$")

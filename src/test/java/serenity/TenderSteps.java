@@ -42,6 +42,11 @@ public class TenderSteps {
     }
 
     @Step
+    public void change_tender_personInCharge_in_db() throws Exception {
+        tenderPage.changeTenderPersonInChargeInDB();
+    }
+
+    @Step
     public void admin_approve() throws Exception {
         tenderPage.adminApprove();
     }
@@ -57,8 +62,8 @@ public class TenderSteps {
     }
 
     @Step
-    public void change_tender_status_in_db() throws Exception {
-        tenderPage.changeTenderStatusInDB();
+    public void change_tender_status_in_db(String prNo) throws Exception {
+        tenderPage.changeTenderStatusInDB(prNo);
     }
 
     @Step
@@ -68,8 +73,8 @@ public class TenderSteps {
 
 
     @Step
-    public void contractor_submit() throws Exception {
-        tenderPage.contractorSubmitTender();
+    public void contractor_submit(String tenderType) throws Exception {
+        tenderPage.contractorSubmitTender(tenderType);
     }
 
     @Step

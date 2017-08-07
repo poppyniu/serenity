@@ -15,16 +15,17 @@ Feature:Test function on tender page
     And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
     And Input attachments tab info <ProjectDescription> and save tender
     And Submit the new tender for approve
+    And Change tender personInCharge in db
     And HKLD Admin login to approve tender
     And HKLD engineer login to issue tender
-    And Contractor login to submit tender
+    And <Contractor> login to submit tender
     And HKLD engineer login to check if contractor has submitted tender
-    And Change tender status in db
+    And Change tender status in db by <prNo>
     And HKLD engineer check current tender status
     Then Clear tender test data in db
     Examples:
-      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |
-      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|prNo|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|59000        |
 
 
 
