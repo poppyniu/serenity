@@ -110,12 +110,12 @@ public class TenderStepDefinitions {
         tenderSteps.click_itemsServices_tab();
     }
 
-    @And("^user at section ([^\"]*) input section tile$")
+    @And("^user at section #([^\"]*) input section tile$")
     public void user_input_section_title(String index){
         tenderSteps.input_sectionTitle(Integer.parseInt(index));
     }
 
-    @And("^user at section ([^\"]*) choose the action ([^\"]*) from section drop down menu$")
+    @And("^user at section #([^\"]*) choose the action ([^\"]*) from section drop down menu$")
     public void user_choose_the_action_from_section_options(String index, String action){
         tenderSteps.click_sectionAction(Integer.parseInt(index),action);
     }
@@ -125,12 +125,12 @@ public class TenderStepDefinitions {
         tenderSteps.check_sectionsQuantity(Integer.parseInt(number));
     }
 
-    @Then("^([^\"]*) items should be existing under section ([^\"]*)$")
+    @Then("^([^\"]*) items should be existing under section #([^\"]*)$")
     public void check_items_numer_in_section(String itemsNumer, String sectionIndex){
         tenderSteps.check_itemsQuantity(Integer.parseInt(itemsNumer), Integer.parseInt(sectionIndex));
     }
 
-    @And("^user at section ([^\"]*) item ([^\"]*) choose the action ([^\"]*) from item drop down menu$")
+    @And("^user at section #([^\"]*) item #([^\"]*) choose the action ([^\"]*) from item drop down menu$")
     public void user_choose_the_action_from_item_options(String sectionIndex, String itemIndex, String action){
         tenderSteps.click_itemAction(Integer.parseInt(sectionIndex), Integer.parseInt(itemIndex), action);
     }
@@ -140,7 +140,7 @@ public class TenderStepDefinitions {
         tenderSteps.add_sections(Integer.parseInt(sectionQuantity));
     }
 
-    @And("^user at section ([^\"]*) add ([^\"]*) more items$" )
+    @And("^user at section #([^\"]*) add ([^\"]*) more items$" )
     public void user_at_section_add_more_items(String sectionIndex, String itemsQuantity){
         tenderSteps.add_items(Integer.parseInt(sectionIndex), Integer.parseInt(itemsQuantity));
     }
@@ -153,17 +153,17 @@ public class TenderStepDefinitions {
         }
     }
 
-    @Then("^([^\"]*) options should be existing under section ([^\"]*) item ([^\"]*)$")
+    @Then("^([^\"]*) options should be existing under section #([^\"]*) item #([^\"]*)$")
     public void check_options_number_under_section_item(String optionNumber, String sectionIndex, String itemIndex){
         tenderSteps.check_optionsQuantity(Integer.parseInt(optionNumber), Integer.parseInt(sectionIndex), Integer.parseInt(itemIndex));
     }
 
-    @And("^user at section ([^\"]*) item ([^\"]*) option ([^\"]*) input option description$")
+    @And("^user at section #([^\"]*) item #([^\"]*) option #([^\"]*) input option description$")
     public void user_input_option_description(String sectionIndex, String itemIndex, String optionIndex){
         tenderSteps.input_optionDescriptioin(Integer.parseInt(sectionIndex), Integer.parseInt(itemIndex), Integer.parseInt(optionIndex));
     }
 
-    @And("^user at section ([^\"]*) item ([^\"]*) option ([^\"]*) choose the action ([^\"]*) from option drop down menu")
+    @And("^user at section #([^\"]*) item #([^\"]*) option #([^\"]*) choose the action ([^\"]*) from option drop down menu")
     public void user_choose_the_action_from_option_menu(String sectionIndex, String itemIndex, String optionIndex, String action){
         tenderSteps.click_optionAction(Integer.parseInt(sectionIndex), Integer.parseInt(itemIndex), Integer.parseInt(optionIndex), action);
     }
