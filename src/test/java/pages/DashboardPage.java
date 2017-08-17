@@ -104,7 +104,7 @@ public class DashboardPage extends PageObject {
 
     public void clickHKLDLogo(){
         hkldLogo.click();
-        commonPage.wait(getDriver(),4);
+        commonPage.wait(getDriver(),5);
     }
 
     public List<WebElement> getLinksFromTenderTable(){
@@ -139,6 +139,7 @@ public class DashboardPage extends PageObject {
     }
 
     public List<WebElement> getAllTenderLines() {
+        commonPage.wait(getDriver(), 3);
        List<WebElement>  allTenderLines = getDriver().findElements(By.xpath("html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr"));
        return allTenderLines;
     }
@@ -149,8 +150,6 @@ public class DashboardPage extends PageObject {
             if(tender.getText().contains(prNumber)){
                 tender.findElements(By.xpath(".//a[@class = 'link_text']")).get(0).click();
                 commonPage.wait(getDriver(), 3);
-            }else{
-                Assert.fail(prNumber + " is not found on dashboard");
             }
         }
     }

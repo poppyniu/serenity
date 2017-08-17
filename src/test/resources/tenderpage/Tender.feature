@@ -53,5 +53,5 @@ Feature:Test function on tender page
       |PR Number|Expected Message|
       |52155    |This PR number is in use                         |
       |59004    |The PR amount does not match with the TENDER type|
-      |58347    |You are not allowed to view this PR              |
+      |59023    |You are not allowed to view this PR              |
 

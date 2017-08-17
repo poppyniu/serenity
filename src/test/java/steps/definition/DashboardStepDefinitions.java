@@ -5,6 +5,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import serenity.DashboardPageSteps;
+import serenity.TenderSteps;
 
 /**
  * Created by Maggie_Ping on 7/25/2017.
@@ -12,6 +13,9 @@ import serenity.DashboardPageSteps;
 public class DashboardStepDefinitions {
     @Steps
     DashboardPageSteps dashboardPageSteps;
+
+    @Steps
+    TenderSteps tenderSteps;
 
     @When("^user click hamburger icon$")
     public void user_click_hamburger_icon(){
@@ -63,8 +67,17 @@ public class DashboardStepDefinitions {
         dashboardPageSteps.check_TenderParameterValue(prNumber, parameterValue);
     }
 
+    @Then("^the tender of PR number ([^\"]*) shows correct amount on the dashboard")
+    public void the_tender_of_PR_number_shows_correct_amount(String prNumber){
+        String expectedAmount = tenderSteps.get_prAmountFromGeneralTab();
+        dashboardPageSteps.click_HKLDLogo();
+        dashboardPageSteps.check_TenderParameterValue(prNumber, expectedAmount);
+    }
+
     @And("^user select the tender of PR number ([^\"]*) from the dashboard")
     public void select_the_tender_of_PR_number_from_the_dashboard(String prNumber){
         dashboardPageSteps.click_specifiedTender(prNumber);
     }
+
+
 }

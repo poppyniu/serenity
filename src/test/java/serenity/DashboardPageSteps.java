@@ -93,8 +93,6 @@ public class DashboardPageSteps {
         for(WebElement tender : allTenderLines){
             if(tender.getText().contains(prNumber)){
                 Assert.assertTrue(tender.getText().replace("\n", "").contains(expectedValue));
-            }else{
-                Assert.fail(prNumber + " is not found on dashboard");
             }
         }
     }

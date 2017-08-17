@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         format = {"pretty", "html:target/html/"},
-        features = "src/test/resources/",
+        features = {"src/test/resources/settingsPage","src/test/resources" },
         tags = {"@ProjectFlow"}
 )
 public class TestSuite {

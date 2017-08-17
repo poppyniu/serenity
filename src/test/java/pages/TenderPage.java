@@ -58,7 +58,7 @@ public class TenderPage extends PageObject {
     WebElement prNumberAddBtn;
     @FindBy(xpath=".//*[@id='tender.general.contractData.save']")
     WebElement prNumberInfoSaveBtn;
-    @FindBy(xpath=".//*[@id='pr-window']/div[2]/span")
+    @FindBy(xpath=".//span[@id='tender.general.budget'][@class='pr-data']")
     WebElement prAmount;
     //ScopeOfWork tab elements
     @FindBy(xpath=".//*[@id='tab-scope-label']")
@@ -636,7 +636,7 @@ public class TenderPage extends PageObject {
         getDriver().findElements(By.id(id)).get(optionIndex-1).click();
     }
 
-    public String getPRAmountFromGeneralAmount(){
+    public String getPRAmountFromGeneralTab(){
         return prAmount.getAttribute("textContent");
     }
 

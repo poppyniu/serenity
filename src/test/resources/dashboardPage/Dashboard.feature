@@ -4,7 +4,7 @@ Feature: Functions on dashboard.
   Background:
     Given Clear tender test data in db
 
-
+  @dashboard
   Scenario Outline: Dashboard and hamburger shows correct user name after HKLD user or vendor login
     Given Open ETender system login page
     And user logs in with user name <HKLD User Name> and password <HKLD Password>
@@ -22,7 +22,7 @@ Feature: Functions on dashboard.
     |sophie  |aaaaaa  |gino_zhu@epam.com     |aaaaaa         |
     |brad    |aaaaaa  |judy_zou@epam.com     |aaaaaa         |
 
-
+  @dashboard
   Scenario: Different HKLD users can only view the Tender created by themselves.
     Given Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
@@ -38,7 +38,7 @@ Feature: Functions on dashboard.
     And user logs in with user name elon and password aaaaaa
     Then the tender of PR number 51120 is not existing in the dashboard
 
-
+  @dashboard
   Scenario: The bubble number on the top of the dashboard shows the correct number
     Given Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
@@ -55,5 +55,23 @@ Feature: Functions on dashboard.
     And user go back to dashboard page
     Then the bubble number of tender is correct on the top of the dashboard
 
+  @dashboard
+  Scenario Outline: ITQ/Tender shows correct amount on the dashboard
+    Given Open ETender system login page
+    And user logs in as the user type HKLD Engineer
+    And Click create tender button and create a tender
+    And user input PR number <Tender PR>
+    And user save the PR info
+    And user save the tender
+    Then the tender of PR number <Tender PR> shows correct amount on the dashboard
+    And Click create itq button and create a itq
+    And user input PR number <ITQ PR>
+    And user save the PR info
+    And user save the tender
+    Then the tender of PR number <ITQ PR> shows correct amount on the dashboard
 
+    Examples:
+    |Tender PR|ITQ PR|
+    |59000    |59004 |
+    |52155    |57556 |
 

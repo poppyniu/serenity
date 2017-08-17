@@ -172,4 +172,9 @@ public class TenderSteps {
         tenderPage.clickOptionAction(sectionIndex, itemIndex, optionIndex, action);
     }
 
+    @Step
+    public String get_prAmountFromGeneralTab(){
+        return tenderPage.getPRAmountFromGeneralTab().replace("$", "");
+    }
+
 }
