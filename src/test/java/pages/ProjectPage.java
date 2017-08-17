@@ -1,0 +1,372 @@
+package pages;
+
+import constants.DBHelper;
+import constants.TestAccountsConstants;
+import constants.TestDataPathConstants;
+import constants.URLConstants;
+import net.serenitybdd.core.annotations.findby.FindBy;
+import net.serenitybdd.core.pages.PageObject;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+
+/**
+ * Created by Poppy_Zhang on 2017/6/21.
+ */
+//@DefaultUrl("http://10.22.17.96/")
+public class ProjectPage extends PageObject {
+    String testDataPath = System.getProperty("testdata");
+    CommonPage commonPage;
+    DashboardPage dashboardPage;
+    LoginPage loginPage;
+    String currentUrl;
+    @FindBy(xpath = ".//*[@id='tab-docs-label']")
+    WebElement addDocTab;
+    @FindBy(xpath = ".//*[@id='project-documents-documents-add']")
+    WebElement addDocTypeBtn;
+    @FindBy(xpath = ".//*[@id='confirm-create-container']/table/tbody/tr[1]/td[2]/div/i[2]")
+    WebElement addDocTypeBtn1;
+    @FindBy(xpath = ".//*[@id='confirm-create-container']/table/tbody/tr[3]/td[2]/div/i[2]")
+    WebElement addDocTypeBtn2;
+    @FindBy(xpath = ".//*[@class='row align-spaced action-buttons']//button[2]")
+    WebElement addDocTypeBtn3;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/div/div/div/button")
+    WebElement inviteBtn;
+    @FindBy(xpath = ".//*[@id='project-detail-invite-vendor']/div[2]/div/div/button")
+    WebElement inviteBtn1;
+    @FindBy(xpath = ".//*[@id='project-detail-invite-success']/div[2]/div/button")
+    WebElement inviteOkBtn;
+    @FindBy(xpath = ".//*[@id='mini-toastr']/div/div")
+    WebElement successInfo;
+    @FindBy(xpath = ".//*[@id='tab-sr']/div/div/div[1]/button")
+    WebElement submissionBtn;
+    @FindBy(xpath = ".//*[@id='sr-completionType-partial']")
+    WebElement partialRadioBtn;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[2]/div/div[1]/span/i")
+    WebElement completeOnBtn;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[2]/div/div[2]/div[2]/span[15]")
+    WebElement calenderItem;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[3]/div/div/textarea")
+    WebElement itemsServiceTextBox;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[4]/div/div[3]/div[2]/div/input")
+    WebElement amountTextbox;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[6]/div[1]/div/div/textarea")
+    WebElement personTextBox;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[6]/div[2]/div/div/textarea")
+    WebElement positionTextBox;
+    @FindBy(xpath = ".//*[@id='project-sr-accordion-0']/div/div/button[1]")
+    WebElement submitBtn;
+    @FindBy(xpath = ".//*[@id='project-sr-accordion-0']/div/div[8]/div[1]/a[2]")
+    WebElement approveBtn;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr[1]/td[3]/span")
+    WebElement projectStatus;
+    @FindBy(xpath = ".//*[@id='sr-completionType-final-partial']")
+    WebElement finalPartialCheckbox;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/span")
+    WebElement uploadDocRemindInfo;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[2]/button")
+    WebElement uploadDocRemindInfoYesBtn;
+    @FindBy(xpath = ".//*[@id='tab-docs-label']")
+    WebElement documentTab;
+    //    @FindBy(xpath = ".//body/input[@type='file'][4]")
+//    WebElement uploadFileTextbox;
+    @FindBy(xpath = ".//*[@class='project-documents-accordion-container']/div/ul/li[1]/div[2]/div[2]/table/tbody/tr/td[2]/a")
+    WebElement uploadedFileName1;
+    @FindBy(xpath = ".//*[@class='project-documents-accordion-container']/div/ul/li[2]/div[2]/div[2]/table/tbody/tr/td[2]/a")
+    WebElement uploadedFileName2;
+    @FindBy(xpath = ".//*[@id='project-docs-accordion-1-label']/div/div/span")
+    WebElement secondDocType;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/span")
+    WebElement approveDocRemindInfo;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[2]/button")
+    WebElement approveDocRemindInfoOkBtn;
+    @FindBy(xpath = ".//*[@class='project-documents-accordion-container']/div/ul/li[1]/div[3]/div/div/div/div/a[2]")
+    WebElement approveDocBtn1;
+    @FindBy(xpath = ".//*[@class='project-documents-accordion-container']/div/ul/li[2]/div[3]/div/div/div/div/a[2]")
+    WebElement approveDocBtn2;
+    @FindBy(xpath = ".//*[@id='project-docs-accordion']/li[2]/a/div/div")
+    WebElement docTwoPanel;
+    @FindBy(xpath = ".//*[@id='alertModal']/div[2]/button[2]")
+    WebElement approveDocYesBtn;
+    @FindBy(xpath = ".//*[@id='tab-sr-label']")
+    WebElement sumissionRequestTab;
+
+
+    public void createProject(String poNo) throws Exception {
+        dashboardPage.clickCreateProject(poNo);
+        //add doc type
+        addDocTab.click();
+        commonPage.wait(getDriver(), 2);
+        addDocTypeBtn.click();
+        commonPage.wait(getDriver(), 2);
+        addDocTypeBtn1.click();
+//        commonPage.wait(getDriver(), 1);
+//        addDocTypeBtn2.click();
+        commonPage.wait(getDriver(), 1);
+        addDocTypeBtn3.click();
+        commonPage.wait(getDriver(), 2);
+        inviteBtn.click();
+        commonPage.wait(getDriver(), 2);
+        inviteBtn1.click();
+        commonPage.wait(getDriver(), 2);
+        inviteOkBtn.click();
+        commonPage.wait(getDriver(), 1);
+        if (successInfo.getText().contains("Success")) {
+            System.out.println("Project invite vendor succeed,test pass!");
+        } else
+            Assert.fail("Project invite vendor get error,test fail!");
+    }
+
+    public void firstSubmission(String amount) throws Exception {
+        getDriver().get(URLConstants.contractorLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
+        dashboardPage.projectItemOne.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+        submissionBtn.click();
+        partialRadioBtn.click();
+        completeOnBtn.click();
+        commonPage.wait(getDriver(), 2);
+        calenderItem.click();
+        commonPage.sendKeysOnElement(itemsServiceTextBox, TestDataPathConstants.testInfo);
+        amountTextbox.clear();
+        commonPage.sendKeysOnElement(amountTextbox, amount);
+        commonPage.scrollToElement(personTextBox);
+        commonPage.sendKeysOnElement(personTextBox, TestDataPathConstants.testInfo);
+        commonPage.scrollToElement(positionTextBox);
+        commonPage.sendKeysOnElement(positionTextBox, TestDataPathConstants.testInfo);
+        submitBtn.click();
+        commonPage.wait(getDriver(), 1);
+        if (successInfo.getText().contains("Success")) {
+            System.out.println("Partial submission succeed,test pass!");
+        } else
+            Assert.fail("Partial submission get error,test fail!");
+    }
+
+    public void engineerApproveSubmission() throws Exception {
+        engineerLoginApprove();
+        checkProjectStatus("1st");
+
+    }
+
+    public void secondSubmission(String amount1) throws Exception {
+        firstSubmission(amount1);
+    }
+
+    public void engineerApproveSecondSubmission() throws Exception {
+        engineerLoginApprove();
+        checkProjectStatus("2nd");
+    }
+
+    public void thirdFinalSubmission(String amount2) throws Exception {
+        getDriver().get(URLConstants.contractorLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
+        dashboardPage.projectItemOne.click();
+        commonPage.wait(getDriver(), 3);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(submissionBtn);
+        commonPage.wait(getDriver(), 2);
+        submissionBtn.click();
+        commonPage.wait(getDriver(), 3);
+        commonPage.scrollToElement(partialRadioBtn);
+        commonPage.wait(getDriver(), 2);
+        partialRadioBtn.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(finalPartialCheckbox);
+        finalPartialCheckbox.click();
+        commonPage.wait(getDriver(), 1);
+        commonPage.scrollToElement(completeOnBtn);
+        completeOnBtn.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(calenderItem);
+        calenderItem.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(itemsServiceTextBox);
+        commonPage.sendKeysOnElement(itemsServiceTextBox, TestDataPathConstants.testInfo);
+        amountTextbox.clear();
+        commonPage.scrollToElement(amountTextbox);
+        commonPage.sendKeysOnElement(amountTextbox, amount2);
+        commonPage.scrollToElement(personTextBox);
+        commonPage.sendKeysOnElement(personTextBox, TestDataPathConstants.testInfo);
+        commonPage.scrollToElement(positionTextBox);
+        commonPage.sendKeysOnElement(positionTextBox, TestDataPathConstants.testInfo);
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(submitBtn);
+        submitBtn.click();
+        commonPage.wait(getDriver(), 3);
+    }
+
+    public void checkUploadDocInfo() throws Exception {
+        if (uploadDocRemindInfo.getText().contains("Please upload all required documents to proceed to submission")) {
+            System.out.println("Final submission do not upload docs, see the remind info,test pass!");
+        } else
+            Assert.fail("Do not see the upload doc remind info,test fail!");
+        commonPage.wait(getDriver(), 2);
+        uploadDocRemindInfoYesBtn.click();
+        commonPage.wait(getDriver(), 2);
+    }
+
+    public void uploadDocsAndSubmit() throws Exception {
+        commonPage.scrollToElement(documentTab);
+        documentTab.click();
+        commonPage.wait(getDriver(), 2);
+//        commonPage.scrollToElement(secondDocType);
+//        secondDocType.click();
+        //upload first file
+        commonPage.wait(getDriver(), 2);
+        uploadDoc();
+//        uploadDoc2();
+        //resubmit final submission
+        commonPage.scrollToElement(sumissionRequestTab);
+        sumissionRequestTab.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(submitBtn);
+        submitBtn.click();
+        commonPage.wait(getDriver(), 2);
+    }
+
+    public void uploadDoc() throws Exception {
+        int uploadFileCount = getDriver().findElements(By.xpath(".//body/input[@type='file']")).size();
+        for (int i = 1; i <= uploadFileCount; i++) {
+            WebElement uploadFileElement = getDriver().findElements(By.xpath(".//body/input[@type='file'][" + i + "]")).get(0);
+            JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
+            removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
+            commonPage.wait(getDriver(), 2);
+            WebElement uploadFileTextbox = getDriver().findElement(By.xpath(".//body/input[@type='file'][" + i + "]"));
+            if (testDataPath == null) {
+                testDataPath = TestDataPathConstants.uploadFilePath;
+            }
+            uploadFileTextbox.sendKeys(testDataPath);
+            commonPage.wait(getDriver(), 4);
+            boolean uploadFileExist = commonPage.isContentAppeared(getDriver(), "test.jpg");
+            if (uploadFileExist == true) {
+                System.out.println("Upload first file succeed,test pass!");
+                break;
+            }
+        }
+    }
+
+    public void uploadDoc2() throws Exception {
+        int uploadFileCount = getDriver().findElements(By.xpath(".//body/input[@type='file']")).size();
+        WebElement uploadFileElement = getDriver().findElements(By.xpath(".//body/input[@type='file'][6]")).get(0);
+        JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
+        removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
+        commonPage.wait(getDriver(), 2);
+        WebElement uploadFileTextbox = getDriver().findElement(By.xpath(".//body/input[@type='file'][6]"));
+        if (testDataPath == null) {
+            testDataPath = TestDataPathConstants.uploadFilePath;
+        }
+        uploadFileTextbox.sendKeys(testDataPath);
+        commonPage.wait(getDriver(), 4);
+        boolean uploadFileExist = commonPage.isContentAppeared(getDriver(), "test.jpg");
+        if (uploadFileExist == true) {
+            System.out.println("Upload first file succeed,test pass!");
+        }
+    }
+
+    public void engineerApproveThirdSubmission() throws Exception {
+        getDriver().get(URLConstants.hkldLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
+        dashboardPage.engineerProjectItemOne.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 3);
+        commonPage.scrollToElement(approveBtn);
+        approveBtn.click();
+        commonPage.wait(getDriver(), 1);
+    }
+
+    public void remindApproveDoc() throws Exception {
+        if (commonPage.elementExist(approveDocRemindInfo)) {
+            System.out.println("Final approve do not upload docs, see the remind info,test pass!");
+        } else
+            Assert.fail("Do not see the approve doc remind info,test fail!");
+        commonPage.wait(getDriver(), 2);
+        approveDocRemindInfoOkBtn.click();
+        commonPage.wait(getDriver(), 2);
+    }
+
+    public void approveDocCheckStatus() throws Exception {
+        commonPage.scrollToElement(documentTab);
+        documentTab.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(approveDocBtn1);
+        approveDocBtn1.click();
+        commonPage.wait(getDriver(), 2);
+        approveDocYesBtn.click();
+//        commonPage.scrollToElement(docTwoPanel);
+//        docTwoPanel.click();
+//        commonPage.wait(getDriver(), 2);
+//        approveDocBtn2.click();
+//        commonPage.wait(getDriver(), 2);
+//        approveDocYesBtn.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(sumissionRequestTab);
+        sumissionRequestTab.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(approveBtn);
+        approveBtn.click();
+        commonPage.wait(getDriver(), 1);
+        if (successInfo.getText().contains("Success")) {
+            System.out.println("Engineer approve final submission succeed,test pass!");
+        } else
+            Assert.fail("Engineer approve final submission get error,test fail!");
+        commonPage.wait(getDriver(), 3);
+        commonPage.scrollToElement(dashboardPage.hkldLogo);
+        dashboardPage.hkldLogo.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+        checkProjectStatus("3rd");
+    }
+
+
+    private void engineerLoginApprove() throws Exception {
+        getDriver().get(URLConstants.hkldLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
+        dashboardPage.engineerProjectItemOne.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(approveBtn);
+        approveBtn.click();
+        commonPage.wait(getDriver(), 1);
+        if (successInfo.getText().contains("Success")) {
+            System.out.println("Engineer approve submission succeed,test pass!");
+        } else
+            Assert.fail("Engineer approve submission get error,test fail!");
+        commonPage.wait(getDriver(), 3);
+        commonPage.scrollToElement(dashboardPage.hkldLogo);
+        dashboardPage.hkldLogo.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+    }
+
+    public void checkProjectStatus(String expectedStatus) throws Exception {
+        String autualStatus = projectStatus.getText();
+        if (autualStatus.contains(expectedStatus)) {
+            System.out.println("Current project status is:" + expectedStatus + ",test pass!");
+        } else
+            Assert.fail("Current project status is not correct,test fail!");
+    }
+
+    public void clearProjectTable() throws Exception {
+        DBHelper.clearDataFromDB("projects");
+    }
+
+
+}
