@@ -31,6 +31,20 @@ public class DashboardPage extends PageObject {
     WebElementFacade settingLink;
     @FindBy(xpath = ".//*[@id='user_name']")
     WebElement userNameAfterLogin;
+    @FindBy(xpath = "//button[contains(text(),\"Create Project\")]")
+    WebElement createProjectBtn;
+    @FindBy(xpath = ".//*[@id='projects-po-number-input']")
+    WebElement poNoTextbox;
+    @FindBy(xpath = ".//*[@id='po-data-modal']/div[2]/button[2]")
+    WebElement poDataYesBtn;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[2]/table/tbody/tr/td[1]/a")
+    WebElement projectItemOne;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr/td[1]/a")
+    WebElement engineerProjectItemOne;
+    @FindBy(xpath = ".//*[@id='create-project-modal']/div/button[2]")
+    WebElement addPoNoBtn;
+
+
 
 
     /*
@@ -78,5 +92,21 @@ public class DashboardPage extends PageObject {
     public void clickHKLDLogo(){
         hkldLogo.click();
         commonPage.wait(getDriver(),2);
+    }
+
+    public void clickCreateProject(String poNo) throws Exception{
+        commonPage.wait(getDriver(), 2);
+        createProjectBtn.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.sendKeysOnElement(poNoTextbox, poNo);
+        commonPage.wait(getDriver(), 1);
+        addPoNoBtn.click();
+        commonPage.wait(getDriver(), 2);
+        poDataYesBtn.click();
+        commonPage.wait(getDriver(), 2);
+        String currentUrl = getDriver().getCurrentUrl();
+        commonPage.wait(getDriver(), 2);
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 3);
     }
 }

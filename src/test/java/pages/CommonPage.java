@@ -8,6 +8,7 @@ import net.serenitybdd.core.pages.PageObject;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.omg.CORBA.PUBLIC_MEMBER;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -213,5 +214,16 @@ public class CommonPage extends PageObject{
         return dayBefore;
     }
 
+    public static boolean isContentAppeared(WebDriver driver, String content) {
+        boolean status = false;
+        try {
+            driver.findElement(By.xpath("//*[contains(a,'" + content + "')]"));
+            System.out.println(content + " is appeard!");
+            status = true;
+        } catch (NoSuchElementException e) {
+            System.out.println("'" + content + "' doesn't exist!");
+        }
+        return status;
+    }
 
 }
