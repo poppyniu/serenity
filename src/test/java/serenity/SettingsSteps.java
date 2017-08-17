@@ -2,8 +2,7 @@ package serenity;
 
 import constants.DBHelper;
 import net.thucydides.core.annotations.Step;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.Assert;
 import pages.SettingsPage;
 
 import java.util.Arrays;
@@ -32,7 +31,7 @@ public class SettingsSteps {
                 settingsPage.selectThresholdOption();
                 break;
             default:
-                LOGGER.warn(("Unexpected setting option: " + option));
+                Assert.fail("Unexpected setting option: " + option);
         }
     }
 
@@ -96,5 +95,12 @@ public class SettingsSteps {
         settingsPage.inputThresholdValue(value);
     }
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SettingsSteps.class);
+    @Step
+    public void addNewContractor(String vendorID, String fullName, String shortName, String addressLine1, String addressLine2, String addressLine3, String companyPhoneNumber,
+                                 String contactAdmin, String contactPhoneNumber, String emailAddress){
+        settingsPage.clickContractorTab();
+        settingsPage.clickAddBtnUnderContractorTab();
+        settingsPage.inputNewVendorInfo(vendorID, fullName, shortName, addressLine1, addressLine2, addressLine3, companyPhoneNumber, contactAdmin, contactPhoneNumber, emailAddress);
+    }
+
 }

@@ -4,6 +4,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
+import org.jruby.RubyProcess;
 import serenity.SettingsSteps;
 
 import java.util.List;
@@ -72,7 +73,15 @@ public class SettingsStepDefinitions {
     }
 
     @And("^user set threshold value as ([^\"]*)$")
-     public void set_threshold_value(String value){
+    public void set_threshold_value(String value){
         settingsSteps.setThresholdValue(value);
+    }
+
+    @And("^user add a new contractor with details info ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*), ([^\"]*) and ([^\"]*)$")
+    public void user_add_a_new_contractor(String vendorID, String fullName, String shortName, String addressLine1, String addressLine2, String addressLine3, String companyPhoneNumber,
+                                          String contactAdmin, String contactPhoneNumber, String emailAddress){
+        System.out.println("vendorID is " + vendorID);
+        System.out.println("Full name is " + fullName);
+        settingsSteps.addNewContractor(vendorID, fullName, shortName, addressLine1, addressLine2, addressLine3, companyPhoneNumber, contactAdmin, contactPhoneNumber, emailAddress);
     }
 }

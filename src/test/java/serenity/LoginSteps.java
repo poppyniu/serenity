@@ -43,13 +43,13 @@ public class LoginSteps {
     public void hkld_login(String userType) throws Exception {
         switch (userType) {
             case "HKLD Admin":
-                loginPage.hkldUserLogin(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
+                loginPage.anyUserLogin(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
                 break;
             case "HKLD Engineer":
-                loginPage.hkldUserLogin(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
+                loginPage.anyUserLogin(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
                 break;
             case "HKLD Approver":
-                loginPage.hkldUserLogin(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
+                loginPage.anyUserLogin(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
                 break;
             default:
                 LOGGER.warn(("Unexpected user type: " + userType));
@@ -58,7 +58,7 @@ public class LoginSteps {
 
     @Step
     public void anyUser_login(String userName, String password) throws Exception{
-        loginPage.hkldUserLogin(userName, password);
+        loginPage.anyUserLogin(userName, password);
     }
 
     @Step

@@ -14,7 +14,7 @@ public class ITQPage extends PageObject {
     DashboardPage dashboardPage;
     TenderPage tenderPage;
     String currentUrl;
-    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[3]/div[2]/a[2]")
+    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[2]/div[2]/div[2]/a[2]")
     WebElement itqIssueBtn;
 
     public void clickCreateITQ() throws Exception {

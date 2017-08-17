@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         format = {"pretty", "html:target/html/"},
         features = "src/test/resources/",
-        tags = {"@VendorForgotPwd"}
+        tags = {"@ITQFlow"}
 )
 public class TestSuite {
 }

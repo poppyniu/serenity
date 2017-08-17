@@ -17,14 +17,16 @@ public class SettingsPage extends PageObject {
     @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[1]")
     WebElement settingsDropDown;
 
-    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/ul/li[1]/span")
+    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[3]/ul/li[1]/span")
     WebElement userOption;
-    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/ul/li[2]/span/span")
+    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[3]/ul/li[2]/span")
     WebElement locationOPtion;
-    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/ul/li[3]/span")
+    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[3]/ul/li[3]/span")
     WebElement securityGroupOption;
-    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/ul/li[4]/span")
+    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[3]/ul/li[4]/span")
     WebElement thresholdOption;
+    @FindBy(xpath = ".//*[@id='pages-settings-selector']/div/div[3]/ul/li[5]/span")
+    WebElement generalDocuments;
 
     @FindBy(id = "add_location_a")
     WebElement locationAddBtn;
@@ -49,6 +51,36 @@ public class SettingsPage extends PageObject {
     WebElement thresholdInputField;
     @FindBy(xpath = ".//*[@id='settings-engineers-threshold-form']/div[1]/div[2]/button[2]")
     WebElement thresholdSaveBtn;
+
+    @FindBy(id = "tab-contractor-label")
+    WebElement contractorTab;
+    @FindBy(xpath = ".//*[@id='tab-contractor']/div/div/div[1]/button[1]")
+    WebElement contractorAddBtn;
+    @FindBy(xpath = ".//*[@id='tab-contractor']/div/div/div[1]/button[2]")
+    WebElement contractorEditBtn;
+    @FindBy(id = "settings-vendors-add-number")
+    WebElement vendorNumberInputField;
+    @FindBy(id = "settings-vendors-add-fullname")
+    WebElement vendorFullNameInputField;
+    @FindBy(id = "settings-vendors-add-shortName")
+    WebElement vendorShortNameInputField;
+    @FindBy(id = "settings-vendors-add-addressLine1")
+    WebElement vendorAddressLine1Field;
+    @FindBy(id = "settings-vendors-add-addressLine2")
+    WebElement vendorAddressLine2Field;
+    @FindBy(id = "settings-vendors-add-addressLine3")
+    WebElement vendorAddressLine3Field;
+    @FindBy(id = "settings-vendors-add-phoneNumber")
+    WebElement vendorCompanyPhoneNumberField;
+    @FindBy(id = "settings-vendors-add-contactAdmin")
+    WebElement vendorContactAdminField;
+    @FindBy(id = "settings-vendors-add-contactPhone")
+    WebElement vendorContactPhoneField;
+    @FindBy(id = "settings-vendors-add-email")
+    WebElement vendorEmailAddress;
+    @FindBy(id = "tender-general-contractData-save")
+    WebElement vendorNewAddBtn;
+
 
     public void clickSettingDropDown(){
         settingsDropDown.click();
@@ -161,5 +193,24 @@ public class SettingsPage extends PageObject {
         thresholdEditBtn.click();
         commonPage.sendKeysOnElement(thresholdInputField,value);
         thresholdSaveBtn.click();
+    }
+
+    public void clickContractorTab(){contractorTab.click();}
+
+    public void clickAddBtnUnderContractorTab(){contractorAddBtn.click();}
+
+    public void inputNewVendorInfo(String vendorID, String fullName, String shortName, String addressLine1, String addressLine2, String addressLine3, String companyPhoneNumber,
+                                   String contactAdmin, String contactPhoneNumber, String emailAddress){
+        commonPage.sendKeysOnElement(vendorNumberInputField, vendorID);
+        commonPage.sendKeysOnElement(vendorFullNameInputField, fullName);
+        commonPage.sendKeysOnElement(vendorShortNameInputField, shortName);
+        commonPage.sendKeysOnElement(vendorAddressLine1Field, addressLine1);
+        commonPage.sendKeysOnElement(vendorAddressLine2Field, addressLine2);
+        commonPage.sendKeysOnElement(vendorAddressLine3Field, addressLine3);
+        commonPage.sendKeysOnElement(vendorCompanyPhoneNumberField, companyPhoneNumber);
+        commonPage.sendKeysOnElement(vendorContactAdminField, contactAdmin);
+        commonPage.sendKeysOnElement(vendorContactPhoneField, contactPhoneNumber);
+        commonPage.sendKeysOnElement(vendorEmailAddress, emailAddress);
+        vendorNewAddBtn.click();
     }
 }

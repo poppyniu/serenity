@@ -45,7 +45,7 @@ Feature: Add, Delete, Update Items/Services
     And user at section #1 item #1 option #2 choose the action Delete from option drop down menu
     Then 1 options should be existing under section #1 item #1
 
-  @items
+  @itemsaaa
   Scenario: Add multiple sections and line items into a Tender
     And user goes to items/services tab
     And user add 2 more sections

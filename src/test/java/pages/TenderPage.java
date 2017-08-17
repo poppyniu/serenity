@@ -7,12 +7,12 @@ import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +27,7 @@ public class TenderPage extends PageObject {
     DashboardPage dashboardPage;
     LoginPage loginPage;
 
-    @FindBy(xpath="html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/a[2]")
+    @FindBy(xpath="html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/a[2]")
     WebElement saveBtn;
     //General tab elements
     @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[1]/div[1]")
@@ -44,7 +44,7 @@ public class TenderPage extends PageObject {
     WebElement projectDescriptionTextbox;
     @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectLocation']/div/textarea")
     WebElement projectLocationTextbox;
-    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectStart']/div/textarea")
+    @FindBy(xpath=".//*[@id='modules-tenders-edit-general-projectStart']")
     WebElement tentativeProjectStartTextbox;
     @FindBy(xpath=".//*[@id='modules-tenders-edit-general-estimatedProjectDuration']/div/textarea")
     WebElement projectDurationTextbox;
@@ -58,6 +58,8 @@ public class TenderPage extends PageObject {
     WebElement prNumberAddBtn;
     @FindBy(xpath=".//*[@id='tender.general.contractData.save']")
     WebElement prNumberInfoSaveBtn;
+    @FindBy(xpath=".//*[@id='pr-window']/div[2]/span")
+    WebElement prAmount;
     //ScopeOfWork tab elements
     @FindBy(xpath=".//*[@id='tab-scope-label']")
     WebElement scopeOfWorkTab;
@@ -82,7 +84,7 @@ public class TenderPage extends PageObject {
     WebElement addQTYTextbox;
     @FindBy(xpath=".//*[@id='line.unit_0_0']/div[1]/div[1]")
     WebElement unitDropdown;
-    @FindBy(xpath=".//*[@id='line.unit_0_0']/div[1]/ul/li[3]/span/span")
+    @FindBy(xpath=".//*[@id='line.unit_0_0']/div[1]/div[3]/ul/li[1]/span")
     WebElement unitDropdownItem;
     //Attachments tab elements
     @FindBy(xpath=".//*[@id='tab-attachment-label']")
@@ -103,7 +105,7 @@ public class TenderPage extends PageObject {
     WebElement submitBtn;
     @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[1]/div[2]/div[1]")
     WebElement chooseApproveDropdown;
-    @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[1]/div[2]/ul/li[1]/span/span")
+    @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[1]/div[2]/div[3]/ul/li[1]/span/span")
     WebElement approveDropdownItem;
     @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[2]/button[2]")
     WebElement chooseApproveEnterBtn;
@@ -111,9 +113,9 @@ public class TenderPage extends PageObject {
     WebElement sendForApproveInfo;
     @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[2]/button[contains(text(),'Okay')]")
     WebElement sendForApproveEnterBtn;
-    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[3]/div[2]/a")
+    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[2]/div[2]/div[2]/a")
     WebElement adminApproveBtn;
-    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[3]/div[2]/a")
+    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[2]/div[2]/div[2]/a")
     WebElement engineerIssueBtn;
     @FindBy(xpath=".//*[@id='edit-closing-date-picker']/div[1]/div[1]/span/i")
     WebElement closingDateDropdown1;
@@ -123,7 +125,7 @@ public class TenderPage extends PageObject {
     WebElement closingDateNextPageItem1;
     @FindBy(xpath=".//*[@id='edit-closing-date-picker']/div[2]/div[1]")
     WebElement closingDateDropdown2;
-    @FindBy(xpath=" .//*[@id='edit-closing-date-picker']/div[2]/ul/li[2]/span/span")
+    @FindBy(xpath=" .//*[@id='edit-closing-date-picker']/div[2]/div[3]/ul/li[2]/span/span")
     WebElement closingDateDropdown2item;
     @FindBy(xpath = ".//div[@class='mini-toastr-notification__message']")
     WebElementFacade headerMessage;
@@ -133,7 +135,7 @@ public class TenderPage extends PageObject {
     WebElementFacade rateTextbox;
     @FindBy(xpath = ".//*[@id='bid-discount-panel']/tr/td[3]/div/div[1]")
     WebElementFacade discountDropdown;
-    @FindBy(xpath = ".//*[@id='bid-discount-panel']/tr/td[3]/div/ul/li[2]/span/span")
+    @FindBy(xpath = ".//*[@id='bid-discount-panel']/tr/td[3]/div/div[3]/ul/li[2]/span/span")
     WebElementFacade discountDropdownItem;
     @FindBy(xpath = ".//*[@id='tab-tnc-label']")
     WebElementFacade termsTab;
@@ -149,9 +151,9 @@ public class TenderPage extends PageObject {
     WebElementFacade contractorSubmitInfo;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr/td[3]")
     WebElementFacade statusColumn;
-    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[3]/div[1]")
+    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[2]/div[2]/div[1]")
     WebElementFacade tenderStatus;
-    @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[1]/td[3]")
+    @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[2]/td[3]")
     WebElementFacade vendorSubmitStatus;
 
     public void clickCreateTender() throws Exception {
@@ -486,8 +488,8 @@ public class TenderPage extends PageObject {
     }
 
     public void validateHeaderMessage(String ExpectedMsg){
-        Assert.assertTrue(headerMessage.isVisible(), "Header message is not shown");
-        Assert.assertTrue(headerMessage.getText().contains(ExpectedMsg), "Header message is not as expected");
+        Assert.assertTrue("Header message is not shown", headerMessage.isVisible());
+        Assert.assertTrue( "Header message is not as expected", headerMessage.getText().contains(ExpectedMsg));
     }
 
     public void clickItemsServicesTab(){
@@ -567,7 +569,7 @@ public class TenderPage extends PageObject {
 
     public void selectItemUnit(int sectionIndex, int itemIndex) {
         String xpathInput = String.format(".//*[@id='line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/div[1]/div[2]/input");
-        String xpathSelectedUnit = String.format(".//*[@id='line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/div[1]/ul/li[1]/span");
+        String xpathSelectedUnit = String.format(".//*[@id='line.unit_"+(sectionIndex-1)+"_"+(itemIndex-1)+"']/div[1]/div[3]/ul/li[1]/span");
         WebElement unitInputField = getDriver().findElement(By.xpath(xpathInput));
         WebElement dropDownSelectedUnit = getDriver().findElement(By.xpath(xpathSelectedUnit));
         String randomUnit = getRandomUnit(sectionIndex, itemIndex);
@@ -632,6 +634,10 @@ public class TenderPage extends PageObject {
                 System.out.println(action + " is not found for option action");
         }
         getDriver().findElements(By.id(id)).get(optionIndex-1).click();
+    }
+
+    public String getPRAmountFromGeneralAmount(){
+        return prAmount.getAttribute("textContent");
     }
 
 }

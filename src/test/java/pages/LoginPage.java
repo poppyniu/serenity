@@ -14,6 +14,7 @@ import org.openqa.selenium.WebElement;
  * Created by Poppy_Zhang on 2017/6/21.
  */
 @DefaultUrl("http://hkld-qa.princeton.epam.com/#/login")
+//@DefaultUrl("http://epcnszxw0187.princeton.epam.com/#/")
 public class LoginPage extends PageObject {
     String currentUrl;
     CommonPage commonPage;
@@ -132,7 +133,7 @@ public class LoginPage extends PageObject {
             Assert.fail("Input invalid email address does not see the correct popup window, test fail!");
     }
 
-    public void hkldUserLogin(String userName, String UserPwd) throws Exception{
+    public void anyUserLogin(String userName, String UserPwd) throws Exception{
         commonPage.sendKeysOnElement(userNameTextbox, userName);
         commonPage.sendKeysOnElement(userPwdTextbox, UserPwd);
         commonPage.wait(getDriver(),2);
@@ -152,7 +153,7 @@ public class LoginPage extends PageObject {
     public void checkContractorLogin() throws Exception {
         dashboardpage.hamburgerIcon.click();
         commonPage.wait(getDriver(),4);
-        if(dashboardpage.userNameAfterLogin.getText().contains(TestAccountsConstants.afterLoginName)){
+        if(dashboardpage.helloNameOnHamburger.getText().contains(TestAccountsConstants.afterLoginName)){
             System.out.println("Input valid contractor name and pwd login succeed, test pass!");
         } else
             Assert.fail("Input valid contractor name and pwd login succeed, test fail!");

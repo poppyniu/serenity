@@ -48,3 +48,15 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And user access settings page
     And user access Threshold setting
     And user set threshold value as 300000
+
+  @setting
+  Scenario Outline: Add contractors under settings
+    Given Open ETender system login page
+    And user logs in as the user type HKLD Admin
+    And user click hamburger icon
+    And user access settings page
+    And user access Users setting
+    And user add a new contractor with details info <vendorID>, <fullName>, <shortName>, <addressLine1>, <addressLine2>, <addressLine3>, <companyPhoneNumber>, <contactAdmin>, <contactPhoneNumber> and <emailAddress>
+    Examples:
+      | vendorID | fullName       | shortName | addressLine1 | addressLine2 | addressLine3 | companyPhoneNumber | contactAdmin | contactPhoneNumber | emailAddress |
+      | 105589   | SHINRYO TECHNICAL | SHINRYO TECHNICAL SERVICES LTD     | Test address | Test address | Test address | 12345678           | Tester       | 87654321           | test@auto.com|

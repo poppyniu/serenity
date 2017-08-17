@@ -4,6 +4,7 @@ import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class DashboardPage extends PageObject {
     WebElement hkldAmount;
     @FindBy(xpath = ".//*[@id='create_tender']")
     WebElement createTenderBtn;
-    @FindBy(xpath = ".//*[@id='modal-dialog']/div[2]/button[2]")
+    @FindBy(xpath = ".//*[starts-with(@id, 'modal-dialog')]/div[2]/button[2]")
     WebElement selectTypeEnterBtn;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[1]/span[2]")
     WebElement userName;
@@ -30,7 +31,19 @@ public class DashboardPage extends PageObject {
     @FindBy(id = "hamburger3")
     WebElementFacade settingLink;
     @FindBy(xpath = ".//*[@id='user_name']")
-    WebElement userNameAfterLogin;
+    WebElement helloNameOnHamburger;
+    @FindBy(xpath = ".//div[@class = 'tender-table']")
+    WebElement tenderTable;
+    @FindBy(xpath = ".//div[@class='project-container clearfix']/div[1]")
+    WebElement projectTable;
+    @FindBy(id = "logout")
+    WebElement logoutLink;
+    @FindBy(xpath = ".//div[@class='summary-badge summary-badge__dark']")
+    WebElement tendersBubbleNumber;
+    @FindBy(xpath = ".//div[@class='summary-badge summary-badge__normal']")
+    WebElement projectBubbleNumber;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[1]/span[2]")
+    WebElement helloNameOnDashboard;
 
 
     /*
@@ -43,8 +56,8 @@ public class DashboardPage extends PageObject {
         commonPage.wait(getDriver(),2);
         WebElement element = getDriver().findElements(By.cssSelector("div[style^='display: block;']")).get(1);
         WebElement inputField = element.findElement(By.xpath(".//*[@id='confirm-create-container']/div/div[2]/input"));
-        WebElement selectTypeDropdownItem= element.findElement(By.xpath(".//*[@id='confirm-create-container']/div/ul/li[1]/span"));
-        WebElement selectTypeEnterBtn1 = element.findElement(By.xpath( ".//*[@id='modal-dialog']/div[2]/button[2]"));
+        WebElement selectTypeDropdownItem= element.findElement(By.xpath(".//*[@id='confirm-create-container']/div/div[3]/ul/li[1]/span"));
+        WebElement selectTypeEnterBtn1 = element.findElement(By.xpath(".//*[starts-with(@id, 'modal-dialog')]/div[2]/button[2]"));
 
         if(item.contains("tender")) {
             commonPage.sendKeysOnElement(inputField, "Tender");
@@ -77,6 +90,54 @@ public class DashboardPage extends PageObject {
 
     public void clickHKLDLogo(){
         hkldLogo.click();
-        commonPage.wait(getDriver(),2);
+        commonPage.wait(getDriver(),4);
+    }
+
+    public List<WebElement> getLinksFromTenderTable(){
+        List<WebElement> linksFromTenderTable = tenderTable.findElements(By.xpath(".//a[@class = 'link_text']"));
+        return linksFromTenderTable;
+    }
+
+    public void clickLogoutLink(){
+        logoutLink.click();
+        commonPage.wait(getDriver(),3);
+    }
+
+    public String getTenderBubbleNumber(){
+        return tendersBubbleNumber.getAttribute("textContent");
+    }
+
+    public String getProjectBubbleNumber() {
+        return projectBubbleNumber.getAttribute("textContent");
+    }
+
+    public List<WebElement> getLinksFromProjectTable(){
+        List<WebElement> linksFromProjectTable = tenderTable.findElements(By.xpath(".//a[@class = 'link_text']"));
+        return linksFromProjectTable;
+    }
+
+    public String getHelloNameOnDashboard(){
+        return helloNameOnDashboard.getAttribute("textContent");
+    }
+
+    public String getHelloNameOnHamburger(){
+        return helloNameOnHamburger.getAttribute("textContent");
+    }
+
+    public List<WebElement> getAllTenderLines() {
+       List<WebElement>  allTenderLines = getDriver().findElements(By.xpath("html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr"));
+       return allTenderLines;
+    }
+
+    public void clickSpecifiedTender(String prNumber){
+        List<WebElement>  allTenderLines = getAllTenderLines();
+        for(WebElement tender : allTenderLines){
+            if(tender.getText().contains(prNumber)){
+                tender.findElements(By.xpath(".//a[@class = 'link_text']")).get(0).click();
+                commonPage.wait(getDriver(), 3);
+            }else{
+                Assert.fail(prNumber + " is not found on dashboard");
+            }
+        }
     }
 }
