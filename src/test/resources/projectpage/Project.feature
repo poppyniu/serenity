@@ -24,3 +24,26 @@ Feature:Test function on project page
     Examples:
     |PoNo|Completion Amount|Completion Amount1|Completion Amount2|
     |333333|2000           |6000              |1000              |
+
+  @RejectProject
+  Scenario Outline: HKLD engineer reject a full submission of a project
+    And Create project with <PoNo> and add doc type and invite vendor
+    And Vendor login to do the full submission <Completion Amount> without uploading the needed docs
+    Then Check there is remind info for uploading docs
+    And Vendor do the full submission with all needed docs uploaded
+    And Engineer reject the full submission and check project status
+    And Vendor login to check project status
+    Then Clear project test data in db
+    Examples:
+      |PoNo|Completion Amount|
+      |333333|2000           |
+
+
+  @ProjectAmount
+  Scenario Outline:  Check PO amount completion amount remaining balance
+    And Create project with <PoNo> and add doc type and invite vendor
+    And Vendor login to test po amount field <Completion Amount>
+    Then Clear project test data in db
+    Examples:
+      |PoNo|Completion Amount|
+      |333333|2000           |

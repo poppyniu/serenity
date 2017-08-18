@@ -73,5 +73,31 @@ public class ProjectStepDefinitions {
     public void clear_project_test_data_in_db() throws Throwable {
         projectSteps.clear_project_in_db();
     }
+
+    @And("^Vendor login to do the full submission ([^\"]*) without uploading the needed docs$")
+    public void vendor_login_to_do_the_full_submission_without_uploading_the_needed_docs(String amount) throws Throwable {
+        projectSteps.full_submission(amount);
+    }
+
+    @Then("^Vendor do the full submission with all needed docs uploaded$")
+    public void vendor_do_the_full_submission_with_all_needed_docs_uploaded() throws Throwable {
+        projectSteps.vendor_upload_docs_submit();
+    }
+
+    @Then("^Engineer reject the full submission and check project status$")
+    public void engineer_reject_the_full_submission_and_check_project_status() throws Throwable {
+        projectSteps.reject_Submission();
+    }
+
+    @Then("^Vendor login to check project status$")
+    public void vendor_login_to_check_project_status() throws Throwable {
+        projectSteps.vendor_check_project_status();
+    }
+
+    @And("^Vendor login to test po amount field ([^\"]*)$")
+    public void vendor_login_to_test_po_amount_field(String amount) throws Throwable {
+        projectSteps.vendor_check_amount(amount);
+    }
+
 }
 

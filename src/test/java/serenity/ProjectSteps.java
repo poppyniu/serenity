@@ -70,5 +70,24 @@ public class ProjectSteps {
         projectPage.clearProjectTable();
     }
 
+    @Step
+    public void full_submission(String amount) throws Exception {
+        projectPage.fullSubmission(amount);
+    }
+
+    @Step
+    public void reject_Submission() throws Exception {
+        projectPage.rejectSubmission();
+    }
+
+    @Step
+    public void vendor_check_project_status() throws Exception {
+        projectPage.vendorCheckProjectStatus();
+    }
+
+    @Step
+    public void vendor_check_amount(String amount) throws Exception {
+        projectPage.vendorCheckAmount(amount);
+    }
 
 }

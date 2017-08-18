@@ -9,7 +9,9 @@ import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Created by Poppy_Zhang on 2017/6/21.
@@ -43,6 +45,8 @@ public class ProjectPage extends PageObject {
     WebElement submissionBtn;
     @FindBy(xpath = ".//*[@id='sr-completionType-partial']")
     WebElement partialRadioBtn;
+    @FindBy(xpath = ".//*[@id='sr-completionType-full']")
+    WebElement fullRadioBtn;
     @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[2]/div/div[1]/span/i")
     WebElement completeOnBtn;
     @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[2]/div/div[2]/div[2]/span[15]")
@@ -59,6 +63,8 @@ public class ProjectPage extends PageObject {
     WebElement submitBtn;
     @FindBy(xpath = ".//*[@id='project-sr-accordion-0']/div/div[8]/div[1]/a[2]")
     WebElement approveBtn;
+    @FindBy(xpath = ".//*[@id='project-sr-accordion-0']/div/div[8]/div[1]/a[1]")
+    WebElement rejectBtn;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr[1]/td[3]/span")
     WebElement projectStatus;
     @FindBy(xpath = ".//*[@id='sr-completionType-final-partial']")
@@ -91,6 +97,18 @@ public class ProjectPage extends PageObject {
     WebElement approveDocYesBtn;
     @FindBy(xpath = ".//*[@id='tab-sr-label']")
     WebElement sumissionRequestTab;
+    @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/textarea")
+    WebElement rejectTextbox;
+    @FindBy(xpath = "//div[contains(@style,'block')]/div/a[text()='Reject']")
+    WebElement rejectWindowRejectBtn;
+    @FindBy(xpath = ".//*[@id='project-sr-accordion-0-label']/div/div/label")
+    WebElement rejectByLable;
+    @FindBy(xpath = ".//*[@id='project-sr-accordion-0-label']/div/div/pre/p")
+    WebElement rejectByName;
+    @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[4]/div/div[4]/label[1]")
+    WebElement remainText;
+
+
 
 
     public void createProject(String poNo) throws Exception {
@@ -112,95 +130,33 @@ public class ProjectPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         inviteOkBtn.click();
         commonPage.wait(getDriver(), 1);
-        if (successInfo.getText().contains("Success")) {
-            System.out.println("Project invite vendor succeed,test pass!");
-        } else
-            Assert.fail("Project invite vendor get error,test fail!");
+        checkSucceed("Project invite vendor");
     }
 
     public void firstSubmission(String amount) throws Exception {
-        getDriver().get(URLConstants.contractorLoginPage);
-        commonPage.wait(getDriver(), 2);
-        loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
-        dashboardPage.projectItemOne.click();
-        commonPage.wait(getDriver(), 2);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
-        submissionBtn.click();
-        partialRadioBtn.click();
-        completeOnBtn.click();
-        commonPage.wait(getDriver(), 2);
-        calenderItem.click();
-        commonPage.sendKeysOnElement(itemsServiceTextBox, TestDataPathConstants.testInfo);
-        amountTextbox.clear();
-        commonPage.sendKeysOnElement(amountTextbox, amount);
-        commonPage.scrollToElement(personTextBox);
-        commonPage.sendKeysOnElement(personTextBox, TestDataPathConstants.testInfo);
-        commonPage.scrollToElement(positionTextBox);
-        commonPage.sendKeysOnElement(positionTextBox, TestDataPathConstants.testInfo);
-        submitBtn.click();
-        commonPage.wait(getDriver(), 1);
-        if (successInfo.getText().contains("Success")) {
-            System.out.println("Partial submission succeed,test pass!");
-        } else
-            Assert.fail("Partial submission get error,test fail!");
+        partialOrFullSubmission(amount, "partial", false
+        );
+        checkSucceed("Partial submission");
     }
 
     public void engineerApproveSubmission() throws Exception {
-        engineerLoginApprove();
+        engineerLoginApproveOrReject("approve");
         checkProjectStatus("1st");
 
     }
 
     public void secondSubmission(String amount1) throws Exception {
-        firstSubmission(amount1);
+        partialOrFullSubmission(amount1, "partial", false);
+        checkSucceed("Partial submission");
     }
 
     public void engineerApproveSecondSubmission() throws Exception {
-        engineerLoginApprove();
+        engineerLoginApproveOrReject("approve");
         checkProjectStatus("2nd");
     }
 
     public void thirdFinalSubmission(String amount2) throws Exception {
-        getDriver().get(URLConstants.contractorLoginPage);
-        commonPage.wait(getDriver(), 2);
-        loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
-        dashboardPage.projectItemOne.click();
-        commonPage.wait(getDriver(), 3);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(submissionBtn);
-        commonPage.wait(getDriver(), 2);
-        submissionBtn.click();
-        commonPage.wait(getDriver(), 3);
-        commonPage.scrollToElement(partialRadioBtn);
-        commonPage.wait(getDriver(), 2);
-        partialRadioBtn.click();
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(finalPartialCheckbox);
-        finalPartialCheckbox.click();
-        commonPage.wait(getDriver(), 1);
-        commonPage.scrollToElement(completeOnBtn);
-        completeOnBtn.click();
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(calenderItem);
-        calenderItem.click();
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(itemsServiceTextBox);
-        commonPage.sendKeysOnElement(itemsServiceTextBox, TestDataPathConstants.testInfo);
-        amountTextbox.clear();
-        commonPage.scrollToElement(amountTextbox);
-        commonPage.sendKeysOnElement(amountTextbox, amount2);
-        commonPage.scrollToElement(personTextBox);
-        commonPage.sendKeysOnElement(personTextBox, TestDataPathConstants.testInfo);
-        commonPage.scrollToElement(positionTextBox);
-        commonPage.sendKeysOnElement(positionTextBox, TestDataPathConstants.testInfo);
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(submitBtn);
-        submitBtn.click();
-        commonPage.wait(getDriver(), 3);
+        partialOrFullSubmission(amount2, "partial", true);
     }
 
     public void checkUploadDocInfo() throws Exception {
@@ -229,7 +185,8 @@ public class ProjectPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         commonPage.scrollToElement(submitBtn);
         submitBtn.click();
-        commonPage.wait(getDriver(), 2);
+        commonPage.wait(getDriver(), 1);
+        checkSucceed("Submission");
     }
 
     public void uploadDoc() throws Exception {
@@ -272,14 +229,7 @@ public class ProjectPage extends PageObject {
     }
 
     public void engineerApproveThirdSubmission() throws Exception {
-        getDriver().get(URLConstants.hkldLoginPage);
-        commonPage.wait(getDriver(), 2);
-        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
-        dashboardPage.engineerProjectItemOne.click();
-        commonPage.wait(getDriver(), 2);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 3);
+        engineerLoginOpenProjectItem();
         commonPage.scrollToElement(approveBtn);
         approveBtn.click();
         commonPage.wait(getDriver(), 1);
@@ -330,32 +280,6 @@ public class ProjectPage extends PageObject {
         checkProjectStatus("3rd");
     }
 
-
-    private void engineerLoginApprove() throws Exception {
-        getDriver().get(URLConstants.hkldLoginPage);
-        commonPage.wait(getDriver(), 2);
-        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
-        dashboardPage.engineerProjectItemOne.click();
-        commonPage.wait(getDriver(), 2);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
-        commonPage.scrollToElement(approveBtn);
-        approveBtn.click();
-        commonPage.wait(getDriver(), 1);
-        if (successInfo.getText().contains("Success")) {
-            System.out.println("Engineer approve submission succeed,test pass!");
-        } else
-            Assert.fail("Engineer approve submission get error,test fail!");
-        commonPage.wait(getDriver(), 3);
-        commonPage.scrollToElement(dashboardPage.hkldLogo);
-        dashboardPage.hkldLogo.click();
-        commonPage.wait(getDriver(), 2);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
-    }
-
     public void checkProjectStatus(String expectedStatus) throws Exception {
         String autualStatus = projectStatus.getText();
         if (autualStatus.contains(expectedStatus)) {
@@ -368,5 +292,135 @@ public class ProjectPage extends PageObject {
         DBHelper.clearDataFromDB("projects");
     }
 
+    public void fullSubmission(String amount) throws Exception {
+        partialOrFullSubmission(amount, "full", false);
+    }
 
+    public void rejectSubmission() throws Exception {
+        engineerLoginApproveOrReject("reject");
+        commonPage.scrollToElement(rejectTextbox);
+        rejectTextbox.click();
+//        rejectTextbox.sendKeys(TestDataPathConstants.testInfo);
+        Actions actions =new Actions(getDriver());
+        actions.sendKeys(Keys.SPACE).perform();
+        actions.sendKeys("aaa").perform();
+        commonPage.wait(getDriver(), 1);
+        actions.sendKeys(Keys.TAB).perform();
+        commonPage.scrollToElement(rejectWindowRejectBtn);
+        rejectWindowRejectBtn.click();
+        commonPage.wait(getDriver(), 1);
+        checkSucceed("Reject submission");
+    }
+
+    public void vendorCheckProjectStatus() throws Exception {
+        contractorLoginOpenProjectItem();
+        if(rejectByLable.getText().contains("REJECTED BY")&&rejectByName.getText().contains("sophie"))
+        {
+            System.out.println("The project is rejected,test pass!");
+        }
+        else
+            Assert.fail("The project is not rejected,test fail!");
+    }
+
+    public void vendorCheckAmount(String amount) throws Exception {
+        contractorLoginOpenProjectItem();
+        submissionBtn.click();
+        commonPage.wait(getDriver(), 2);
+        amountTextbox.clear();
+        commonPage.scrollToElement(amountTextbox);
+        commonPage.sendKeysOnElement(amountTextbox, amount);
+        commonPage.wait(getDriver(), 2);
+        itemsServiceTextBox.click();
+        int totalValue=10000;
+        int inputValue=Integer.parseInt(amount);
+        int remainValue=Integer.parseInt(remainText.getText().substring(0,4));
+        if(totalValue-inputValue==remainValue){
+            System.out.println("The amount function works well,test pass!");
+        }
+        else
+            Assert.fail("The amount function does not work well,test fail!");
+    }
+
+    public void partialOrFullSubmission(String amount, String type, Boolean partialFinal) throws Exception {
+        contractorLoginOpenProjectItem();
+        submissionBtn.click();
+        commonPage.wait(getDriver(), 2);
+        if (type.contains("partial") && partialFinal.booleanValue() == false) {
+            partialRadioBtn.click();
+        } else if (type.contains("partial") && partialFinal.booleanValue() == true) {
+            partialRadioBtn.click();
+            commonPage.wait(getDriver(), 1);
+            finalPartialCheckbox.click();
+            commonPage.wait(getDriver(), 1);
+        } else if (type.contains("full")) {
+            fullRadioBtn.click();
+        }
+        commonPage.wait(getDriver(), 1);
+        completeOnBtn.click();
+        commonPage.wait(getDriver(), 2);
+        calenderItem.click();
+        commonPage.sendKeysOnElement(itemsServiceTextBox, TestDataPathConstants.testInfo);
+        amountTextbox.clear();
+        commonPage.sendKeysOnElement(amountTextbox, amount);
+        commonPage.scrollToElement(personTextBox);
+        commonPage.sendKeysOnElement(personTextBox, TestDataPathConstants.testInfo);
+        commonPage.scrollToElement(positionTextBox);
+        commonPage.sendKeysOnElement(positionTextBox, TestDataPathConstants.testInfo);
+        submitBtn.click();
+        commonPage.wait(getDriver(), 1);
+    }
+
+    public void checkSucceed(String info) throws Exception {
+        if (successInfo.getText().contains("Success")) {
+            System.out.println(info+" succeed,test pass!");
+        } else
+            Assert.fail(info+" get error,test fail!");
+    }
+
+    private void engineerLoginApproveOrReject(String type) throws Exception {
+        engineerLoginOpenProjectItem();
+        if(type.contains("approve")) {
+            commonPage.scrollToElement(approveBtn);
+            approveBtn.click();
+            commonPage.wait(getDriver(), 1);
+            if (successInfo.getText().contains("Success")) {
+                System.out.println("Engineer approve submission succeed,test pass!");
+            } else
+                Assert.fail("Engineer approve submission get error,test fail!");
+            commonPage.wait(getDriver(), 3);
+            commonPage.scrollToElement(dashboardPage.hkldLogo);
+            dashboardPage.hkldLogo.click();
+            commonPage.wait(getDriver(), 2);
+            currentUrl = getDriver().getCurrentUrl();
+            commonPage.navigatePage(currentUrl);
+            commonPage.wait(getDriver(), 2);
+        }
+        else if(type.contains("reject")) {
+            commonPage.scrollToElement(rejectBtn);
+            rejectBtn.click();
+            commonPage.wait(getDriver(), 3);
+        }
+    }
+
+    private void contractorLoginOpenProjectItem() throws Exception{
+        getDriver().get(URLConstants.contractorLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
+        dashboardPage.projectItemOne.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 3);
+    }
+
+    private void engineerLoginOpenProjectItem() throws Exception{
+        getDriver().get(URLConstants.hkldLoginPage);
+        commonPage.wait(getDriver(), 2);
+        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
+        dashboardPage.engineerProjectItemOne.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+    }
 }
