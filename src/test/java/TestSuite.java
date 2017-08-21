@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         format = {"pretty", "html:target/html/"},
         features = {"src/test/resources/settingsPage","src/test/resources" },
-        tags = {"@logout"}
+        tags = {"@ProjectAmount"}
 )
 public class TestSuite {
 }
