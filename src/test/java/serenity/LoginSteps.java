@@ -99,4 +99,9 @@ public class LoginSteps {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginSteps.class);
 
+    @Step
+    public void check_logout_success() {
+        loginPage.CheckLogOut_success();
+    }
+
 }

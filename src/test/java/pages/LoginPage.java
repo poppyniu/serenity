@@ -214,4 +214,11 @@ public class LoginPage extends PageObject {
             Assert.fail("Send email to reset pwd does not see the correct info, test fail!");
     }
 
+    public void CheckLogOut_success() {
+        if(currentUrl==URLConstants.hkldLoginPage){
+            System.out.println("Logout successfully");
+            System.out.println(currentUrl);
+        } else
+            Assert.fail("logout fail");
+    }
 }
