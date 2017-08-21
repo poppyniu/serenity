@@ -84,4 +84,8 @@ public class LoginStepDefinitions {
         loginSteps.check_reset_pwd_info();
     }
 
+    @Then("^Logout Successfully$")
+    public void logoutSuccessfully() throws Throwable {
+        loginSteps.check_logout_success();
+    }
 }
