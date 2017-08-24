@@ -215,7 +215,8 @@ public class LoginPage extends PageObject {
     }
 
     public void CheckLogOut_success() {
-        if(currentUrl==URLConstants.hkldLoginPage){
+        currentUrl = getDriver().getCurrentUrl();
+        if(currentUrl.equals(URLConstants.hkldLoginPage)){
             System.out.println("Logout successfully");
             System.out.println(currentUrl);
         } else
