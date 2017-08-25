@@ -6,7 +6,6 @@ Feature:Test function on login page
     When Input valid user name and pwd and click login button
     Then HKLD engineer login to ETender system succeed
 
-<<<<<<< HEAD
   @EngineerLogout @logout
   Scenario: Test valid login for HKLD engineer
     Given  Open ETender system login page
@@ -15,15 +14,6 @@ Feature:Test function on login page
     And user click hamburger icon
     And user logs out ETender
     Then Logout Successfully
-=======
-#  @EngineerLogout @logout
-#  Scenario: Test valid login for HKLD engineer
-#    Given  Open ETender system login page
-#    When Input valid user name and pwd and click login button
-#    Then HKLD engineer login to ETender system succeed
-#    Then user logs out ETender
-#    Then Logout Successfully
->>>>>>> 8d25d3e2c86ac89abb7374578a73f14f95a35376
 
   @InvalidLogin
   Scenario: Test invalid login for HKLD engineer
@@ -36,7 +26,7 @@ Feature:Test function on login page
     Given  Open contractor login page
     When Input valid contractor name and pwd and click login button
     Then Contractor login to ETender system succeed
-#    Then  user logs out ETender
+    Then  user logs out ETender
 
   @VendorInvalidLogin
   Scenario: Test invalid login for contractor
