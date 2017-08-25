@@ -28,7 +28,7 @@ public class DashboardPage extends PageObject {
     WebElement itqTenderItemOne;
     @FindBy(id = "hamburger")
     WebElement hamburgerIcon;
-    @FindBy(id = "hamburger3")
+    @FindBy(id = "hamburger2")
     WebElementFacade settingLink;
     @FindBy(xpath = ".//*[@id='user_name']")
     WebElement helloNameOnHamburger;
@@ -146,12 +146,15 @@ public class DashboardPage extends PageObject {
 
     public void clickSpecifiedTender(String prNumber){
         List<WebElement>  allTenderLines = getAllTenderLines();
-        for(WebElement tender : allTenderLines){
-            if(tender.getText().contains(prNumber)){
+        for (WebElement tender:allTenderLines) {
+            if (tender.getText().contains(prNumber)) {
                 tender.findElements(By.xpath(".//a[@class = 'link_text']")).get(0).click();
                 commonPage.wait(getDriver(), 3);
+                return;
             }
         }
+        Assert.fail(prNumber + " is not found from the dashboard.");
+
     }
 
     public void clickCreateProject(String poNo) throws Exception{

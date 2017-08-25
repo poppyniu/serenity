@@ -78,23 +78,25 @@ public class DashboardPageSteps {
     @Step
     public void check_HelloNameOnDashboard(String expectedName){
         String actualName = dashboardPage.getHelloNameOnDashboard();
-        Assert.assertTrue(actualName.contains(expectedName));
+        Assert.assertTrue("Hello Name is incorrect, and the actual name is "+actualName, expectedName.contains(actualName.toLowerCase().replace(" ", "_")));
     }
 
     @Step
     public void check_HelloNameOnHamburger(String expectedName){
         String actualName = dashboardPage.getHelloNameOnHamburger();
-        Assert.assertTrue(expectedName.contains(actualName.replace(" ", "_")));
+        Assert.assertTrue("The Hello name on hamburger is incorrect, and it's "+ actualName, expectedName.contains(actualName.toLowerCase().replace(" ", "_")));
     }
 
     @Step
     public void check_TenderParameterValue(String prNumber, String expectedValue){
         List<WebElement> allTenderLines = dashboardPage.getAllTenderLines();
-        for(WebElement tender : allTenderLines){
+        for (WebElement tender:allTenderLines) {
             if(tender.getText().contains(prNumber)){
                 Assert.assertTrue(tender.getText().replace("\n", "").contains(expectedValue));
+                return;
             }
         }
+        Assert.fail(prNumber + " is not found from the dashboard.");
     }
 
     @Step

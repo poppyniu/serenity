@@ -63,8 +63,8 @@ public class DashboardStepDefinitions {
     }
 
     @Then("^the tender of PR number ([^\"]*) shows the status as ([^\"]*)$")
-    public void the_tender_of_PR_number_shows_parameters_as(String prNumber, String parameterValue){
-        dashboardPageSteps.check_TenderParameterValue(prNumber, parameterValue);
+    public void the_tender_of_PR_number_shows_parameters_as(String prNumber, String statusValue){
+        dashboardPageSteps.check_TenderParameterValue(prNumber, statusValue);
     }
 
     @Then("^the tender of PR number ([^\"]*) shows correct amount on the dashboard")

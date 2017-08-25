@@ -13,7 +13,7 @@ Feature: Functions on dashboard.
     Then the Hello Name shown on hamburger is <HKLD User Name>
     And Open contractor login page
     And user logs in with user name <Vendor User> and password <Vendor Password>
-    #Then the Hello Name shown on dashboard is <Vendor User> (a notice bug)
+    Then the Hello Name shown on dashboard is <Vendor User>
     And user click hamburger icon
     Then the Hello Name shown on hamburger is <Vendor User>
     And user logs out ETender

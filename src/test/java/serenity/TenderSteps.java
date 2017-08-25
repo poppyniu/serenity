@@ -177,4 +177,19 @@ public class TenderSteps {
         return tenderPage.getPRAmountFromGeneralTab().replace("$", "");
     }
 
+    @Step
+    public void runAnalysisFromReview() throws Exception{
+        tenderPage.runAnalysis();
+    }
+
+    @Step
+    public void vendor_inputRateForItemsLine(){
+        tenderPage.vendorInputRateForItemsServices();
+    }
+
+    @Step
+    public void vendor_inputTermsAndSubmit(){
+        tenderPage.vendorInputTermsInfo();
+        tenderPage.vendorClickSubmitButton();
+    }
 }

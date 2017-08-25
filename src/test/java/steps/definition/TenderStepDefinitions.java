@@ -167,4 +167,16 @@ public class TenderStepDefinitions {
     public void user_choose_the_action_from_option_menu(String sectionIndex, String itemIndex, String optionIndex, String action){
         tenderSteps.click_optionAction(Integer.parseInt(sectionIndex), Integer.parseInt(itemIndex), Integer.parseInt(optionIndex), action);
     }
+
+    @And("^user run analysis and get analysis table$")
+    public void user_run_analysis_and_get_analysis_table() throws Exception{
+        tenderSteps.runAnalysisFromReview();
+    }
+
+    @And("^contractor fill in tender info and submit$")
+    public void contractor_fill_in_tender_info_and_submit(){
+        tenderSteps.click_itemsServices_tab();
+        tenderSteps.vendor_inputRateForItemsLine();
+        tenderSteps.vendor_inputTermsAndSubmit();
+    }
 }

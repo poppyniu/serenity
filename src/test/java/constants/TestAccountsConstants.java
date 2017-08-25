@@ -13,7 +13,7 @@ public class TestAccountsConstants {
     public static String hkldAdmin="elon";
     public static String contractorNameTender="poppy_zhang@epam.com";
     public static String contractorPwd="aaaaaa";
-    public static String contractorNameITQ="poppy_zhang1@epam.com";
+    public static String contractorNameITQ="michelle_zhang@epam.com";
     public static String afterLoginName="Poppy";
     public static String contractorName="gino_zhu@epam.com";
 }

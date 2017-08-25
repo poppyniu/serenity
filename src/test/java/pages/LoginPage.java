@@ -80,7 +80,7 @@ public class LoginPage extends PageObject {
         commonPage.wait(getDriver(),3);
         String userNameText = dashboardpage.userName.getAttribute("innerHTML");
         String AmoutText = dashboardpage.hkldAmount.getText();
-        if (AmoutText.contains("AMOUNT") && userNameText.contains("sophie")) {
+        if (AmoutText.contains("AMOUNT") && userNameText.contains("Sophie")) {
             System.out.println("HkLD engineer login succeed, test pass!");
         } else
             Assert.fail("HkLD engineer login get error, test fail!");
@@ -215,7 +215,8 @@ public class LoginPage extends PageObject {
     }
 
     public void CheckLogOut_success() {
-        if(currentUrl==URLConstants.hkldLoginPage){
+        currentUrl = getDriver().getCurrentUrl();
+        if(currentUrl.equals(URLConstants.hkldLoginPage)){
             System.out.println("Logout successfully");
             System.out.println(currentUrl);
         } else

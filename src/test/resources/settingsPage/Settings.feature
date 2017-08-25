@@ -15,6 +15,9 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |Location Short Form | Location Description    | HKL Company|
       |AH                  | AH description | HKLD       |
       |PB                  | PB description | HKLD       |
+      |CH                  | CH description | HKLD       |
+      |ES                  | ES description | HKLD       |
+      |JH                  | JH description | HKLD       |
 
 
   @setting
@@ -23,9 +26,9 @@ Feature: HKLD admin user is able to do configuration on settings page.
     When user access Security Groups setting
     And user add new security groups with Group Name and Group Description
       |Group Name     | Group Description |
-      |General Users  | HKLD General Engineer|
-      |Approver       | HKLD Tender Manager  |
-      |Super Admin       | HKLD Super Administrator   |
+      |Engineer  | HKLD General Engineer|
+      |Approver       | HKLD Technical Manager  |
+      |Senior Manager       | HKLD Senior Manager   |
 
 
   @setting
@@ -37,26 +40,18 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And he saves the attributes for the single user
     Examples:
       |User Name|Attribute|
-      |sophie|General Users,AH,PB|
+      |sophie|Engineer,AH,PB,CH,ES|
       |elon|Approver,AH          |
 
   @setting
   Scenario: Set the threshold for ITQ/Tender
-    Given  Open ETender system login page
-    When user logs in as the user type HKLD Admin
-    And user click hamburger icon
-    And user access settings page
     And user access Threshold setting
     And user set threshold value as 300000
 
   @setting
   Scenario Outline: Add contractors under settings
-    Given Open ETender system login page
-    And user logs in as the user type HKLD Admin
-    And user click hamburger icon
-    And user access settings page
     And user access Users setting
     And user add a new contractor with details info <vendorID>, <fullName>, <shortName>, <addressLine1>, <addressLine2>, <addressLine3>, <companyPhoneNumber>, <contactAdmin>, <contactPhoneNumber> and <emailAddress>
     Examples:
       | vendorID | fullName       | shortName | addressLine1 | addressLine2 | addressLine3 | companyPhoneNumber | contactAdmin | contactPhoneNumber | emailAddress |
-      | 105589   | SHINRYO TECHNICAL | SHINRYO TECHNICAL SERVICES LTD     | Test address | Test address | Test address | 12345678           | Tester       | 87654321           | test@auto.com|
+      | 106676   | PROJEXASIA LIMITED | PROJEXASIA LIMITED     | Test address | Test address | Test address | 12345678           | Tester       | 87654321           | test@auto.com|

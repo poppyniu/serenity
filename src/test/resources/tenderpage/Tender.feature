@@ -18,10 +18,7 @@ Feature:Test function on tender page
     And Submit the new tender for approve
     And user go back to dashboard page
     Then the tender of PR number <PRNumber> shows the status as WAPPR
-    And Change tender personInCharge in db
     And HKLD Admin login to approve tender
-    And user go back to dashboard page
-    Then the tender of PR number <PRNumber> shows the status as APPR
     And HKLD engineer login to issue tender
     And user go back to dashboard page
     Then the tender of PR number <PRNumber> shows the status as ISSUED
@@ -30,8 +27,7 @@ Feature:Test function on tender page
     Then the tender of PR number <PRNumber> shows the status as SUBMITTED
     And HKLD engineer login to check if contractor has submitted tender
     And Change tender status in db by <PRNumber>
-    And user go back to dashboard page
-    Then the tender of PR number <PRNumber> shows the status as REVIEW
+    And HKLD engineer check current tender status
     Then Clear tender test data in db
     Examples:
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|

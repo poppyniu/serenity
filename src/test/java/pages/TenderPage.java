@@ -7,6 +7,7 @@ import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -27,7 +28,7 @@ public class TenderPage extends PageObject {
     DashboardPage dashboardPage;
     LoginPage loginPage;
 
-    @FindBy(xpath="html/body/div[1]/div[2]/div[1]/div/div[2]/div[2]/div[2]/a[2]")
+    @FindBy(xpath=".//div[@class='tender-info-with-status']/div[2]/div[2]/a[2]")
     WebElement saveBtn;
     //General tab elements
     @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[1]/div[1]")
@@ -113,9 +114,9 @@ public class TenderPage extends PageObject {
     WebElement sendForApproveInfo;
     @FindBy(xpath=".//*[@class='reveal-overlay']/div/div[2]/button[contains(text(),'Okay')]")
     WebElement sendForApproveEnterBtn;
-    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[2]/div[2]/div[2]/a")
+    @FindBy(xpath=".//div[contains(@class, 'tender-view-button-bar' )]/div/a")
     WebElement adminApproveBtn;
-    @FindBy(xpath=".//*[@class='tender-head-info columns clearfix']/div[2]/div[2]/div[2]/a")
+    @FindBy(xpath=".//div[contains(@class, 'tender-view-button-bar')]/div/a")
     WebElement engineerIssueBtn;
     @FindBy(xpath=".//*[@id='edit-closing-date-picker']/div[1]/div[1]/span/i")
     WebElement closingDateDropdown1;
@@ -151,10 +152,28 @@ public class TenderPage extends PageObject {
     WebElementFacade contractorSubmitInfo;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr/td[3]")
     WebElementFacade statusColumn;
-    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[2]/div[2]/div[1]")
+    @FindBy(xpath = ".//div[contains(@class, 'tender-status')]")
     WebElementFacade tenderStatus;
     @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[2]/td[3]")
     WebElementFacade vendorSubmitStatus;
+    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/button")
+    WebElement startAnalysisBtn;
+    @FindBy(xpath = ".//*[@id='router-view-content']/div[1]/div[1]")
+    WebElement tenderSummaryDropdown;
+    @FindBy(xpath = ".//*[@id='router-view-content']/div[1]/div[3]/ul/li[2]/span")
+    WebElement analysisFromSummaryDropdown;
+    @FindBy(xpath = ".//*[@id='analysis-recos-content']/div[2]/div/div/a[2]")
+    WebElement runAnalysisBtn;
+    @FindBy(xpath = ".//div[@class='tender-info-with-status']/div[2]/div[2]/a[1]")
+    WebElement vendorSaveButton;
+    @FindBy(xpath = ".//div[@class='tender-info-with-status']/div[2]/div[2]/a[2]")
+    WebElement vendorSubmitButton;
+    @FindBy(xpath = ".//div[starts-with(@class, 'reveal-overlay')][@style='display: block;']/div/div[2]/button[2]")
+    WebElement vendorConfirmSubmitBtn;
+    @FindBy(xpath = ".//*[@id='tenders-comparison-data']/table")
+    WebElementFacade comparisonTable;
+    @FindBy(xpath = ".//td[contains(@class, 'lowestLine')]")
+    List<WebElementFacade> lowestPricesInComparisonTable;
 
     public void clickCreateTender() throws Exception {
         dashboardPage.selectCreateTenderDropdown("tender");
@@ -461,6 +480,8 @@ public class TenderPage extends PageObject {
         currentUrl=getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(),2);
+        startAnalysisBtn.click();
+        commonPage.wait(getDriver(),2);
         if(tenderStatus.getText().contains("REVIEW")){
             System.out.println("Tender is after closing date the status changed to review,test pass!");
         }
@@ -638,6 +659,64 @@ public class TenderPage extends PageObject {
 
     public String getPRAmountFromGeneralTab(){
         return prAmount.getAttribute("textContent");
+    }
+
+    public void clickFloatingButton(String buttonName){
+        List<WebElement> floatButtons = getDriver().findElements(By.xpath(".//*[@id='sticky-tender-tabs']/div/div/a"));
+        for (WebElement button: floatButtons) {
+            if(button.getAttribute("textContent").contains(buttonName)){
+                button.click();
+                commonPage.wait(getDriver(), 2);
+                return;
+            }
+        }
+        Assert.fail(buttonName+" is not a valid float button");
+    }
+
+    public void runAnalysis() throws Exception{
+        startAnalysisBtn.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        String id = currentUrl.split("/")[5];
+        String comparisonUrl = "http://hkld-qa.princeton.epam.com/#/comparison/"+id;
+        //tenderSummaryDropdown.click();
+        //analysisFromSummaryDropdown.click();
+        //commonPage.wait(getDriver(),3);
+        runAnalysisBtn.click();
+        commonPage.wait(getDriver(),3);
+        commonPage.navigatePage(comparisonUrl);
+        commonPage.wait(getDriver(), 3);
+        Assert.assertTrue("Comparison table is not generated", comparisonTable.isVisible());
+        Assert.assertFalse("None of the lowest prices is shown in the comparison table", lowestPricesInComparisonTable.isEmpty());
+    }
+
+    public void vendorInputRateForItemsServices(){
+        itemsServicesTab.click();
+        List<WebElement> sections = getDriver().findElements(By.xpath(".//*[@id='tab-services']/div/div/form/div[@class='card-section hover']"));
+        for (WebElement section:sections) {
+            List<WebElement> rateFields = section.findElements(By.xpath(".//input[@required='required'][@type=\"text\"]"));
+            for (WebElement rateField: rateFields) {
+                commonPage.sendKeysOnElement(rateField, RandomStringUtils.randomNumeric(2));
+            }
+        }
+    }
+
+    public void vendorInputTermsInfo(){
+        commonPage.scrollToElement(termsTab);
+        termsTab.click();
+        termsCheckbox1.click();
+        commonPage.sendKeysOnElement(termsNameTextbox, TestDataPathConstants.testInfo);
+        commonPage.sendKeysOnElement(termsPositionTextbox, TestDataPathConstants.testInfo);
+        termsCheckbox2.click();
+    }
+
+    public void vendorClickSubmitButton(){
+        vendorSaveButton.click();
+        commonPage.wait(getDriver(), 5);
+        vendorSubmitButton.click();
+        commonPage.wait(getDriver(), 2);
+        vendorConfirmSubmitBtn.click();
+        commonPage.wait(getDriver(),5);
     }
 
 }

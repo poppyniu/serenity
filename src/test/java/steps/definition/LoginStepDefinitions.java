@@ -74,12 +74,12 @@ public class LoginStepDefinitions {
         loginSteps.check_contractor_login_fail();
     }
 
-    @And("^Click forgot passowrd link to send email$")
+    @And("^Click forgot password link to send email$")
     public void click_forgot_passowrd_link_to_send_email() throws Throwable {
         loginSteps.click_forgot_pwd_send_email();
     }
 
-    @Then("^Check the reset passord info is correct$")
+    @Then("^Check the reset password info is correct$")
     public void check_the_reset_passord_info_is_correct() throws Throwable {
         loginSteps.check_reset_pwd_info();
     }
