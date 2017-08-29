@@ -51,3 +51,64 @@ Feature:Test function on tender page
       |59004    |The PR amount does not match with the TENDER type|
       |59023    |You are not allowed to view this PR              |
 
+
+  @ViewTender
+  Scenario Outline: View all tenders
+    And Click create tender button and create a tender
+    And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
+    And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
+    And user save the tender
+    And user go back to dashboard page
+    Then the tender of PR number <PRNumber> shows the status as DRAFT
+    And Click view all tenders button
+    Then Check view all tenders page search function
+    Then Clear tender test data in db
+    Examples:
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|
+
+  @CancelTender
+  Scenario Outline: Cancel a tender
+    And Click create tender button and create a tender
+    And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
+    And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
+    And user save the tender
+    And user go back to dashboard page
+    Then the tender of PR number <PRNumber> shows the status as DRAFT
+    And Open the new created dashboard tender item
+    Then Cancel this tender and check cancel result
+    Then Clear tender test data in db
+    Examples:
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|
+
+
+  @RejectTender
+  Scenario Outline: Reject a tender
+    And Click create tender button and create a tender
+    And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
+    And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
+    And user save the tender
+    And Submit the new tender for approve
+    And HKLD Admin login to reject tender
+    Then HKLD engineer to check tender <Status>
+    Then Clear tender test data in db
+    Examples:
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|Status|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|REJECTED|
+
+
+  @ResetToDraft
+  Scenario Outline: Reset tender to draft
+    And Click create tender button and create a tender
+    And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
+    And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
+    And user save the tender
+    And Submit the new tender for approve
+    And HKLD Admin login to reset tender to draft
+    Then HKLD engineer to check tender <Status>
+    Then Clear tender test data in db
+    Examples:
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|Status|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|DRAFT     |
+

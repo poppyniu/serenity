@@ -179,4 +179,39 @@ public class TenderStepDefinitions {
         tenderSteps.vendor_inputRateForItemsLine();
         tenderSteps.vendor_inputTermsAndSubmit();
     }
+
+    @And("^Click view all tenders button$")
+    public void click_view_all_tenders_button() throws Throwable {
+        tenderSteps.click_view_all_tenders_button();
+    }
+
+    @Then("^Check view all tenders page search function$")
+    public void check_view_all_tenders_page_search_function() throws Throwable {
+        tenderSteps.view_all_page_search();
+    }
+
+    @And("^Open the new created dashboard tender item$")
+    public void open_the_new_created_dashboard_tender_item() throws Throwable {
+        tenderSteps.click_tender_item();
+    }
+
+    @Then("^Cancel this tender and check cancel result$")
+    public void cancel_this_tender() throws Throwable {
+        tenderSteps.cancel_tender();
+    }
+
+    @And("^HKLD Admin login to reject tender$")
+    public void hkld_Admin_login_to_reject_tender() throws Throwable {
+        tenderSteps.reject_tender();
+    }
+
+    @Then("^HKLD engineer to check tender ([^\"]*)$")
+    public void hkld_engineer_to_check_tender_is_rejected(String status) throws Throwable {
+        tenderSteps.engineer_check_tender_status(status);
+    }
+
+    @And("^HKLD Admin login to reset tender to draft$")
+    public void hkld_Admin_login_to_reset_tender_to_draft() throws Throwable {
+        tenderSteps.reset_to_draft();
+    }
 }

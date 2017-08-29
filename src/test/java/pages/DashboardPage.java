@@ -56,8 +56,10 @@ public class DashboardPage extends PageObject {
     WebElement engineerProjectItemOne;
     @FindBy(xpath = ".//*[@id='create-project-modal']/div/button[2]")
     WebElement addPoNoBtn;
-
-
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[2]/button")
+    WebElement viewAllTendersBtn;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr/td[3]")
+    WebElement tenderStatusColumn;
 
 
     /*

@@ -192,4 +192,41 @@ public class TenderSteps {
         tenderPage.vendorInputTermsInfo();
         tenderPage.vendorClickSubmitButton();
     }
+
+    @Step
+    public void click_view_all_tenders_button()throws Exception{
+        tenderPage.clickViewAllTendersBtn();
+    }
+
+    @Step
+    public void view_all_page_search()throws Exception{
+        tenderPage.viewAllPageSearch();
+    }
+
+    @Step
+    public void click_tender_item()throws Exception{
+        tenderPage.clickTenderItem();
+    }
+
+    @Step
+    public void cancel_tender()throws Exception{
+        tenderPage.cancelTender();
+    }
+
+    @Step
+    public void reject_tender()throws Exception{
+        tenderPage.rejectTender();
+    }
+
+    @Step
+    public void engineer_check_tender_status(String status)throws Exception{
+        tenderPage.checkTenderStatus(status);
+    }
+
+    @Step
+    public void reset_to_draft()throws Exception{
+        tenderPage.resetToDraft();
+    }
+
+
 }

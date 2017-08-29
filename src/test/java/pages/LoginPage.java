@@ -14,7 +14,7 @@ import org.openqa.selenium.WebElement;
  * Created by Poppy_Zhang on 2017/6/21.
  */
 @DefaultUrl("http://hkld-qa.princeton.epam.com/#/login")
-//@DefaultUrl("http://epcnszxw0187.princeton.epam.com/#/")
+//@DefaultUrl("http://epcnszxw0187.princeton.epam.com/#/login")
 public class LoginPage extends PageObject {
     String currentUrl;
     CommonPage commonPage;
