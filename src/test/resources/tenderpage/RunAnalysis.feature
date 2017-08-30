@@ -9,15 +9,7 @@ Feature: HKLD user is able to run analysis when review a tender.
     And Click create itq button and create a itq
     And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
     And user goes to items/services tab
-    And user add 1 more sections
-    And user at section #1 add 1 more items
-    And user at section #1 input section tile
-    And user at section #2 input section tile
-    And user input Description, QTY and UNIT for every line item
-      |Section Index|Item Index|
-      |1            |1         |
-      |1            |2         |
-      |2            |1         |
+    And user add 1 more sections and at every section add 2 more items and input value for all
     And Input attachments tab info <ProjectDescription> and save tender
     And HKLD engineer preview and issue itq
     And user click hamburger icon

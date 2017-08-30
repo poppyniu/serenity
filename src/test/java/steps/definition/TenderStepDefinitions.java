@@ -1,5 +1,6 @@
 package steps.definition;
 
+import constants.SampleTenderInfo;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -110,11 +111,6 @@ public class TenderStepDefinitions {
         tenderSteps.click_itemsServices_tab();
     }
 
-    @And("^user at section #([^\"]*) input section tile$")
-    public void user_input_section_title(String index){
-        tenderSteps.input_sectionTitle(Integer.parseInt(index));
-    }
-
     @And("^user at section #([^\"]*) choose the action ([^\"]*) from section drop down menu$")
     public void user_choose_the_action_from_section_options(String index, String action){
         tenderSteps.click_sectionAction(Integer.parseInt(index),action);
@@ -145,12 +141,9 @@ public class TenderStepDefinitions {
         tenderSteps.add_items(Integer.parseInt(sectionIndex), Integer.parseInt(itemsQuantity));
     }
 
-    @And("^user input Description, QTY and UNIT for every line item$")
-    public void user_input_item_info(final DataTable dataTable){
-        List<List<String>> data= dataTable.raw();
-        for(int i=1; i<data.size();i++){
-            tenderSteps.input_ItemInfo(Integer.parseInt(data.get(i).get(0)), Integer.parseInt(data.get(i).get(1)));
-        }
+    @And("^user add ([^\"]*) more sections and at every section add ([^\"]*) more items and input value for all$")
+    public void user_add_items_services_and_input_value(String sectionsQuantity, String itemsQuantity){
+        tenderSteps.add_SectionsItems_And_InputValue(Integer.parseInt(sectionsQuantity), Integer.parseInt(itemsQuantity));
     }
 
     @Then("^([^\"]*) options should be existing under section #([^\"]*) item #([^\"]*)$")
@@ -213,5 +206,10 @@ public class TenderStepDefinitions {
     @And("^HKLD Admin login to reset tender to draft$")
     public void hkld_Admin_login_to_reset_tender_to_draft() throws Throwable {
         tenderSteps.reset_to_draft();
+    }
+
+    @And("^user input sample info for items and services$")
+    public void user_input_sample_info_for_items_and_services() {
+        tenderSteps.input_SampleItemsServices(2, 2);
     }
 }

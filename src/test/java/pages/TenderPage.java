@@ -29,7 +29,7 @@ public class TenderPage extends PageObject {
     DashboardPage dashboardPage;
     LoginPage loginPage;
 
-    @FindBy(xpath = ".//div[@class='tender-info-with-status']/div[2]/div[2]/a[2]")
+    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/div/a[1]")
     WebElement saveBtn;
     //General tab elements
     @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[1]/div[1]")
@@ -167,9 +167,9 @@ public class TenderPage extends PageObject {
     WebElement analysisFromSummaryDropdown;
     @FindBy(xpath = ".//*[@id='analysis-recos-content']/div[2]/div/div/a[2]")
     WebElement runAnalysisBtn;
-    @FindBy(xpath = ".//div[@class='tender-info-with-status']/div[2]/div[2]/a[1]")
+    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/div/a[1]")
     WebElement vendorSaveButton;
-    @FindBy(xpath = ".//div[@class='tender-info-with-status']/div[2]/div[2]/a[2]")
+    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/div/a[2]")
     WebElement vendorSubmitButton;
     @FindBy(xpath = ".//div[starts-with(@class, 'reveal-overlay')][@style='display: block;']/div/div[2]/button[2]")
     WebElement vendorConfirmSubmitBtn;
@@ -455,8 +455,10 @@ public class TenderPage extends PageObject {
         termsCheckbox2.click();
         commonPage.wait(getDriver(), 2);
         //contractor submit
-        saveBtn.click();
+        commonPage.scrollToElement(saveBtn);
+        vendorSaveButton.click();
         commonPage.wait(getDriver(), 2);
+        vendorSubmitButton.click();
         contractorSubmitInfo.click();
         Actions actions = new Actions(getDriver());
         actions.sendKeys(Keys.TAB).perform();
@@ -540,7 +542,6 @@ public class TenderPage extends PageObject {
 
     public void inputSectionTitle(int index, String sectionTitle) {
         String id = String.format("tender.section.title_" + (index - 1));
-        System.out.println(id);
         WebElement sectionTitleField = getDriver().findElement(By.id(id));
         commonPage.sendKeysOnElement(sectionTitleField, sectionTitle);
     }
@@ -731,6 +732,7 @@ public class TenderPage extends PageObject {
     }
 
     public void vendorClickSubmitButton() {
+        commonPage.scrollToElement(vendorSaveButton);
         vendorSaveButton.click();
         commonPage.wait(getDriver(), 5);
         vendorSubmitButton.click();

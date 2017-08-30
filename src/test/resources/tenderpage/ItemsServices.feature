@@ -52,26 +52,5 @@ Feature: Add, Delete, Update Items/Services
   @itemsAndServices
   Scenario: Add multiple sections and line items into a Tender
     And user goes to items/services tab
-    And user add 2 more sections
-    And user at section #1 add 2 more items
-    And user at section #1 input section tile
-    And user input Description, QTY and UNIT for every line item
-      |Section Index|Item Index|
-      |1            |1         |
-      |1            |2         |
-      |1            |3         |
-    And user at section #1 item #1 choose the action Add Option from item drop down menu
-    And user at section #1 item #1 option #1 input option description
-    And user at section #2 add 1 more items
-    And user at section #2 input section tile
-    And user input Description, QTY and UNIT for every line item
-      |Section Index|Item Index|
-      |2            |1         |
-      |2            |2         |
-    And user at section #3 add 1 more items
-    And user at section #3 input section tile
-    And user input Description, QTY and UNIT for every line item
-      |Section Index|Item Index|
-      |3            |1         |
-      |3            |2         |
+    And user add 2 more sections and at every section add 2 more items and input value for all
     And user save the tender

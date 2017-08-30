@@ -1,5 +1,6 @@
 package serenity;
 
+import constants.SampleTenderInfo;
 import net.thucydides.core.annotations.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
@@ -108,9 +109,40 @@ public class TenderSteps {
     }
 
     @Step
-    public void input_sectionTitle(int index){
-        String sectionTitle = String.format("Section "+index+" Test");
-        tenderPage.inputSectionTitle(index, sectionTitle);
+    public void add_SectionsItems_And_InputValue(int sectionQty, int itemQty){
+        add_sections(sectionQty);
+        for(int sectionIndex = 1; sectionIndex<=(sectionQty+1); sectionIndex++){
+            String sectionTitle = "Section "+sectionIndex+" Test";
+            tenderPage.inputSectionTitle(sectionIndex, sectionTitle);
+            add_items(sectionIndex, itemQty);
+            for(int itemIndex = 1; itemIndex<=(itemQty+1); itemIndex++){
+                String randomDescription = "Section "+sectionIndex+" Item "+itemIndex+"\n"+RandomStringUtils.randomAlphabetic(10);
+                input_ItemInfo(sectionIndex, itemIndex, randomDescription);
+            }
+        }
+    }
+
+    @Step
+    /* Need to make sure SampleTenderInfo has enough sectionTitles and items*/
+    public void input_SampleItemsServices(int sectionAddQty, int itemAddQty){
+        int i = 0;
+        add_sections(sectionAddQty);
+        for(int sectionIndex = 1; sectionIndex<=(sectionAddQty+1); sectionIndex++){
+            tenderPage.inputSectionTitle(sectionIndex, SampleTenderInfo.sectionTitles[sectionIndex-1]);
+            add_items(sectionIndex, itemAddQty);
+            for(int itemIndex = 1; itemIndex<=(itemAddQty+1); itemIndex++){
+                input_ItemInfo(sectionIndex, itemIndex, SampleTenderInfo.items[i]);
+                i=i+1;
+            }
+        }
+    }
+
+    @Step
+    public void input_ItemInfo(int sectionIndex, int itemIndex, String sampleItemInfo){
+        String randomQTY = RandomStringUtils.randomNumeric(2);
+        tenderPage.inputItemDescription(sectionIndex, itemIndex, sampleItemInfo);
+        tenderPage.inputItemQty(sectionIndex, itemIndex,randomQTY);
+        tenderPage.selectItemUnit(sectionIndex, itemIndex);
     }
 
     @Step
@@ -140,15 +172,6 @@ public class TenderSteps {
     @Step
     public void check_sectionsQuantity(int number){
         Assert.assertEquals(number, tenderPage.sectionsQuantity());
-    }
-
-    @Step
-    public void input_ItemInfo(int sectionIndex, int itemIndex){
-        String randomDescription = String.format("Section "+sectionIndex+" Item "+itemIndex+"\n"+RandomStringUtils.randomAlphabetic(10));
-        String randomQTY = RandomStringUtils.randomNumeric(2);
-        tenderPage.inputItemDescription(sectionIndex, itemIndex, randomDescription);
-        tenderPage.inputItemQty(sectionIndex, itemIndex, randomQTY);
-        tenderPage.selectItemUnit(sectionIndex, itemIndex);
     }
 
     @Step

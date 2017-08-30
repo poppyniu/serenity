@@ -22,11 +22,10 @@ Feature: HKLD admin user is able to do configuration on settings page.
 
   @setting
   Scenario: Add new security Groups
-    And clear roles table from Database
+    #And clear roles table from Database (Note: In order to keep the initial ymal data, skip DB clear for now)
     When user access Security Groups setting
     And user add new security groups with Group Name and Group Description
       |Group Name     | Group Description |
-      |Engineer  | HKLD General Engineer|
       |Approver       | HKLD Technical Manager  |
       |Senior Manager       | HKLD Senior Manager   |
 

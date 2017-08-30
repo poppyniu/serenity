@@ -181,10 +181,10 @@ public class CommonPage extends PageObject{
 
     public  void sendKeysOnElement(WebElement element, String sendValue) {
         element.click();
+        element.clear();
         String insertedValue = element.getAttribute("value");
         while ( !insertedValue.equals(sendValue) ) {
             element.click();
-            element.clear();
             for(int i=0; i<sendValue.length(); i++){
                 element.sendKeys(sendValue.substring(i,i+1));
             }
