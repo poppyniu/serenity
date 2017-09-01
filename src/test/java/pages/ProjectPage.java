@@ -23,7 +23,7 @@ public class ProjectPage extends PageObject {
     DashboardPage dashboardPage;
     LoginPage loginPage;
     String currentUrl;
-    @FindBy(xpath = ".//*[@id='tab-docs-label']")
+    @FindBy(xpath = ".//*[@id='tab-1-label']")
     WebElement addDocTab;
     @FindBy(xpath = ".//*[@id='project-documents-documents-add']")
     WebElement addDocTypeBtn;
@@ -35,13 +35,13 @@ public class ProjectPage extends PageObject {
     WebElement addDocTypeBtn3;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/div/div/div/button")
     WebElement inviteBtn;
-    @FindBy(xpath = ".//*[@id='project-detail-invite-vendor']/div[2]/div/div/button")
+    @FindBy(xpath = ".//*[@id='project-detail-invite-vendor']/div[4]/div/div/button")
     WebElement inviteBtn1;
-    @FindBy(xpath = ".//*[@id='project-detail-invite-success']/div[2]/div/button")
+    @FindBy(xpath = ".//*[@id='project-detail-invite-success']/div[4]/div/button")
     WebElement inviteOkBtn;
     @FindBy(xpath = ".//*[@id='mini-toastr']/div/div")
     WebElement successInfo;
-    @FindBy(xpath = ".//*[@id='tab-sr']/div/div/div[1]/button")
+    @FindBy(xpath = ".//*[@id='tab-0']/div/div/div[1]/button")
     WebElement submissionBtn;
     @FindBy(xpath = ".//*[@id='sr-completionType-partial']")
     WebElement partialRadioBtn;
@@ -67,13 +67,15 @@ public class ProjectPage extends PageObject {
     WebElement rejectBtn;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr[1]/td[3]/span")
     WebElement projectStatus;
+    @FindBy(xpath = "html/body/div[1]/div[2]/div[3]/div/div[1]/table/tbody/tr/td[4]")
+    WebElement projectCompletion;
     @FindBy(xpath = ".//*[@id='sr-completionType-final-partial']")
     WebElement finalPartialCheckbox;
     @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/span")
     WebElement uploadDocRemindInfo;
     @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[2]/button")
     WebElement uploadDocRemindInfoYesBtn;
-    @FindBy(xpath = ".//*[@id='tab-docs-label']")
+    @FindBy(xpath = ".//*[@id='tab-1-label']")
     WebElement documentTab;
     //    @FindBy(xpath = ".//body/input[@type='file'][4]")
 //    WebElement uploadFileTextbox;
@@ -95,7 +97,7 @@ public class ProjectPage extends PageObject {
     WebElement docTwoPanel;
     @FindBy(xpath = ".//*[@id='alertModal']/div[2]/button[2]")
     WebElement approveDocYesBtn;
-    @FindBy(xpath = ".//*[@id='tab-sr-label']")
+    @FindBy(xpath = ".//*[@id='tab-0-label']")
     WebElement sumissionRequestTab;
     @FindBy(xpath = ".//*[@class='reveal-overlay fade-in mui-enter mui-enter-active']/div[1]/div[1]/textarea")
     WebElement rejectTextbox;
@@ -142,6 +144,7 @@ public class ProjectPage extends PageObject {
     public void engineerApproveSubmission() throws Exception {
         engineerLoginApproveOrReject("approve");
         checkProjectStatus("1st");
+        checkProjectCompletion("20.00%");
 
     }
 
@@ -153,6 +156,7 @@ public class ProjectPage extends PageObject {
     public void engineerApproveSecondSubmission() throws Exception {
         engineerLoginApproveOrReject("approve");
         checkProjectStatus("2nd");
+        checkProjectCompletion("80.00%");
     }
 
     public void thirdFinalSubmission(String amount2) throws Exception {
@@ -191,6 +195,7 @@ public class ProjectPage extends PageObject {
 
     public void uploadDoc() throws Exception {
         int uploadFileCount = getDriver().findElements(By.xpath(".//body/input[@type='file']")).size();
+        System.out.println("1111111111111111111"+uploadFileCount);
         for (int i = 1; i <= uploadFileCount; i++) {
             WebElement uploadFileElement = getDriver().findElements(By.xpath(".//body/input[@type='file'][" + i + "]")).get(0);
             JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
@@ -278,6 +283,7 @@ public class ProjectPage extends PageObject {
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
         checkProjectStatus("3rd");
+        checkProjectCompletion("90.00%");
     }
 
     public void checkProjectStatus(String expectedStatus) throws Exception {
@@ -286,6 +292,14 @@ public class ProjectPage extends PageObject {
             System.out.println("Current project status is:" + expectedStatus + ",test pass!");
         } else
             Assert.fail("Current project status is not correct,test fail!");
+    }
+
+    public void checkProjectCompletion(String expectedCompletion) throws Exception {
+        String autualCompletion = projectCompletion.getText();
+        if (autualCompletion.contains(expectedCompletion)) {
+            System.out.println("Current project completion status is:" + expectedCompletion + ",test pass!");
+        } else
+            Assert.fail("Current project completion status is not correct,test fail!");
     }
 
     public void clearProjectTable() throws Exception {
