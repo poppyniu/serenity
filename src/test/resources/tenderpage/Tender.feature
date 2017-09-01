@@ -36,6 +36,7 @@ Feature:Test function on tender page
 
 
   Scenario Outline: Validate PR Number
+    And clear tender data of the PR number 52155
     And Click create tender button and create a tender
     And user input PR number 52155
     And user save the PR info
@@ -49,7 +50,8 @@ Feature:Test function on tender page
       |PR Number|Expected Message|
       |52155    |This PR number is in use                         |
       |59004    |The PR amount does not match with the TENDER type|
-      |59023    |You are not allowed to view this PR              |
+      #|58682    |You are not allowed to view this PR              |
+      |00000    |Not Found                                        |
 
 
   @ViewTender

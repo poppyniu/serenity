@@ -1,9 +1,8 @@
 Feature: HKLD user is able to run analysis when review a tender.
-  Background:
-    Given Clear tender test data in db
 
   @ITQFlow
   Scenario Outline: Multiple vendors submit bids and HKLD user can get comparison table
+    Given clear tender data of the PR number <PRNumber>
     When Open ETender system login page
     And user logs in as the user type HKLD Engineer
     And Click create itq button and create a itq

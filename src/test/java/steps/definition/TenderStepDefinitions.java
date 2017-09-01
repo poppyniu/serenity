@@ -1,13 +1,10 @@
 package steps.definition;
 
-import constants.SampleTenderInfo;
-import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import net.thucydides.core.annotations.Steps;
+import serenity.DashboardPageSteps;
 import serenity.TenderSteps;
-
-import java.util.List;
 
 /**
  * Created by Poppy_Zhang on 2017/6/21.
@@ -15,6 +12,8 @@ import java.util.List;
 public class TenderStepDefinitions {
     @Steps
     TenderSteps tenderSteps;
+    @Steps
+    DashboardPageSteps dashboardPageSteps;
 
     @And("^Click create tender button and create a tender$")
     public void click_create_tender_button_and_create_a_tender() throws Throwable {
@@ -41,9 +40,19 @@ public class TenderStepDefinitions {
         tenderSteps.input_attachments_tab_info(ProjectDescription);
     }
 
+    @And("^user upload attachments and input description ([^\"]*)$")
+    public void upload_attachments_and_input_description(String description) throws  Throwable{
+        tenderSteps.upload_attachments(description);
+    }
+
     @And("^Submit the new tender for approve$")
     public void submit_the_new_tender_for_approve() throws Throwable {
         tenderSteps.submit_tender_for_approve();
+    }
+
+    @And("^preview and submit the tender$")
+    public void preview_and_submit_the_tender(){
+        tenderSteps.preview_and_submit_tender();
     }
 
     @And("^Change tender personInCharge in db$")
@@ -56,9 +65,21 @@ public class TenderStepDefinitions {
         tenderSteps.admin_approve();
     }
 
+    @And("^the manager approve the tender of PR number ([^\"]*)$")
+    public void user_gets_approval(String prNumber){
+        dashboardPageSteps.click_specifiedTender(prNumber);
+        tenderSteps.manager_approve_tender();
+    }
+
     @And("^HKLD engineer login to issue tender$")
     public void hkld_engineer_login_to_issue_tender() throws Throwable {
         tenderSteps.engineer_issue();
+    }
+
+    @And("^user issue the tender of PR number ([^\"]*)$")
+    public void user_issue_tender(String prNumber){
+        dashboardPageSteps.click_specifiedTender(prNumber);
+        tenderSteps.issue_tender();
     }
 
     @And("^HKLD engineer login to check if contractor has submitted tender$")
@@ -84,6 +105,11 @@ public class TenderStepDefinitions {
     @Then("^Clear tender test data in db$")
     public void clear_tender_test_data_in_db() throws Throwable {
         tenderSteps.clear_tender_from_db();
+    }
+
+    @And("^clear tender data of the PR number ([^\"]*)$")
+    public void clear_specified_tender(String prNumber) throws Throwable{
+        tenderSteps.clear_specified_tender_fromDB(prNumber);
     }
 
     @And("^user input PR number ([^\"]*)$")
@@ -210,6 +236,6 @@ public class TenderStepDefinitions {
 
     @And("^user input sample info for items and services$")
     public void user_input_sample_info_for_items_and_services() {
-        tenderSteps.input_SampleItemsServices(2, 2);
+        tenderSteps.input_SampleItemsServices(4, 2);
     }
 }

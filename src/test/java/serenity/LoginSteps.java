@@ -48,7 +48,7 @@ public class LoginSteps {
             case "HKLD Engineer":
                 loginPage.anyUserLogin(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
                 break;
-            case "HKLD Approver":
+            case "HKLD Manager":
                 loginPage.anyUserLogin(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
                 break;
             default:

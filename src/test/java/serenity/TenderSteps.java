@@ -38,8 +38,18 @@ public class TenderSteps {
     }
 
     @Step
+    public void upload_attachments(String description) throws Exception {
+        tenderPage.uploadAttachments(description);
+    }
+
+    @Step
     public void submit_tender_for_approve() throws Exception {
         tenderPage.submitTenderForApprove();
+    }
+
+    @Step
+    public void preview_and_submit_tender(){
+        tenderPage.previewAndSubmitTender();
     }
 
     @Step
@@ -53,8 +63,18 @@ public class TenderSteps {
     }
 
     @Step
+    public void manager_approve_tender(){
+        tenderPage.approveTender();
+    }
+
+    @Step
     public void engineer_issue() throws Exception {
         tenderPage.engineerIssueTender();
+    }
+
+    @Step
+    public void issue_tender(){
+        tenderPage.issueTender();
     }
 
     @Step
@@ -81,6 +101,11 @@ public class TenderSteps {
     @Step
     public void clear_tender_from_db() throws Exception {
         tenderPage.clearTenderFromDb();
+    }
+
+    @Step
+    public void clear_specified_tender_fromDB(String prNumber) throws Exception {
+        tenderPage.deleteSpecifiedTenderFromDB(prNumber);
     }
 
     @Step
@@ -139,9 +164,9 @@ public class TenderSteps {
 
     @Step
     public void input_ItemInfo(int sectionIndex, int itemIndex, String sampleItemInfo){
-        String randomQTY = RandomStringUtils.randomNumeric(2);
+        int randomQTY = (int)Math.round(Math.random()*98+1);
         tenderPage.inputItemDescription(sectionIndex, itemIndex, sampleItemInfo);
-        tenderPage.inputItemQty(sectionIndex, itemIndex,randomQTY);
+        tenderPage.inputItemQty(sectionIndex, itemIndex, Integer.toString(randomQTY));
         tenderPage.selectItemUnit(sectionIndex, itemIndex);
     }
 

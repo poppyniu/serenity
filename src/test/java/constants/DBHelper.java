@@ -58,6 +58,26 @@ public class DBHelper {
         }
     }
 
+    public static void clearSpecifiedTenderData(String prNumber) throws Exception{
+        //SQL语句
+        sql = "DELETE FROM `tenders` WHERE prNo = " + prNumber;
+        //创建DBHelper对象
+        dbHelper = new DBHelper(sql);
+        try {
+            //执行语句，得到结果集
+            int result= dbHelper.pst.executeUpdate();
+            if(result==1||result==0) {
+                System.out.println("Clear data of " + prNumber + " from database succeed, test pass!");
+            }
+            else
+                System.out.println("Clear data of " + prNumber + " from database get error, test fail!");
+            //关闭连接
+            dbHelper.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void clearRolesTableFromDB() throws Exception{
         String sqlCommand = "DELETE FROM `roles` WHERE `id`!= '5976ee2f2c71f53d43471940'";
         DBHelper db = new DBHelper(sqlCommand);

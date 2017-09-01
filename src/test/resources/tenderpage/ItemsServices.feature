@@ -2,7 +2,6 @@ Feature: Add, Delete, Update Items/Services
 
 
   Background:
-    Given Clear tender test data in db
     When  Open ETender system login page
     And Input valid user name and pwd and click login button
     And Click create tender button and create a tender

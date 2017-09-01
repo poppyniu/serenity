@@ -29,7 +29,7 @@ public class TenderPage extends PageObject {
     DashboardPage dashboardPage;
     LoginPage loginPage;
 
-    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/div/a[1]")
+    @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/a[2]")
     WebElement saveBtn;
     //General tab elements
     @FindBy(xpath = ".//*[@id='tender.general.workingHours']/div/div[2]/div[1]/div[1]")
@@ -103,7 +103,7 @@ public class TenderPage extends PageObject {
     WebElement saveSuccessInfo;
     @FindBy(xpath = ".//*[@class='clearfix']/div[2]/a[3]")
     WebElement previewSubmitBtn;
-    @FindBy(xpath = ".//*[@id='submit_tender']")
+    @FindBy(xpath = ".//*[contains(@class, 'tender-view-button-bar')]/div/div/button")
     WebElement submitBtn;
     @FindBy(xpath = ".//*[@class='reveal-overlay']/div/div[1]/div[2]/div[1]")
     WebElement chooseApproveDropdown;
@@ -282,6 +282,7 @@ public class TenderPage extends PageObject {
     }
 
     public void inputItemsServicesTabInfo(String SectionTitle1, String DescriptionofWork1, String QTY1, String UNIT1) throws Exception {
+        commonPage.scrollToElement(itemsServicesTab);
         itemsServicesTab.click();
         commonPage.wait(getDriver(), 2);
         commonPage.sendKeysOnElement(addSectionTitleTextbox, SectionTitle1);
@@ -297,7 +298,31 @@ public class TenderPage extends PageObject {
         unitDropdownItem.click();
     }
 
+    public void uploadAttachments(String description) throws Exception {
+        commonPage.scrollToElement(attachmentsTab);
+        attachmentsTab.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.sendKeysOnElement(attachmentDescription, description);
+        commonPage.wait(getDriver(), 1);
+        //Upload file：
+        WebElement uploadFileElement = getDriver().findElements(By.xpath("//input[@type='file']")).get(0);
+        JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
+        removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
+        commonPage.wait(getDriver(), 2);
+        if (testDataPath == null) {
+            testDataPath = TestDataPathConstants.uploadFilePath;
+        }
+        uploadFileTextbox.sendKeys(testDataPath);
+        commonPage.wait(getDriver(), 4);
+        boolean uploadFileExist = commonPage.elementExist(uploadedFileName);
+        if (uploadFileExist == true) {
+            System.out.println("Upload file succeed,test pass!");
+        } else
+            Assert.fail("Upload file get error,test fail!");
+    }
+
     public void inputAttachmentsTabInfo(String ProjectDescription) throws Exception {
+        commonPage.scrollToElement(attachmentsTab);
         attachmentsTab.click();
         commonPage.wait(getDriver(), 2);
         commonPage.sendKeysOnElement(attachmentDescription, ProjectDescription);
@@ -324,6 +349,27 @@ public class TenderPage extends PageObject {
         } else
             Assert.fail("Save get error,test fail!");
         commonPage.wait(getDriver(), 5);
+    }
+
+    public void previewAndSubmitTender(){
+        previewSubmitBtn.click();
+        commonPage.wait(getDriver(), 3);
+        submitBtn.click();
+        chooseApproveDropdown.click();
+        approveDropdownItem.click();
+        commonPage.wait(getDriver(), 1);
+        chooseApproveEnterBtn.click();
+        commonPage.wait(getDriver(), 2);
+        if (sendForApproveInfo.getText().contains("Your tender has been sent for approval, Stay tuned")) {
+            System.out.println("Send tender for approve succeed, test pass!");
+            sendForApproveInfo.click();
+            Actions action = new Actions(getDriver());
+            action.sendKeys(Keys.TAB).perform();
+            commonPage.wait(getDriver(), 1);
+            action.sendKeys(Keys.ENTER).perform();
+            commonPage.wait(getDriver(), 2);
+        } else
+            Assert.fail("Send tender for approve get error, test fail!");
     }
 
     public void submitTenderForApprove() throws Exception {
@@ -372,6 +418,11 @@ public class TenderPage extends PageObject {
         DBHelper.changePersonInCharge();
     }
 
+    public void approveTender(){
+        adminApproveBtn.click();
+        commonPage.wait(getDriver(), 2);
+    }
+
     public void adminApprove() throws Exception {
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(), 2);
@@ -387,6 +438,25 @@ public class TenderPage extends PageObject {
             System.out.println("Admin approve tender succeed,test pass!");
         } else
             Assert.fail("Admin approve tender get error,test fail!");
+    }
+
+    public void issueTender(){
+        closingDateDropdown1.click();
+        commonPage.wait(getDriver(), 1);
+        closingDateDropdown1LeftBtn.click();
+        commonPage.wait(getDriver(), 1);
+        closingDateNextPageItem1.click();
+        commonPage.wait(getDriver(), 1);
+        closingDateDropdown2.click();
+        commonPage.wait(getDriver(), 1);
+        closingDateDropdown2item.click();
+        commonPage.wait(getDriver(), 2);
+        engineerIssueBtn.click();
+        if (saveSuccessInfo.getText().contains("Success")) {
+            System.out.println("Engineer issue tender succeed,test pass!");
+        } else
+            Assert.fail("Engineer issue tender get error,test fail!");
+        commonPage.wait(getDriver(), 5);
     }
 
     public void engineerIssueTender() throws Exception {
@@ -455,7 +525,7 @@ public class TenderPage extends PageObject {
         termsCheckbox2.click();
         commonPage.wait(getDriver(), 2);
         //contractor submit
-        commonPage.scrollToElement(saveBtn);
+        commonPage.scrollToElement(vendorSaveButton);
         vendorSaveButton.click();
         commonPage.wait(getDriver(), 2);
         vendorSubmitButton.click();
@@ -516,6 +586,10 @@ public class TenderPage extends PageObject {
         DBHelper.clearDataFromDB("tenders");
     }
 
+    public void deleteSpecifiedTenderFromDB(String prNumber) throws Exception {
+        DBHelper.clearSpecifiedTenderData(prNumber);
+    }
+
     public void inputPRNumber(String prNumber) {
         commonPage.sendKeysOnElement(prNumberTextbox, prNumber);
         prNumberAddBtn.click();
@@ -526,6 +600,7 @@ public class TenderPage extends PageObject {
     }
 
     public void clickSaveBtn() {
+        commonPage.scrollToElement(saveBtn);
         saveBtn.click();
         commonPage.wait(getDriver(), 5);
     }
@@ -536,6 +611,7 @@ public class TenderPage extends PageObject {
     }
 
     public void clickItemsServicesTab() {
+        commonPage.scrollToElement(itemsServicesTab);
         itemsServicesTab.click();
         commonPage.wait(getDriver(), 2);
     }
@@ -713,11 +789,12 @@ public class TenderPage extends PageObject {
 
     public void vendorInputRateForItemsServices() {
         itemsServicesTab.click();
-        List<WebElement> sections = getDriver().findElements(By.xpath(".//*[@id='tab-services']/div/div/form/div[@class='card-section hover']"));
-        for (WebElement section : sections) {
-            List<WebElement> rateFields = section.findElements(By.xpath(".//input[@required='required'][@type=\"text\"]"));
-            for (WebElement rateField : rateFields) {
-                commonPage.sendKeysOnElement(rateField, RandomStringUtils.randomNumeric(2));
+        List<WebElement> rateFields = getDriver().findElements(By.xpath(".//*[@id='tab-services']/div/div/form/div[@class='card-section hover']//input[@required='required']"));
+        for (int i=0; i<rateFields.size(); i++){
+            int randomRate = (int)Math.round(Math.random()*989+10);
+            commonPage.sendKeysOnElement(rateFields.get(i), Integer.toString(randomRate));
+            if((i+1)<rateFields.size()){
+                commonPage.scrollToElement(rateFields.get(i+1));
             }
         }
     }
