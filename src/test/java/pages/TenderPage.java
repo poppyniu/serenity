@@ -157,7 +157,7 @@ public class TenderPage extends PageObject {
     WebElementFacade statusColumn;
     @FindBy(xpath = ".//div[contains(@class, 'tender-status')]")
     WebElementFacade tenderStatus;
-    @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[2]/td[3]")
+    @FindBy(xpath = ".//*[@class='vendor-status-list']/table/tbody/tr[3]/td[3]")
     WebElementFacade vendorSubmitStatus;
     @FindBy(xpath = ".//div[contains(@class, 'tender-view-button-bar')]/button")
     WebElement startAnalysisBtn;
@@ -378,7 +378,8 @@ public class TenderPage extends PageObject {
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -427,7 +428,8 @@ public class TenderPage extends PageObject {
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(), 2);
         loginPage.Login(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -462,7 +464,8 @@ public class TenderPage extends PageObject {
     public void engineerIssueTender() throws Exception {
         commonPage.navigatePage(URLConstants.hkldLoginPage);
         loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -493,7 +496,8 @@ public class TenderPage extends PageObject {
         } else if (tenderType.contains("itq")) {
             loginPage.Login(TestAccountsConstants.contractorNameITQ, TestAccountsConstants.contractorPwd);
         }
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -548,7 +552,8 @@ public class TenderPage extends PageObject {
     public void checkVendorSubmitStatus() throws Exception {
         commonPage.navigatePage(URLConstants.hkldLoginPage);
         loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -570,11 +575,8 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         getDriver().navigate().refresh();
         commonPage.wait(getDriver(), 5);
-        currentUrl = getDriver().getCurrentUrl();
-        commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
         startAnalysisBtn.click();
-        commonPage.wait(getDriver(), 2);
+        commonPage.wait(getDriver(), 3);
         if (tenderStatus.getText().contains("REVIEW")) {
             System.out.println("Tender is after closing date the status changed to review,test pass!");
         } else
@@ -833,7 +835,7 @@ public class TenderPage extends PageObject {
         } else
             Assert.fail("Open view all tenders page get error,test fail!");
         commonPage.wait(getDriver(), 2);
-        commonPage.sendKeysOnElement(prNoInputBox,"59000");
+        commonPage.sendKeysOnElement(prNoInputBox,"58668");
         commonPage.wait(getDriver(), 2);
         statusDropdown.click();
         commonPage.wait(getDriver(), 2);
@@ -841,14 +843,15 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         searchBtn.click();
         commonPage.wait(getDriver(), 2);
-        if(searchResult.getText().contains("59000")){
+        if(searchResult.getText().contains("58668")){
             System.out.println("Search function on view all tenders page works well,test pass!");
         } else
             Assert.fail("Search function on view all tenders page does not work well,test fail!");
     }
 
     public void clickTenderItem() throws Exception {
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -870,7 +873,7 @@ public class TenderPage extends PageObject {
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
-        if(!commonPage.isContentAppeared(getDriver(),"59000"))
+        if(!commonPage.isContentAppeared(getDriver(),"58668"))
         {
             System.out.println("Canceled tender is not appeared on dashboard page,test pass!");
         } else
@@ -881,7 +884,8 @@ public class TenderPage extends PageObject {
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(), 2);
         loginPage.Login(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -919,7 +923,8 @@ public class TenderPage extends PageObject {
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(), 2);
         loginPage.Login(TestAccountsConstants.hkldAdmin, TestAccountsConstants.hkldUserPwd);
-        dashboardPage.itqTenderItemOne.click();
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
