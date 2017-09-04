@@ -24,8 +24,8 @@ public class DashboardPage extends PageObject {
     WebElement userName;
     @FindBy(xpath = ".//*[@id='logo']/img")
     WebElement hkldLogo;
-    @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr[1]/td[1]/a")
-    WebElement itqTenderItemOne;
+    @FindBy(xpath = "//a[contains(text(),'58668')]")
+    WebElement tenderItem58668;
     @FindBy(id = "hamburger")
     WebElement hamburgerIcon;
     @FindBy(id = "hamburger2")
@@ -58,7 +58,7 @@ public class DashboardPage extends PageObject {
     WebElement addPoNoBtn;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[2]/button")
     WebElement viewAllTendersBtn;
-    @FindBy(xpath = "html/body/div[1]/div[2]/div[2]/div/div[1]/table/tbody/tr/td[3]")
+    @FindBy(xpath = "//tr[./td/a[text()='58668']]/td[3]")
     WebElement tenderStatusColumn;
 
 
