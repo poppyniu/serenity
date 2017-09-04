@@ -277,4 +277,11 @@ public class TenderSteps {
     }
 
 
+    public void Verifytenderhistory(int i, String Status, String UserName, String Date) throws Exception {
+        tenderPage.clickTenderHistoryStates(i,Status,UserName,Date);
+    }
+
+    public void ClickStatus() {
+        tenderPage.clickStatus();
+    }
 }

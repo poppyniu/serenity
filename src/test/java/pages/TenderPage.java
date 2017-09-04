@@ -7,7 +7,6 @@ import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -203,8 +202,8 @@ public class TenderPage extends PageObject {
     WebElement resetToDraftBtn;
     @FindBy(xpath = ".//*[@id='tender-reset-to-draft-dialog']/div[4]/div/button")
     WebElement resetToDraftContinueBtn;
-
-
+    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[3]/div[2]/div[1]")
+    WebElement TenderStatus;
 
 
     public void clickCreateTender() throws Exception {
@@ -351,7 +350,7 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 5);
     }
 
-    public void previewAndSubmitTender(){
+    public void previewAndSubmitTender() {
         previewSubmitBtn.click();
         commonPage.wait(getDriver(), 3);
         submitBtn.click();
@@ -418,7 +417,7 @@ public class TenderPage extends PageObject {
         DBHelper.changePersonInCharge();
     }
 
-    public void approveTender(){
+    public void approveTender() {
         adminApproveBtn.click();
         commonPage.wait(getDriver(), 2);
     }
@@ -440,7 +439,7 @@ public class TenderPage extends PageObject {
             Assert.fail("Admin approve tender get error,test fail!");
     }
 
-    public void issueTender(){
+    public void issueTender() {
         closingDateDropdown1.click();
         commonPage.wait(getDriver(), 1);
         closingDateDropdown1LeftBtn.click();
@@ -790,11 +789,11 @@ public class TenderPage extends PageObject {
     public void vendorInputRateForItemsServices() {
         itemsServicesTab.click();
         List<WebElement> rateFields = getDriver().findElements(By.xpath(".//*[@id='tab-services']/div/div/form/div[@class='card-section hover']//input[@required='required']"));
-        for (int i=0; i<rateFields.size(); i++){
-            int randomRate = (int)Math.round(Math.random()*989+10);
+        for (int i = 0; i < rateFields.size(); i++) {
+            int randomRate = (int) Math.round(Math.random() * 989 + 10);
             commonPage.sendKeysOnElement(rateFields.get(i), Integer.toString(randomRate));
-            if((i+1)<rateFields.size()){
-                commonPage.scrollToElement(rateFields.get(i+1));
+            if ((i + 1) < rateFields.size()) {
+                commonPage.scrollToElement(rateFields.get(i + 1));
             }
         }
     }
@@ -828,12 +827,12 @@ public class TenderPage extends PageObject {
     }
 
     public void viewAllPageSearch() throws Exception {
-        if(allTendersPageTitle.getText().contains("All ITQ/Tenders")){
+        if (allTendersPageTitle.getText().contains("All ITQ/Tenders")) {
             System.out.println("Open view all tenders page succeed,test pass!");
         } else
             Assert.fail("Open view all tenders page get error,test fail!");
         commonPage.wait(getDriver(), 2);
-        commonPage.sendKeysOnElement(prNoInputBox,"59000");
+        commonPage.sendKeysOnElement(prNoInputBox, "59000");
         commonPage.wait(getDriver(), 2);
         statusDropdown.click();
         commonPage.wait(getDriver(), 2);
@@ -841,7 +840,7 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         searchBtn.click();
         commonPage.wait(getDriver(), 2);
-        if(searchResult.getText().contains("59000")){
+        if (searchResult.getText().contains("59000")) {
             System.out.println("Search function on view all tenders page works well,test pass!");
         } else
             Assert.fail("Search function on view all tenders page does not work well,test fail!");
@@ -870,8 +869,7 @@ public class TenderPage extends PageObject {
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
-        if(!commonPage.isContentAppeared(getDriver(),"59000"))
-        {
+        if (!commonPage.isContentAppeared(getDriver(), "59000")) {
             System.out.println("Canceled tender is not appeared on dashboard page,test pass!");
         } else
             Assert.fail("Canceled tender still appear on dashboard page,test fail!");
@@ -889,7 +887,7 @@ public class TenderPage extends PageObject {
         adminRejectBtn.click();
         commonPage.wait(getDriver(), 2);
         rejectTenderTextbox.click();
-        Actions actions =new Actions(getDriver());
+        Actions actions = new Actions(getDriver());
         actions.sendKeys(Keys.SPACE).perform();
         actions.sendKeys("aaa").perform();
         actions.sendKeys(Keys.TAB).perform();
@@ -934,11 +932,32 @@ public class TenderPage extends PageObject {
     }
 
 
-
     public void checkSucceed(String info) throws Exception {
         if (saveSuccessInfo.getText().contains("Success")) {
-            System.out.println(info+" succeed,test pass!");
+            System.out.println(info + " succeed,test pass!");
         } else
-            Assert.fail(info+" get error,test fail!");
+            Assert.fail(info + " get error,test fail!");
+    }
+
+    public List<WebElement> getAllTenderStatusLines() {
+        commonPage.wait(getDriver(), 3);
+        List<WebElement> allTenderStatusLines = getDriver().findElements(By.xpath(".//*[@id='modules-tenders-lifecycle-modal']/div[1]/table/tbody/tr"));
+        return allTenderStatusLines;
+    }
+
+    public void clickTenderHistoryStates(int i,String Status, String UserName, String Date) throws Exception {
+
+        List<WebElement> allTenderStatusLines = getAllTenderStatusLines();
+        System.out.println("i = "+i);
+        System.out.println(allTenderStatusLines.get(i).getText());
+        Assert.assertTrue("Status is incorrect", allTenderStatusLines.get(i).getText().contains(Status));
+        Assert.assertTrue(" is incorrect",allTenderStatusLines.get(i).getText().contains(UserName));
+        Assert.assertTrue("Date is incorrect", allTenderStatusLines.get(i).getText().contains(Date));
+
+    }
+
+    public void clickStatus() {
+        tenderStatus.click();
+        commonPage.wait(getDriver(), 2);
     }
 }

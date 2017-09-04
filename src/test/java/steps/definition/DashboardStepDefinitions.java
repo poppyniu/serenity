@@ -1,11 +1,14 @@
 package steps.definition;
 
+import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import net.thucydides.core.annotations.Steps;
 import serenity.DashboardPageSteps;
 import serenity.TenderSteps;
+
+import java.util.List;
 
 /**
  * Created by Maggie_Ping on 7/25/2017.
@@ -78,6 +81,27 @@ public class DashboardStepDefinitions {
     public void select_the_tender_of_PR_number_from_the_dashboard(String prNumber){
         dashboardPageSteps.click_specifiedTender(prNumber);
     }
+    @When("^User click Review status$")
+    public void user_click_Review_status() throws Throwable {
+        tenderSteps.ClickStatus();
 
+    }
+
+    @When("^Verify the tender information Status Comment Username and Date$")
+    public void verify_the_tender_information_Status_Comment_Username_and_Date(final DataTable dataTable) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        // For automatic transformation, change DataTable to one of
+        // List<YourType>, List<List<E>>, List<Map<K,V>> or Map<K,V>.
+        // E,K,V must be a scalar (String, Integer, Date, enum etc)
+        List<List<String>> data = dataTable.raw();
+        for (int i = 1; i < data.size(); i++) {
+            System.out.println(i +" Size "+data.size());
+            System.out.println(data.get(i).get(0)+data.get(i).get(1)+data.get(i).get(2));
+            int a=i-1;
+            System.out.println("a"+a);
+            tenderSteps.Verifytenderhistory(a,data.get(i).get(0), data.get(i).get(1), data.get(i).get(2));
+
+        }
+    }
 
 }

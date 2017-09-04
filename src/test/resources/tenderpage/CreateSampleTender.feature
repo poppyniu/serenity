@@ -45,3 +45,21 @@ Feature: Create a sample tender with sample info for items/services.
     Examples:
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications |  ProjectDescription | Contractor 1 | Contractor 1 pwd | Contractor 2 | Contractor 2 pwd | Contractor 3 | Contractor 3 pwd |
       | test        | test     | 3            | 3        | Monday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 59000    | test                     | test                  | test                     |  test               | judy_zou@epam.com | aaaaaa      | poppy_zhang@epam.com | aaaaaa   | ason_yang@epam.com | aaaaaa     |
+
+  @VerifyStatushistory
+  Scenario Outline: Verify status history
+    Given Open ETender system login page
+    When user logs in as the user type HKLD Engineer
+    And user select the tender of PR number <PRNumber> from the dashboard
+    And User click Review status
+    And Verify the tender information Status Comment Username and Date
+      |Status|UserName|Date|
+      |REVIEW|Sophie|01 Sep 17|
+      |ISSUED|Sophie|01 Sep 17|
+      |APPR|Elon|01 Sep 17|
+      |WAPPR|Sophie|01 Sep 17|
+      |DRAFT|Sophie|01 Sep 17|
+#    Then Clear tender test data in db
+    Examples:
+      |PRNumber|
+      |59000|

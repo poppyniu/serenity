@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         format = {"pretty", "html:target/html/"},
-        features = {"src/test/resources/settingsPage","src/test/resources" }
-//        tags = {"@RejectProject"}
+        features = {"src/test/resources/settingsPage","src/test/resources" },
+       tags = {"@VerifyStatushistory"}
 )
 public class TestSuite {
 }
