@@ -966,6 +966,25 @@ public class TenderPage extends PageObject {
             Assert.fail(info+" get error,test fail!");
     }
 
+    public List<WebElement> getAllTenderStatusLines() {
+        commonPage.wait(getDriver(), 3);
+        List<WebElement> allTenderStatusLines = getDriver().findElements(By.xpath(".//*[@id='modules-tenders-lifecycle-modal']/div[1]/table/tbody/tr"));
+        return allTenderStatusLines;
+    }
+
+    public void clickTenderHistoryStates(int i,String Status, String UserName, String Date) throws Exception {
+        List<WebElement> allTenderStatusLines = getAllTenderStatusLines();
+        System.out.println("i = " + i);
+        System.out.println(allTenderStatusLines.get(i).getText());
+        Assert.assertTrue("Status is incorrect", allTenderStatusLines.get(i).getText().contains(Status));
+        Assert.assertTrue(" is incorrect",allTenderStatusLines.get(i).getText().contains(UserName));
+        Assert.assertTrue("Date is incorrect", allTenderStatusLines.get(i).getText().contains(Date));
+    }
+
+    public void clickStatus() {
+        tenderStatus.click();
+        commonPage.wait(getDriver(), 2);
+    }
     public void doAddendum() throws Exception {
         commonPage.wait(getDriver(), 2);
         commonPage.scrollToElement(dashboardPage.tenderItem58668);
