@@ -119,3 +119,20 @@ Feature:Test function on tender page
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|Status|
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|DRAFT     |
 
+
+  @TenderAddendum
+  Scenario Outline: Tender addendum
+    And clear tender data of the PR number <PRNumber>
+    And Click create tender button and create a tender
+    And Input general tab info <Description> <Location> <ProjectStart> <Duration> <WorkingHours1> <WorkingHours2> <WorkingHours3> <WorkingHours4> <Period> <Retention> <DefectsLiabilityPeriod> <LiquidatedDamages> <SuretyBond> <PRNumber>
+    And Input items services tab info <SectionTitle1> <DescriptionofWork1> <QTY1> <UNIT1>
+    And user save the tender
+    And Submit the new tender for approve
+    And HKLD Admin login to approve tender
+    And HKLD engineer login to issue tender
+    And user go back to dashboard page
+    And HKLD engineer do tender addendum
+    And clear tender data of the PR number <PRNumber>
+    Examples:
+      | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|Status|
+      | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|DRAFT     |

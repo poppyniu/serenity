@@ -238,4 +238,9 @@ public class TenderStepDefinitions {
     public void user_input_sample_info_for_items_and_services() {
         tenderSteps.input_SampleItemsServices(4, 2);
     }
+
+    @And("^HKLD engineer do tender addendum$")
+    public void hkld_engineer_do_tender_addendum() throws Throwable {
+        tenderSteps.do_addendum();
+    }
 }

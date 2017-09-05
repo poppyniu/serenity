@@ -276,12 +276,9 @@ public class TenderSteps {
         tenderPage.resetToDraft();
     }
 
-
-    public void Verifytenderhistory(int i, String Status, String UserName, String Date) throws Exception {
-        tenderPage.clickTenderHistoryStates(i,Status,UserName,Date);
+    @Step
+    public void do_addendum()throws Exception{
+        tenderPage.doAddendum();
     }
 
-    public void ClickStatus() {
-        tenderPage.clickStatus();
-    }
 }

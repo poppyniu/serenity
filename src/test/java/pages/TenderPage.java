@@ -86,7 +86,7 @@ public class TenderPage extends PageObject {
     WebElement addQTYTextbox;
     @FindBy(xpath = ".//*[@id='line.unit_0_0']/div[1]/div[1]")
     WebElement unitDropdown;
-    @FindBy(xpath = ".//*[@id='line.unit_0_0']/div[1]/div[3]/ul/li[1]/span")
+    @FindBy(xpath = ".//*[@id='line.unit_0_0']/div[1]/div[3]/ul/li[3]/span")
     WebElement unitDropdownItem;
     //Attachments tab elements
     @FindBy(xpath = ".//*[@id='tab-attachment-label']")
@@ -203,8 +203,28 @@ public class TenderPage extends PageObject {
     WebElement resetToDraftBtn;
     @FindBy(xpath = ".//*[@id='tender-reset-to-draft-dialog']/div[4]/div/button")
     WebElement resetToDraftContinueBtn;
-    @FindBy(xpath = ".//*[@id='general-summay-content']/div[1]/div/div[3]/div[2]/div[1]")
-    WebElement TenderStatus;
+    @FindBy(xpath = ".//*[@id='start-addendum']")
+    WebElement startAddendumBtn;
+    @FindBy(xpath = ".//*[@id='start-addendum-container']/following-sibling::*[1]/button[2]")
+    WebElement addendumYesBtn;
+    @FindBy(xpath = ".//*[@id='general-form']/div[1]/div[1]/div[5]/a")
+    WebElement requestExtensionBtn;
+    @FindBy(xpath = ".//*[@id='general-form']/div[1]/div[1]/div[5]/label")
+    WebElement requestExtensionInfo;
+    @FindBy(xpath = ".//*[@id='submit_tender_addendum']")
+    WebElement submitAddendumBtn;
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[1]/pre")
+    WebElement extensionRequestLable;
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[3]/pre")
+    WebElement locationLable;
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[5]/pre")
+    WebElement fileLable;
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[2]/button[2]")
+    WebElement addendumSubmitBtn;
+    @FindBy(xpath = ".//*[@id='addendum-detail-content']/div/div/div[3]/div[2]/div[2]/a")
+    WebElement addendumSaveBtn;
+
+
 
 
     public void clickCreateTender() throws Exception {
@@ -295,6 +315,7 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 1);
         unitDropdown.click();
         commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(unitDropdownItem);
         unitDropdownItem.click();
     }
 
@@ -938,33 +959,75 @@ public class TenderPage extends PageObject {
         checkSucceed("Reset tender to draft");
     }
 
-
     public void checkSucceed(String info) throws Exception {
         if (saveSuccessInfo.getText().contains("Success")) {
-            System.out.println(info + " succeed,test pass!");
+            System.out.println(info+" succeed,test pass!");
         } else
-            Assert.fail(info + " get error,test fail!");
+            Assert.fail(info+" get error,test fail!");
     }
 
-    public List<WebElement> getAllTenderStatusLines() {
-        commonPage.wait(getDriver(), 3);
-        List<WebElement> allTenderStatusLines = getDriver().findElements(By.xpath(".//*[@id='modules-tenders-lifecycle-modal']/div[1]/table/tbody/tr"));
-        return allTenderStatusLines;
-    }
-
-    public void clickTenderHistoryStates(int i,String Status, String UserName, String Date) throws Exception {
-
-        List<WebElement> allTenderStatusLines = getAllTenderStatusLines();
-        System.out.println("i = "+i);
-        System.out.println(allTenderStatusLines.get(i).getText());
-        Assert.assertTrue("Status is incorrect", allTenderStatusLines.get(i).getText().contains(Status));
-        Assert.assertTrue(" is incorrect",allTenderStatusLines.get(i).getText().contains(UserName));
-        Assert.assertTrue("Date is incorrect", allTenderStatusLines.get(i).getText().contains(Date));
-
-    }
-
-    public void clickStatus() {
-        tenderStatus.click();
+    public void doAddendum() throws Exception {
         commonPage.wait(getDriver(), 2);
+        commonPage.scrollToElement(dashboardPage.tenderItem58668);
+        dashboardPage.tenderItem58668.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 2);
+        startAddendumBtn.click();
+        commonPage.wait(getDriver(), 2);
+        addendumYesBtn.click();
+        commonPage.wait(getDriver(), 2);
+        //modify general tab info
+        projectDescriptionTextbox.clear();
+        commonPage.wait(getDriver(), 1);
+        commonPage.sendKeysOnElement(projectDescriptionTextbox, "editDescription");
+        commonPage.wait(getDriver(), 1);
+        projectLocationTextbox.clear();
+        commonPage.wait(getDriver(), 1);
+        commonPage.sendKeysOnElement(projectLocationTextbox, "editLocation");
+        commonPage.wait(getDriver(), 1);
+        requestExtensionBtn.click();
+        commonPage.wait(getDriver(), 2);
+        if(requestExtensionInfo.getText().contains("Extension Requested")){
+            System.out.println("Reqest extension succeed,test pass!");
+        }
+        else
+            Assert.fail("Reqest extension get error,test fail!");
+        //modify items/services tab info
+        inputItemsServicesTabInfo("edit","edit","20","kg");
+        //modify attachment tab info
+        commonPage.wait(getDriver(), 2);
+        addendumSaveBtn.click();
+        commonPage.wait(getDriver(), 2);
+        getDriver().navigate().refresh();
+        commonPage.wait(getDriver(), 5);
+        submitAddendumBtn.click();
+        commonPage.wait(getDriver(), 2);
+        chooseApproveDropdown.click();
+        commonPage.wait(getDriver(), 2);
+        approveDropdownItem.click();
+        commonPage.wait(getDriver(), 1);
+        find(By.xpath(".//*[@id='chooseApprModal']/div[2]/button[2]")).click();
+        commonPage.wait(getDriver(), 2);
+        if(extensionRequestLable.getText().contains("Yes")&&locationLable.getText().contains("edit")){
+            System.out.println("Tender addendum update info succeed,test pass!");
+        }
+        else
+            Assert.fail("Tender addendum update info get error,test fail!");
+        commonPage.wait(getDriver(), 2);
+        addendumSubmitBtn.click();
+        commonPage.wait(getDriver(), 2);
+        if (sendForApproveInfo.getText().contains("Your tender has been sent for approval, Stay tuned")) {
+            System.out.println("Send tender for approve succeed, test pass!");
+            sendForApproveInfo.click();
+            Actions action = new Actions(getDriver());
+            action.sendKeys(Keys.TAB).perform();
+            commonPage.wait(getDriver(), 1);
+            action.sendKeys(Keys.ENTER).perform();
+            commonPage.wait(getDriver(), 2);
+        } else
+            Assert.fail("Send tender for approve get error, test fail!");
     }
+
 }
