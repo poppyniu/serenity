@@ -353,10 +353,8 @@ public class TenderPage extends PageObject {
         JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
         removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
         commonPage.wait(getDriver(), 2);
-        System.out.println("1111111111111111111111111"+testDataPath);
         if (testDataPath == null) {
             testDataPath = TestDataPathConstants.uploadFilePath;
-            System.out.println("222222222222222222222222"+testDataPath);
         }
         uploadFileTextbox.sendKeys(testDataPath);
         commonPage.wait(getDriver(), 4);
