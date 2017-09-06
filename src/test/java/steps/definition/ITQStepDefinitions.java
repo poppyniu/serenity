@@ -23,4 +23,9 @@ public class ITQStepDefinitions {
     public void hkld_engineer_preview_and_issue_itq() throws Throwable {
         itqSteps.preview_and_issue_itq();
     }
+
+    @And("^HKLD engineer login to check if contractor has submitted itq")
+    public void hkld_engineer_login_to_check_if_contractor_has_submitted_itq() throws Throwable {
+        itqSteps.check_vendor_submit_status();
+    }
 }

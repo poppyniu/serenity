@@ -4,7 +4,7 @@ Feature: Functions on dashboard.
   Background:
     Given Clear tender test data in db
 
-  @dashboard
+  @dashboard @Regression
   Scenario Outline: Dashboard and hamburger shows correct user name after HKLD user or vendor login
     Given Open ETender system login page
     And user logs in with user name <HKLD User Name> and password <HKLD Password>
@@ -22,7 +22,7 @@ Feature: Functions on dashboard.
     |sophie  |aaaaaa  |gino_zhu@epam.com     |aaaaaa         |
     |brad    |aaaaaa  |judy_zou@epam.com     |aaaaaa         |
 
-  @dashboard
+  @dashboard @Regression
   Scenario: Different HKLD users can only view the Tender created by themselves.
     Given Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
@@ -38,7 +38,7 @@ Feature: Functions on dashboard.
     And user logs in with user name elon and password aaaaaa
     Then the tender of PR number 51120 is not existing in the dashboard
 
-  @dashboard
+  @dashboard @Regression
   Scenario: The bubble number on the top of the dashboard shows the correct number
     Given Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
@@ -55,7 +55,7 @@ Feature: Functions on dashboard.
     And user go back to dashboard page
     Then the bubble number of tender is correct on the top of the dashboard
 
-  @dashboard
+  @dashboard @Regression
   Scenario Outline: ITQ/Tender shows correct amount on the dashboard
     Given Open ETender system login page
     And user logs in as the user type HKLD Engineer

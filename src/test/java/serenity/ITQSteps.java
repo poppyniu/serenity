@@ -20,5 +20,10 @@ public class ITQSteps {
         itqPage.previewIssueITQ();
     }
 
+    @Step
+    public void check_vendor_submit_status() throws Exception {
+        itqPage.checkVendorSubmitStatus();
+    }
+
 
 }

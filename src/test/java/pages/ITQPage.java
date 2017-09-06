@@ -1,5 +1,7 @@
 package pages;
 
+import constants.TestAccountsConstants;
+import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
@@ -13,9 +15,13 @@ public class ITQPage extends PageObject {
     CommonPage commonPage;
     DashboardPage dashboardPage;
     TenderPage tenderPage;
+    LoginPage loginPage;
     String currentUrl;
     @FindBy(xpath=".//div[contains(@class, 'tender-view-button-bar')]/div/a[2]")
     WebElement itqIssueBtn;
+    @FindBy(xpath=".//*[@class='vendor-status-list']/table/tbody/tr[2]/td[3]")
+    WebElement vendorSubmitStatus;
+
 
     public void clickCreateITQ() throws Exception {
         //bug exist can not use this function
@@ -64,5 +70,19 @@ public class ITQPage extends PageObject {
         commonPage.wait(getDriver(), 5);
     }
 
+    public void checkVendorSubmitStatus() throws Exception {
+        commonPage.navigatePage(URLConstants.hkldLoginPage);
+        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.hkldUserPwd);
+        commonPage.scrollToElement(dashboardPage.itqItem59004);
+        dashboardPage.itqItem59004.click();
+        commonPage.wait(getDriver(), 2);
+        currentUrl = getDriver().getCurrentUrl();
+        commonPage.navigatePage(currentUrl);
+        commonPage.wait(getDriver(), 4);
+        if (tenderPage.tenderStatus.getText().contains("ISSUED") && vendorSubmitStatus.getText().contains("SUBMITTED")) {
+            System.out.println("After contractor submit, the itq status and company submit status is correct,test pass!");
+        } else
+            Assert.fail("After contractor submit, the itq status and company submit status is not correct,test fail!");
+    }
 
 }

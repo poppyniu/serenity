@@ -1,12 +1,12 @@
 Feature:Test function on login page
 
-  @Login
+  @Login @Regression
   Scenario: Test valid login for HKLD engineer
     Given  Open ETender system login page
     When Input valid user name and pwd and click login button
     Then HKLD engineer login to ETender system succeed
 
-  @EngineerLogout @logout
+  @EngineerLogout @logout @Regression
   Scenario: Test valid login for HKLD engineer
     Given  Open ETender system login page
     When Input valid user name and pwd and click login button
@@ -15,26 +15,26 @@ Feature:Test function on login page
     And user logs out ETender
     Then Logout Successfully
 
-  @InvalidLogin
+  @InvalidLogin @Regression
   Scenario: Test invalid login for HKLD engineer
     Given  Open ETender system login page
     When Input invalid user name and pwd and click login button
     Then HKLD engineer login disalbed
 
-  @VendorLogin
+  @VendorLogin @Regression
   Scenario: Test valid login for contractor
     Given  Open contractor login page
     When Input valid contractor name and pwd and click login button
     Then Contractor login to ETender system succeed
     Then  user logs out ETender
 
-  @VendorInvalidLogin
+  @VendorInvalidLogin @Regression
   Scenario: Test invalid login for contractor
     Given  Open contractor login page
     When Input invalid contractor name and pwd and click login button
     Then Contractor login fail
 
-  @VendorForgotPwd
+  @VendorForgotPwd @Regression
   Scenario: Test contractor forget password
     Given  Open contractor login page
     And Click forgot password link to send email

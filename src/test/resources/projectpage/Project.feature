@@ -7,7 +7,7 @@ Feature:Test function on project page
     Then HKLD engineer login to ETender system succeed
 
 
-  @ProjectFlow
+  @ProjectFlow @Regression
   Scenario Outline: Test whole flow for project
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to do the first partial submission <Completion Amount>
@@ -25,7 +25,7 @@ Feature:Test function on project page
     |PoNo|Completion Amount|Completion Amount1|Completion Amount2|
     |333333|2000           |6000              |1000              |
 
-  @RejectProject
+  @RejectProject @Regression
   Scenario Outline: HKLD engineer reject a full submission of a project
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to do the full submission <Completion Amount> without uploading the needed docs
@@ -39,7 +39,7 @@ Feature:Test function on project page
       |333333|2000           |
 
 
-  @ProjectAmount
+  @ProjectAmount @Regression
   Scenario Outline:  Check PO amount completion amount remaining balance
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to test po amount field <Completion Amount>

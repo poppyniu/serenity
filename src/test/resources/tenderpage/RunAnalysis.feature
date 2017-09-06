@@ -1,6 +1,6 @@
 Feature: HKLD user is able to run analysis when review a tender.
 
-  @ITQFlow
+  @ITQFlow @Regression
   Scenario Outline: Multiple vendors submit bids and HKLD user can get comparison table
     Given clear tender data of the PR number <PRNumber>
     When Open ETender system login page

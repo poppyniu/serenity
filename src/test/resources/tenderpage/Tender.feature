@@ -6,7 +6,7 @@ Feature:Test function on tender page
     Then HKLD engineer login to ETender system succeed
 
 
-  @TenderFlow
+  @TenderFlow @Regression
   Scenario Outline: Create a Tender until Review, and check status along the whole flow
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender
@@ -35,7 +35,7 @@ Feature:Test function on tender page
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|
 
 
-
+  @Regression
   Scenario Outline: Validate PR Number
     And clear tender data of the PR number 52155
     And Click create tender button and create a tender
@@ -55,7 +55,7 @@ Feature:Test function on tender page
       |00000    |Not Found                                        |
 
 
-  @ViewTender
+  @ViewTender @Regression
   Scenario Outline: View all tenders
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender
@@ -71,7 +71,7 @@ Feature:Test function on tender page
       | Description | Location | ProjectStart | Duration | WorkingHours1 | WorkingHours2 | WorkingHours3 | WorkingHours4 | Period | Retention | DefectsLiabilityPeriod | LiquidatedDamages | SuretyBond | PRNumber | GeneralDescriptionofWork | GeneralSpecifications | ParticularSpecifications | SectionTitle1 | DescriptionofWork1 | QTY1 | UNIT1 | ProjectDescription |Contractor|
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|
 
-  @CancelTender
+  @CancelTender @Regression
   Scenario Outline: Cancel a tender
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender
@@ -88,7 +88,7 @@ Feature:Test function on tender page
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|
 
 
-  @RejectTender
+  @RejectTender @Regression
   Scenario Outline: Reject a tender
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender
@@ -104,7 +104,7 @@ Feature:Test function on tender page
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|REJECTED|
 
 
-  @ResetToDraft
+  @ResetToDraft @Regression
   Scenario Outline: Reset tender to draft
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender
@@ -120,7 +120,7 @@ Feature:Test function on tender page
       | test        | test     | 3            | 3        | Friday        | Friday        | 01:00         | 03:00         | 3      | 3         | 3                      | 3                 | 3          | 58668    | test                     | test                  | test                     | test          | test               | 3    | kg    | test               |tender|DRAFT     |
 
 
-  @TenderAddendum
+  @TenderAddendum @Regression
   Scenario Outline: Tender addendum
     And clear tender data of the PR number <PRNumber>
     And Click create tender button and create a tender

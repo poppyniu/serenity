@@ -26,6 +26,8 @@ public class DashboardPage extends PageObject {
     WebElement hkldLogo;
     @FindBy(xpath = "//a[contains(text(),'58668')]")
     WebElement tenderItem58668;
+    @FindBy(xpath = "//a[contains(text(),'59004')]")
+    WebElement itqItem59004;
     @FindBy(id = "hamburger")
     WebElement hamburgerIcon;
     @FindBy(id = "hamburger2")

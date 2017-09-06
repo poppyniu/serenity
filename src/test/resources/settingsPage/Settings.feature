@@ -7,7 +7,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And user click hamburger icon
     And user access settings page
 
-  @setting
+  @setting @Regression
   Scenario: Add new locations
     And clear locations table from Database
     When user access Location setting
@@ -20,7 +20,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |JH                  | JH description | HKLD       |
 
 
-  @setting
+  @setting @Regression
   Scenario: Add new security Groups
     #And clear roles table from Database (Note: In order to keep the initial ymal data, skip DB clear for now)
     When user access Security Groups setting
@@ -30,7 +30,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |Senior Manager       | HKLD Senior Manager   |
 
 
-  @setting
+  @setting @Regression
   Scenario Outline: Edit a user to add setting attributes
     When user access Users setting
     And he selects the user <User Name> from the user list
@@ -42,12 +42,12 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |sophie|Engineer,AH,PB,CH,ES|
       |elon|Approver,AH          |
 
-  @setting
+  @setting @Regression
   Scenario: Set the threshold for ITQ/Tender
     And user access Threshold setting
     And user set threshold value as 300000
 
-  @setting
+  @setting @Regression
   Scenario Outline: Add contractors under settings
     And user access Users setting
     And user add a new contractor with details info <vendorID>, <fullName>, <shortName>, <addressLine1>, <addressLine2>, <addressLine3>, <companyPhoneNumber>, <contactAdmin>, <contactPhoneNumber> and <emailAddress>

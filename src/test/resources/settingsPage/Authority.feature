@@ -1,20 +1,20 @@
 Feature: Users of different security groups should have correct authorities.
 
-
+  @Regression
   Scenario: Settings link from hamburger is visible to Admin user
     Given Open ETender system login page
     When user logs in as the user type HKLD Admin
     And user click hamburger icon
     Then the setting link is displayed in hamburger menu
 
-
+  @Regression
   Scenario: Settings link from hamburger is not visible to non-Admin user
     Given Open ETender system login page
     When user logs in as the user type HKLD Engineer
     And user click hamburger icon
     Then the setting link is not displayed in hamburger menu
 
-
+  @Regression
   Scenario Outline: Settings link from hamburger is visible to the new added Admin user
     Given Open ETender system login page
     When user logs in as the user type HKLD Admin

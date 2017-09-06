@@ -353,8 +353,10 @@ public class TenderPage extends PageObject {
         JavascriptExecutor removeAttribute = (JavascriptExecutor) getDriver();
         removeAttribute.executeScript("arguments[0].removeAttribute('style');", uploadFileElement);
         commonPage.wait(getDriver(), 2);
+        System.out.println("1111111111111111111111111"+testDataPath);
         if (testDataPath == null) {
             testDataPath = TestDataPathConstants.uploadFilePath;
+            System.out.println("222222222222222222222222"+testDataPath);
         }
         uploadFileTextbox.sendKeys(testDataPath);
         commonPage.wait(getDriver(), 4);
@@ -514,11 +516,13 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         if (tenderType.contains("tender")) {
             loginPage.Login(TestAccountsConstants.contractorNameTender, TestAccountsConstants.contractorPwd);
+            commonPage.scrollToElement(dashboardPage.tenderItem58668);
+            dashboardPage.tenderItem58668.click();
         } else if (tenderType.contains("itq")) {
             loginPage.Login(TestAccountsConstants.contractorNameITQ, TestAccountsConstants.contractorPwd);
+            commonPage.scrollToElement(dashboardPage.itqItem59004);
+            dashboardPage.itqItem59004.click();
         }
-        commonPage.scrollToElement(dashboardPage.tenderItem58668);
-        dashboardPage.tenderItem58668.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
