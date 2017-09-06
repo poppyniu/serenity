@@ -2,7 +2,7 @@ Feature: Functions on dashboard.
 
 
   Background:
-    Given Clear tender test data in db
+    #Given Clear tender test data in db
 
   @dashboard @Regression
   Scenario Outline: Dashboard and hamburger shows correct user name after HKLD user or vendor login
@@ -24,7 +24,8 @@ Feature: Functions on dashboard.
 
   @dashboard @Regression
   Scenario: Different HKLD users can only view the Tender created by themselves.
-    Given Open ETender system login page
+    Given clear tender data of the PR number 51120
+    When Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
     And Click create tender button and create a tender
     And user input PR number 51120
@@ -40,7 +41,8 @@ Feature: Functions on dashboard.
 
   @dashboard @Regression
   Scenario: The bubble number on the top of the dashboard shows the correct number
-    Given Open ETender system login page
+    Given clear tender data of the PR number 51120
+    When Open ETender system login page
     And user logs in with user name sophie and password aaaaaa
     And Click create tender button and create a tender
     And user input PR number 51120
@@ -57,7 +59,9 @@ Feature: Functions on dashboard.
 
   @dashboard @Regression
   Scenario Outline: ITQ/Tender shows correct amount on the dashboard
-    Given Open ETender system login page
+    Given clear tender data of the PR number <Tender PR>
+    And clear tender data of the PR number <ITQ PR>
+    When Open ETender system login page
     And user logs in as the user type HKLD Engineer
     And Click create tender button and create a tender
     And user input PR number <Tender PR>
@@ -72,6 +76,6 @@ Feature: Functions on dashboard.
 
     Examples:
     |Tender PR|ITQ PR|
-    |59000    |59004 |
+    |57070    |59004 |
     |52155    |57556 |
 
