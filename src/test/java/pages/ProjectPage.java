@@ -302,8 +302,8 @@ public class ProjectPage extends PageObject {
             Assert.fail("Current project completion status is not correct,test fail!");
     }
 
-    public void clearProjectTable() throws Exception {
-        DBHelper.clearDataFromDB("projects");
+    public void clearProjectTable(String poNo) throws Exception {
+        DBHelper.clearProjectDataFromDB("projects",poNo);
     }
 
     public void fullSubmission(String amount) throws Exception {

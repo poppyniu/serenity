@@ -69,9 +69,9 @@ public class ProjectStepDefinitions {
         projectSteps.approve_doc_check_status();
     }
 
-    @Then("^Clear project test data in db$")
-    public void clear_project_test_data_in_db() throws Throwable {
-        projectSteps.clear_project_in_db();
+    @Then("^Clear project test data in db by ([^\"]*)$")
+    public void clear_project_test_data_in_db(String poNo) throws Throwable {
+        projectSteps.clear_project_in_db(poNo);
     }
 
     @And("^Vendor login to do the full submission ([^\"]*) without uploading the needed docs$")
