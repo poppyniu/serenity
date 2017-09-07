@@ -16,6 +16,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |AH                  | AH description | HKLD       |
       |PB                  | PB description | HKLD       |
       |CH                  | CH description | HKLD       |
+      |LM                  | LM description | HKLD       |
       |ES                  | ES description | HKLD       |
       |JH                  | JH description | HKLD       |
 
@@ -39,7 +40,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
     And he saves the attributes for the single user
     Examples:
       |User Name|Attribute|
-      |sophie|Engineer,AH,PB,CH,ES|
+      |sophie|Engineer,AH,PB,CH,LM,ES,JH|
       |elon|Approver,AH          |
 
   @setting @Regression
