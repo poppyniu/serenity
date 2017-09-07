@@ -58,6 +58,26 @@ public class DBHelper {
         }
     }
 
+    public static void clearProjectDataFromDB(String tableName,String paraName)throws Exception{
+        //SQL语句
+        sql = "Delete from " +tableName+ " where poNumber = " + paraName;
+        //创建DBHelper对象
+        dbHelper = new DBHelper(sql);
+        try {
+            //执行语句，得到结果集
+            int result= dbHelper.pst.executeUpdate();
+            if(result==1||result==0) {
+                System.out.println("Clear data in " + tableName + " table by prNo from database succeed, test pass!");
+            }
+            else
+                System.out.println("Clear data in " + tableName + " table by prNo from database get error, test fail!");
+            //关闭连接
+            dbHelper.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void clearSpecifiedTenderData(String prNumber) throws Exception{
         //SQL语句
         sql = "DELETE FROM `tenders` WHERE prNo = " + prNumber;

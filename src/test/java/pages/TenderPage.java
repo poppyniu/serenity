@@ -848,7 +848,7 @@ public class TenderPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
-        commonPage.wait(getDriver(), 2);
+        commonPage.wait(getDriver(), 4);
 
     }
 

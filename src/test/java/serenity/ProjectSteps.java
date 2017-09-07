@@ -66,8 +66,8 @@ public class ProjectSteps {
     }
 
     @Step
-    public void clear_project_in_db() throws Exception {
-        projectPage.clearProjectTable();
+    public void clear_project_in_db(String poNo) throws Exception {
+        projectPage.clearProjectTable(poNo);
     }
 
     @Step
