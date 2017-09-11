@@ -81,9 +81,15 @@ public class DashboardStepDefinitions {
     public void select_the_tender_of_PR_number_from_the_dashboard(String prNumber){
         dashboardPageSteps.click_specifiedTender(prNumber);
     }
+
+    @And("^user wait until the tender of PR number ([^\"]*) is shown as Ready_For_Review$")
+    public void user_wait_until_Ready_For_Review(String prNumber){
+        dashboardPageSteps.wait_for_Ready_For_Review(prNumber);
+    }
+
     @When("^User click Review status$")
     public void user_click_Review_status() throws Throwable {
-        tenderSteps.ClickStatus();
+        tenderSteps.clickStatus();
 
     }
 
@@ -99,7 +105,7 @@ public class DashboardStepDefinitions {
             System.out.println(data.get(i).get(0)+data.get(i).get(1)+data.get(i).get(2));
             int a=i-1;
             System.out.println("a"+a);
-            tenderSteps.Verifytenderhistory(a,data.get(i).get(0), data.get(i).get(1), data.get(i).get(2));
+            tenderSteps.verifyTenderHistory(a,data.get(i).get(0), data.get(i).get(1), data.get(i).get(2));
 
         }
     }

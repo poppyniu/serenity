@@ -28,6 +28,7 @@ Feature: HKLD user is able to run analysis when review a tender.
     And Change tender status in db by <PRNumber>
     And Open ETender system login page
     And user logs in as the user type HKLD Engineer
+    And user wait until the tender of PR number <PRNumber> is shown as Ready_For_Review
     And user select the tender of PR number <PRNumber> from the dashboard
     And user run analysis and get analysis table
 

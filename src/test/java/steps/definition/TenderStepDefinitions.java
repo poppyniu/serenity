@@ -243,4 +243,9 @@ public class TenderStepDefinitions {
     public void hkld_engineer_do_tender_addendum() throws Throwable {
         tenderSteps.do_addendum();
     }
+
+    @And("^the contractor decline the bid with decline reason ([^\"]*)$")
+    public void the_contractor_decline_the_bid(String declineReason){
+        tenderSteps.vendor_decline_bid(declineReason);
+    }
 }

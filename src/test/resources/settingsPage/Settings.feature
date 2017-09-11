@@ -22,16 +22,23 @@ Feature: HKLD admin user is able to do configuration on settings page.
 
 
   @setting @Regression
-  Scenario: Add new security Groups
+  Scenario: Add new security groups
     #And clear roles table from Database (Note: In order to keep the initial ymal data, skip DB clear for now)
     When user access Security Groups setting
     And user add new security groups with Group Name and Group Description
       |Group Name     | Group Description |
-      |Approver       | HKLD Technical Manager  |
       |Senior Manager       | HKLD Senior Manager   |
+      |Auto Test       | Just For Test  |
 
+  @settinga @Regression
+  Scenario: Set security group with authorities
+    When user access Security Groups setting
+    And user set security groups with corresponding authority actions
+      |Group Name     |Authority Actions |
+      |Senior Manager |ITQ/Tender_Read All,Project_Read All|
+      |Approver       |Project_Read All|
 
-  @setting @Regression
+  @settinga @Regression
   Scenario Outline: Edit a user to add setting attributes
     When user access Users setting
     And he selects the user <User Name> from the user list
@@ -41,7 +48,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
     Examples:
       |User Name|Attribute|
       |sophie|Engineer,AH,PB,CH,LM,ES,JH|
-      |elon|Approver,AH          |
+      |elon|Approver,AH,PB,CH,LM,ES,JH|
 
   @setting @Regression
   Scenario: Set the threshold for ITQ/Tender

@@ -276,17 +276,24 @@ public class TenderSteps {
         tenderPage.resetToDraft();
     }
 
-    public void Verifytenderhistory(int i, String Status, String UserName, String Date) throws Exception {
+    @Step
+    public void verifyTenderHistory(int i, String Status, String UserName, String Date) throws Exception {
         tenderPage.clickTenderHistoryStates(i, Status, UserName, Date);
     }
 
-    public void ClickStatus() {
+    @Step
+    public void clickStatus() {
         tenderPage.clickStatus();
     }
-        @Step
+    
+    @Step
     public void do_addendum()throws Exception{
         tenderPage.doAddendum();
     }
 
+    @Step
+    public void vendor_decline_bid(String declineReason){
+        tenderPage.vendorDeclineBid(declineReason);
+    }
 
 }

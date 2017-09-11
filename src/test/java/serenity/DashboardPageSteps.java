@@ -103,4 +103,9 @@ public class DashboardPageSteps {
     public void click_specifiedTender(String prNumber){
         dashboardPage.clickSpecifiedTender(prNumber);
     }
+
+    @Step
+    public void wait_for_Ready_For_Review(String prNumber) {
+        dashboardPage.refreshToSeeReadyForReview(prNumber);
+    }
 }

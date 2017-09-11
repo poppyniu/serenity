@@ -84,4 +84,12 @@ public class SettingsStepDefinitions {
         System.out.println("Full name is " + fullName);
         settingsSteps.addNewContractor(vendorID, fullName, shortName, addressLine1, addressLine2, addressLine3, companyPhoneNumber, contactAdmin, contactPhoneNumber, emailAddress);
     }
+
+    @And("^user set security groups with corresponding authority actions$")
+    public void user_set_security_groups_with_authorities(final DataTable dataTable){
+        List<List<String>> data= dataTable.raw();
+        for(int i=1; i<data.size();i++){
+            settingsSteps.setActionsForSecurityGroup(data.get(i).get(0), data.get(i).get(1));
+        }
+    }
 }

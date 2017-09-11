@@ -80,7 +80,7 @@ public class DBHelper {
 
     public static void clearSpecifiedTenderData(String prNumber) throws Exception{
         //SQL语句
-        sql = "DELETE FROM `tenders` WHERE prNo = " + prNumber;
+        sql = "DELETE FROM `tenders` WHERE prNumber = " + prNumber;
         //创建DBHelper对象
         dbHelper = new DBHelper(sql);
         try {
@@ -115,7 +115,7 @@ public class DBHelper {
     }
 
     public static void changeClosingDate(String currentDateBefore,String prNo)throws Exception{
-        String sqlCommand = "UPDATE tenders SET closingDate = '"+currentDateBefore+"' WHERE prNo = '"+prNo+"'";
+        String sqlCommand = "UPDATE tenders SET closingDate = '"+currentDateBefore+"' WHERE prNumber = '"+prNo+"'";
         //创建DBHelper对象
         dbHelper = new DBHelper(sqlCommand);
         try {

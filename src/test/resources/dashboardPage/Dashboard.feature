@@ -40,24 +40,6 @@ Feature: Functions on dashboard.
     Then the tender of PR number 51120 is not existing in the dashboard
 
   @dashboard @Regression
-  Scenario: The bubble number on the top of the dashboard shows the correct number
-    Given clear tender data of the PR number 51120
-    When Open ETender system login page
-    And user logs in with user name sophie and password aaaaaa
-    And Click create tender button and create a tender
-    And user input PR number 51120
-    And user save the PR info
-    And user save the tender
-    And user go back to dashboard page
-    And Click create tender button and create a tender
-    And user save the tender
-    And user go back to dashboard page
-    And Click create itq button and create a itq
-    And user save the tender
-    And user go back to dashboard page
-    Then the bubble number of tender is correct on the top of the dashboard
-
-  @dashboard @Regression
   Scenario Outline: ITQ/Tender shows correct amount on the dashboard
     Given clear tender data of the PR number <Tender PR>
     And clear tender data of the PR number <ITQ PR>
@@ -79,3 +61,21 @@ Feature: Functions on dashboard.
     |57070    |59004 |
     |52155    |57556 |
 
+  @dashboard @Regression
+    #comment: move the sequence and shall be able to skip below skipped steps
+  Scenario: The bubble number on the top of the dashboard shows the correct number
+    Given clear tender data of the PR number 51120
+    When Open ETender system login page
+    And user logs in with user name sophie and password aaaaaa
+    And Click create tender button and create a tender
+    And user input PR number 51120
+    And user save the PR info
+    And user save the tender
+    And user go back to dashboard page
+  #    And Click create tender button and create a tender
+  #    And user save the tender
+  #    And user go back to dashboard page
+  #    And Click create itq button and create a itq
+  #    And user save the tender
+  #    And user go back to dashboard page
+    Then the bubble number of tender is correct on the top of the dashboard

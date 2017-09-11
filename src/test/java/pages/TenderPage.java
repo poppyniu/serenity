@@ -7,7 +7,6 @@ import constants.URLConstants;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -54,7 +53,7 @@ public class TenderPage extends PageObject {
     WebElement addWorkingHoursBtn;
     @FindBy(xpath = ".//*[@id='modules-tenders-edit-general-validityPeriod']")
     WebElement periodTextbox;
-    @FindBy(xpath = ".//*[@id='tender.general.prNo']")
+    @FindBy(xpath = ".//*[@id='tender.general.prNumber']")
     WebElement prNumberTextbox;
     @FindBy(xpath = ".//*[@id='modules-tenders-edit-general-pr-add']")
     WebElement prNumberAddBtn;
@@ -223,8 +222,16 @@ public class TenderPage extends PageObject {
     WebElement addendumSubmitBtn;
     @FindBy(xpath = ".//*[@id='addendum-detail-content']/div/div/div[3]/div[2]/div[2]/a")
     WebElement addendumSaveBtn;
-
-
+    @FindBy(id = "decline_tender")
+    WebElement vendorDeclineTenderButton;
+    @FindBy(xpath = ".//*[@id='alertDeclineMoal'][contains(@style, 'display: block')]/div[2]/button[2]")
+    WebElement vendorDeclineTenderYesBtn;
+    @FindBy(xpath = ".//*[@id='specifyReasonModal'][contains(@style, 'display: block')]/div[1]/input")
+    WebElement vendorDeclineReasonInput;
+    @FindBy(xpath = ".//*[@id='specifyReasonModal'][contains(@style, 'display: block')]/div[2]/button[2]")
+    WebElement vendorDeclineTenderSubmitBtn;
+    @FindBy(xpath = ".//*[@id='confirmMessageModal'][contains(@style, 'display: block')]/div[2]/button")
+    WebElement vendorDeclineTenderOKBtn;
 
 
     public void clickCreateTender() throws Exception {
@@ -976,10 +983,8 @@ public class TenderPage extends PageObject {
 
     public void clickTenderHistoryStates(int i,String Status, String UserName, String Date) throws Exception {
         List<WebElement> allTenderStatusLines = getAllTenderStatusLines();
-        System.out.println("i = " + i);
-        System.out.println(allTenderStatusLines.get(i).getText());
         Assert.assertTrue("Status is incorrect", allTenderStatusLines.get(i).getText().contains(Status));
-        Assert.assertTrue(" is incorrect",allTenderStatusLines.get(i).getText().contains(UserName));
+        Assert.assertTrue("User name is incorrect",allTenderStatusLines.get(i).getText().contains(UserName));
         Assert.assertTrue("Date is incorrect", allTenderStatusLines.get(i).getText().contains(Date));
     }
 
@@ -1049,6 +1054,19 @@ public class TenderPage extends PageObject {
             commonPage.wait(getDriver(), 2);
         } else
             Assert.fail("Send tender for approve get error, test fail!");
+    }
+
+    public void vendorDeclineBid(String declineReason){
+        commonPage.scrollToElement(vendorDeclineTenderButton);
+        vendorDeclineTenderButton.click();
+        commonPage.wait(getDriver(), 1);
+        vendorDeclineTenderYesBtn.click();
+        commonPage.wait(getDriver(), 1);
+        commonPage.sendKeysOnElement(vendorDeclineReasonInput, declineReason);
+        vendorDeclineTenderSubmitBtn.click();
+        commonPage.wait(getDriver(), 1);
+        vendorDeclineTenderOKBtn.click();
+        commonPage.wait(getDriver(), 1);
     }
 
 }

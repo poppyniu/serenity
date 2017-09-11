@@ -103,4 +103,10 @@ public class SettingsSteps {
         settingsPage.inputNewVendorInfo(vendorID, fullName, shortName, addressLine1, addressLine2, addressLine3, companyPhoneNumber, contactAdmin, contactPhoneNumber, emailAddress);
     }
 
+    @Step
+    public void setActionsForSecurityGroup(String securityGroup, String authorityActions){
+        List<String> actionsList = Arrays.asList(authorityActions.split(","));
+        settingsPage.addAuthority(securityGroup, actionsList);
+    }
+
 }

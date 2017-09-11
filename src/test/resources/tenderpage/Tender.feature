@@ -28,6 +28,9 @@ Feature:Test function on tender page
     Then the tender of PR number <PRNumber> shows the status as SUBMITTED
     And HKLD engineer login to check if contractor has submitted tender
     And Change tender status in db by <PRNumber>
+    And user go back to dashboard page
+    And user wait until the tender of PR number <PRNumber> is shown as Ready_For_Review
+    And user select the tender of PR number <PRNumber> from the dashboard
     And HKLD engineer check current tender status
     And clear tender data of the PR number <PRNumber>
     Examples:

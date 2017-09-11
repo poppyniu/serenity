@@ -35,8 +35,14 @@ public class SettingsPage extends PageObject {
 
     @FindBy(id = "settings-engineers-add-group")
     WebElement securityGroupAddBtn;
+    @FindBy(id = "settings-engineers-security-group-edit")
+    WebElement securityGroupEditBtn;
+    @FindBy(id = "settings-engineers-security-group-save")
+    WebElement securityGroupSaveBtn;
     @FindBy(id = "settings-engineers-security-group-detail-back")
     WebElement securityGroupDetailsBackLink;
+    @FindBy(xpath = ".//*[starts-with(@id,'settings-engineers-security-group-role')]")
+    List<WebElement> securityGroups;
 
     @FindBy(id = "settings-engineers-hkl-user-detail-btn-edit")
     WebElement userDetailsEditBtn;
@@ -212,5 +218,50 @@ public class SettingsPage extends PageObject {
         commonPage.sendKeysOnElement(vendorContactPhoneField, contactPhoneNumber);
         commonPage.sendKeysOnElement(vendorEmailAddress, emailAddress);
         vendorNewAddBtn.click();
+    }
+
+    public void addAuthority(String securityGroup, List<String> authorityActions){
+        securityGroupEditBtn.click();
+        commonPage.wait(getDriver(), 1);
+        for(int index = 0; index<securityGroups.size(); index++){
+            if(securityGroups.get(index).getText().contains(securityGroup)){
+                for(int i=0; i<authorityActions.size(); i++) {
+                    switch (authorityActions.get(i)) {
+                        case "ITQ/Tender_All Actions":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[1]/td/input")).get(index).click();
+                            break;
+                        case "ITQ/Tender_Read All":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[2]/td/input")).get(index).click();
+                            break;
+                        case "ITQ/Tender_Create/Update":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[3]/td/input")).get(index).click();
+                            break;
+                        case "ITQ/Tender_Approve":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[4]/td/input")).get(index).click();
+                            break;
+                        case "Project_All Actions":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[5]/td/input")).get(index).click();
+                            break;
+                        case "Project_Read All":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[6]/td/input")).get(index).click();
+                            break;
+                        case "Project_Manage Project Workspace":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[7]/td/input")).get(index).click();
+                            break;
+                        case "Settings_All Actions":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[8]/td/input")).get(index).click();
+                            break;
+                        case "Settings_Read":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[9]/td/input")).get(index).click();
+                            break;
+                        case "Settings_Update":
+                            getDriver().findElements(By.xpath(".//*[@id='settings-engineers-security-group-data']/table/tbody/tr[10]/td/input")).get(index).click();
+                            break;
+                    }
+                }
+            }
+        }
+        securityGroupSaveBtn.click();
+        commonPage.wait(getDriver(), 1);
     }
 }
