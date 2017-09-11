@@ -183,7 +183,6 @@ public class DashboardPage extends PageObject {
         for (int i = 0; i < allTenderLines.size(); i++) {
             if (allTenderLines.get(i).getText().contains(prNumber)) {
                 while (!(getAllTenderLines().get(i).getText().replace("\n", "").contains("READY_FOR_REVIEW"))) {
-                    System.out.println(getAllTenderLines().get(i).getText().replace("\n", ""));
                     getDriver().navigate().refresh();
                     commonPage.wait(getDriver(), 5);
                 }
