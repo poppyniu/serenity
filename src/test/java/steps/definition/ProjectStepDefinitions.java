@@ -18,6 +18,11 @@ public class ProjectStepDefinitions {
         projectSteps.create_project(poNo);
     }
 
+    @And("^Engineer create project with ([^\"]*)$")
+    public void create_project(String poNo) throws Throwable {
+        projectSteps.create_project1(poNo);
+    }
+
     @And("^Vendor login to do the first partial submission ([^\"]*)$")
     public void vendor_login_to_do_the_first_partial_submission(String completionAmount) throws Throwable {
         projectSteps.first_submission(completionAmount);
@@ -98,6 +103,22 @@ public class ProjectStepDefinitions {
     public void vendor_login_to_test_po_amount_field(String amount) throws Throwable {
         projectSteps.vendor_check_amount(amount);
     }
+
+    @And("^Do several PO validation$")
+    public void do_several_PO_validation() throws Throwable {
+        projectSteps.do_po_validation();
+    }
+
+    @And("^Engineer do project request change$")
+    public void engineer_do_project_request_change() throws Throwable {
+        projectSteps.do_request_change();
+    }
+
+    @And("^Vendor login to check if can edit the last submission$")
+    public void vendor_check_can_edit_submission() throws Throwable {
+        projectSteps.vendor_can_edit_last_submission();
+    }
+
 
 }
 

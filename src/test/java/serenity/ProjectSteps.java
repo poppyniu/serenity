@@ -16,6 +16,11 @@ public class ProjectSteps {
     }
 
     @Step
+    public void create_project1(String poNo) throws Exception {
+        projectPage.createProject1(poNo);
+    }
+
+    @Step
     public void first_submission(String completionAmount) throws Exception {
         projectPage.firstSubmission(completionAmount);
     }
@@ -89,5 +94,21 @@ public class ProjectSteps {
     public void vendor_check_amount(String amount) throws Exception {
         projectPage.vendorCheckAmount(amount);
     }
+
+    @Step
+    public void do_po_validation() throws Exception {
+        projectPage.poValidation();
+    }
+
+    @Step
+    public void do_request_change() throws Exception {
+        projectPage.poRequestChange();
+    }
+
+    @Step
+    public void vendor_can_edit_last_submission() throws Exception {
+        projectPage.vendorCheckCanEditSubmission();
+    }
+
 
 }

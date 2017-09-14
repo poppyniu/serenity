@@ -23,7 +23,7 @@ Feature:Test function on project page
     Then Clear project test data in db by <PoNo>
     Examples:
     |PoNo|Completion Amount|Completion Amount1|Completion Amount2|
-    |333333|2000           |6000              |1000              |
+    |80070962|2000           |3000              |1000              |
 
   @RejectProject
   Scenario Outline: HKLD engineer reject a full submission of a project
@@ -37,7 +37,7 @@ Feature:Test function on project page
     Then Clear project test data in db by <PoNo>
     Examples:
       |PoNo|Completion Amount|
-      |333333|2000           |
+      |80070962|2000           |
 
 
   @ProjectAmount @Regression
@@ -48,4 +48,27 @@ Feature:Test function on project page
     Then Clear project test data in db by <PoNo>
     Examples:
       |PoNo|Completion Amount|
-      |333333|2000           |
+      |80070962|2000           |
+
+  @POValidation @Regression
+  Scenario Outline:  Do PO number validation
+    And Clear project test data in db by <PoNo>
+    And Engineer create project with <PoNo>
+    And Do several PO validation
+    Then Clear project test data in db by <PoNo>
+    Examples:
+      | PoNo     |
+      | 80070962 |
+
+  @RequestChange @Regression
+  Scenario Outline: Project request change
+    And Clear project test data in db by <PoNo>
+    And Create project with <PoNo> and add doc type and invite vendor
+    And Vendor login to do the first partial submission <Completion Amount>
+    And Engineer approve the first partial submission and check project status
+    And Engineer do project request change
+    And Vendor login to check if can edit the last submission
+    Then Clear project test data in db by <PoNo>
+    Examples:
+      | PoNo     |Completion Amount|
+      | 80070962 |2000             |

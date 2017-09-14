@@ -61,8 +61,8 @@ Feature: Functions on dashboard.
     |57070    |59004 |
     |52155    |57556 |
 
+   #comment: move the sequence and shall be able to skip below skipped steps
   @dashboard @Regression
-    #comment: move the sequence and shall be able to skip below skipped steps
   Scenario: The bubble number on the top of the dashboard shows the correct number
     Given clear tender data of the PR number 51120
     When Open ETender system login page

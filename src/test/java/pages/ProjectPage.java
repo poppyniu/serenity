@@ -35,7 +35,7 @@ public class ProjectPage extends PageObject {
     WebElement addDocTypeBtn3;
     @FindBy(xpath = "html/body/div[1]/div[2]/div[1]/div/div[3]/div[2]/div/div/div/button")
     WebElement inviteBtn;
-    @FindBy(xpath = ".//*[@id='project-detail-invite-vendor']/div[4]/div/div/button")
+    @FindBy(xpath = ".//*[@id='project-detail-invite-vendor']/div[4]/div/button")
     WebElement inviteBtn1;
     @FindBy(xpath = ".//*[@id='project-detail-invite-success']/div[4]/div/button")
     WebElement inviteOkBtn;
@@ -109,6 +109,12 @@ public class ProjectPage extends PageObject {
     WebElement rejectByName;
     @FindBy(xpath = ".//*[@id='submission-request-form']/div/div[4]/div/div[4]/label[1]")
     WebElement remainText;
+    @FindBy(xpath = ".//*[@id='project-sr-dotted-dropdown-0']/li/i")
+    WebElement requestChangeDropDown;
+    @FindBy(xpath = ".//*[@id='project-sr-dotted-dropdown-0']/li/ul/li/div")
+    WebElement requestChangeDropDownItem;
+    @FindBy(xpath = ".//*[@id='project-sr-request-change-modal']/div[4]/div/button")
+    WebElement requestChangeYesContinue;
 
 
 
@@ -129,10 +135,18 @@ public class ProjectPage extends PageObject {
         inviteBtn.click();
         commonPage.wait(getDriver(), 2);
         inviteBtn1.click();
-        commonPage.wait(getDriver(), 2);
+        commonPage.wait(getDriver(), 5);
         inviteOkBtn.click();
-        commonPage.wait(getDriver(), 1);
-        checkSucceed("Project invite vendor");
+        commonPage.wait(getDriver(), 2);
+        if(dashboardPage.projectItem80070962.getText().contains("80070962")){
+            System.out.println("Create project succeed, test pass!");
+        }
+        else
+            System.out.println("Create project get error, test fail!");
+    }
+
+    public void createProject1(String poNo) throws Exception {
+        dashboardPage.clickCreateProject(poNo);
     }
 
     public void firstSubmission(String amount) throws Exception {
@@ -144,7 +158,7 @@ public class ProjectPage extends PageObject {
     public void engineerApproveSubmission() throws Exception {
         engineerLoginApproveOrReject("approve");
         checkProjectStatus("1st");
-        checkProjectCompletion("20.00%");
+        checkProjectCompletion("26.88%");
 
     }
 
@@ -156,7 +170,7 @@ public class ProjectPage extends PageObject {
     public void engineerApproveSecondSubmission() throws Exception {
         engineerLoginApproveOrReject("approve");
         checkProjectStatus("2nd");
-        checkProjectCompletion("80.00%");
+        checkProjectCompletion("67.20%");
     }
 
     public void thirdFinalSubmission(String amount2) throws Exception {
@@ -283,7 +297,7 @@ public class ProjectPage extends PageObject {
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
         checkProjectStatus("3rd");
-        checkProjectCompletion("90.00%");
+        checkProjectCompletion("80.65%");
     }
 
     public void checkProjectStatus(String expectedStatus) throws Exception {
@@ -345,10 +359,7 @@ public class ProjectPage extends PageObject {
         commonPage.sendKeysOnElement(amountTextbox, amount);
         commonPage.wait(getDriver(), 2);
         itemsServiceTextBox.click();
-        int totalValue=10000;
-        int inputValue=Integer.parseInt(amount);
-        int remainValue=Integer.parseInt(remainText.getText().substring(0,4));
-        if(totalValue-inputValue==remainValue){
+        if(remainText.getText().contains("5,440")){
             System.out.println("The amount function works well,test pass!");
         }
         else
@@ -420,7 +431,7 @@ public class ProjectPage extends PageObject {
         getDriver().get(URLConstants.contractorLoginPage);
         commonPage.wait(getDriver(), 2);
         loginPage.Login(TestAccountsConstants.contractorName, TestAccountsConstants.contractorPwd);
-        dashboardPage.projectItemOne.click();
+        dashboardPage.projectItem80070962.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
         commonPage.navigatePage(currentUrl);
@@ -437,4 +448,55 @@ public class ProjectPage extends PageObject {
         commonPage.navigatePage(currentUrl);
         commonPage.wait(getDriver(), 2);
     }
+
+    public void poValidation() throws Exception{
+        dashboardPage.hkldLogo.click();
+        commonPage.wait(getDriver(), 2);
+        getDriver().navigate().refresh();
+        commonPage.wait(getDriver(), 5);
+        dashboardPage.createProjectBtn.click();
+        commonPage.wait(getDriver(), 2);
+        commonPage.sendKeysOnElement(dashboardPage.poNoTextbox,"333");
+        dashboardPage.addPoNoBtn.click();
+        commonPage.wait(getDriver(), 4);
+        dashboardPage.checkPoValidationInfo("Invalid PO Number, please input another PO Number");
+        inputPo("80070962");
+        dashboardPage.checkPoValidationInfo("Duplicate PO Number, please input another PO Number");
+        inputPo("80055582");
+        dashboardPage.checkPoValidationInfo("You are not allowed to view this PO, please input another PO number");
+    }
+
+    private void inputPo(String poNumber) throws Exception{
+        dashboardPage.poNoTextbox.clear();
+        commonPage.sendKeysOnElement(dashboardPage.poNoTextbox,poNumber);
+        dashboardPage.addPoNoBtn.click();
+        commonPage.wait(getDriver(), 2);
+        dashboardPage.addPoNoBtn.click();
+        commonPage.wait(getDriver(), 3);
+    }
+
+    public void poRequestChange() throws Exception{
+        commonPage.wait(getDriver(), 2);
+        dashboardPage.projectItem80070962.click();
+        commonPage.wait(getDriver(), 3);
+        requestChangeDropDown.click();
+        commonPage.wait(getDriver(), 2);
+        requestChangeDropDownItem.click();
+        commonPage.wait(getDriver(), 2);
+        requestChangeYesContinue.click();
+        commonPage.wait(getDriver(), 1);
+        checkSucceed("Request change") ;
+    }
+
+    public void vendorCheckCanEditSubmission() throws Exception{
+        contractorLoginOpenProjectItem();
+        //can do the submission directly without re-input
+        commonPage.scrollToElement(positionTextBox);
+        positionTextBox.clear();
+        commonPage.sendKeysOnElement(positionTextBox, "edit");
+        submitBtn.click();
+        commonPage.wait(getDriver(), 1);
+        checkSucceed("After change request do the re-submission") ;
+    }
+
 }

@@ -62,6 +62,12 @@ public class DashboardPage extends PageObject {
     WebElement viewAllTendersBtn;
     @FindBy(xpath = "//tr[./td/a[text()='58668']]/td[3]")
     WebElement tenderStatusColumn;
+    @FindBy(xpath = "//a[contains(text(),'80070962')]")
+    WebElement projectItem80070962;
+    @FindBy(xpath = ".//*[@id='hint']")
+    WebElement poValidationInfo;
+
+
 
 
     /*
@@ -189,5 +195,13 @@ public class DashboardPage extends PageObject {
                 break;
             }
         }
+    }
+
+    public void checkPoValidationInfo(String ExpectedInfo) {
+        if (poValidationInfo.getText().contains(ExpectedInfo)) {
+            System.out.println("The expected po validation info shows correctly, test pass");
+        }
+        else
+            Assert.fail("The expected po validation info not shows correctly, test fail");
     }
 }
