@@ -38,7 +38,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |Senior Manager |ITQ/Tender_Read All,Project_Read All|
       |Approver       |Project_Read All|
 
-  @settinga @Regression
+  @setting @Regression
   Scenario Outline: Edit a user to add setting attributes
     When user access Users setting
     And he selects the user <User Name> from the user list
@@ -49,6 +49,7 @@ Feature: HKLD admin user is able to do configuration on settings page.
       |User Name|Attribute|
       |sophie|Engineer,AH,PB,CH,LM,ES,JH|
       |elon|Approver,AH,PB,CH,LM,ES,JH|
+      |morgan |Engineer,AH,PB,CH,ES,JH|
 
   @setting @Regression
   Scenario: Set the threshold for ITQ/Tender

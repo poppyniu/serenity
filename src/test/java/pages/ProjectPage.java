@@ -441,7 +441,7 @@ public class ProjectPage extends PageObject {
     private void engineerLoginOpenProjectItem() throws Exception{
         getDriver().get(URLConstants.hkldLoginPage);
         commonPage.wait(getDriver(), 2);
-        loginPage.Login(TestAccountsConstants.hkldUserName, TestAccountsConstants.contractorPwd);
+        loginPage.Login(TestAccountsConstants.hkldUserName1, TestAccountsConstants.contractorPwd);
         dashboardPage.engineerProjectItemOne.click();
         commonPage.wait(getDriver(), 2);
         currentUrl = getDriver().getCurrentUrl();
@@ -458,7 +458,7 @@ public class ProjectPage extends PageObject {
         commonPage.wait(getDriver(), 2);
         commonPage.sendKeysOnElement(dashboardPage.poNoTextbox,"333");
         dashboardPage.addPoNoBtn.click();
-        commonPage.wait(getDriver(), 4);
+        commonPage.wait(getDriver(), 6);
         dashboardPage.checkPoValidationInfo("Invalid PO Number, please input another PO Number");
         inputPo("80070962");
         dashboardPage.checkPoValidationInfo("Duplicate PO Number, please input another PO Number");

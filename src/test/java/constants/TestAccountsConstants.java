@@ -16,4 +16,5 @@ public class TestAccountsConstants {
     public static String contractorNameITQ="michelle_zhang@epam.com";
     public static String afterLoginName="Poppy";
     public static String contractorName="gino_zhu@epam.com";
+    public static String hkldUserName1 = "morgan";
 }

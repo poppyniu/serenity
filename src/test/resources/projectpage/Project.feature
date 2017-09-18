@@ -2,12 +2,11 @@ Feature:Test function on project page
 
   Background:
     Given  Open ETender system login page
-    When Input valid user name and pwd and click login button
-    Then HKLD engineer login to ETender system succeed
 
 
   @ProjectFlow
   Scenario Outline: Test whole flow for project
+    When user logs in with user name <User Name> and password <Password>
     And Clear project test data in db by <PoNo>
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to do the first partial submission <Completion Amount>
@@ -22,11 +21,12 @@ Feature:Test function on project page
     And Engineer re-approve the third final submission and check project status
     Then Clear project test data in db by <PoNo>
     Examples:
-    |PoNo|Completion Amount|Completion Amount1|Completion Amount2|
-    |80070962|2000           |3000              |1000              |
+    |User Name|Password|PoNo|Completion Amount|Completion Amount1|Completion Amount2|
+    |morgan   |aaaaaa|80070962|2000           |3000              |1000              |
 
   @RejectProject
   Scenario Outline: HKLD engineer reject a full submission of a project
+    When user logs in with user name <User Name> and password <Password>
     And Clear project test data in db by <PoNo>
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to do the full submission <Completion Amount> without uploading the needed docs
@@ -36,32 +36,35 @@ Feature:Test function on project page
     And Vendor login to check project status
     Then Clear project test data in db by <PoNo>
     Examples:
-      |PoNo|Completion Amount|
-      |80070962|2000           |
+      |User Name|Password|PoNo|Completion Amount|
+      |morgan   |aaaaaa|80070962|2000           |
 
 
   @ProjectAmount @Regression
   Scenario Outline:  Check PO amount completion amount remaining balance
+    When user logs in with user name <User Name> and password <Password>
     And Clear project test data in db by <PoNo>
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to test po amount field <Completion Amount>
     Then Clear project test data in db by <PoNo>
     Examples:
-      |PoNo|Completion Amount|
-      |80070962|2000           |
+      |User Name|Password|PoNo|Completion Amount|
+      |morgan   |aaaaaa|80070962|2000           |
 
   @POValidation @Regression
   Scenario Outline:  Do PO number validation
+    When user logs in with user name <User Name> and password <Password>
     And Clear project test data in db by <PoNo>
     And Engineer create project with <PoNo>
     And Do several PO validation
     Then Clear project test data in db by <PoNo>
     Examples:
-      | PoNo     |
-      | 80070962 |
+      |User Name|Password| PoNo     |
+     |morgan   |aaaaaa| 80070962 |
 
   @RequestChange @Regression
   Scenario Outline: Project request change
+    When user logs in with user name <User Name> and password <Password>
     And Clear project test data in db by <PoNo>
     And Create project with <PoNo> and add doc type and invite vendor
     And Vendor login to do the first partial submission <Completion Amount>
@@ -70,5 +73,5 @@ Feature:Test function on project page
     And Vendor login to check if can edit the last submission
     Then Clear project test data in db by <PoNo>
     Examples:
-      | PoNo     |Completion Amount|
-      | 80070962 |2000             |
+      |User Name|Password| PoNo     |Completion Amount|
+      |morgan   |aaaaaa| 80070962 |2000             |

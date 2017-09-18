@@ -212,9 +212,9 @@ public class TenderPage extends PageObject {
     WebElement requestExtensionInfo;
     @FindBy(xpath = ".//*[@id='submit_tender_addendum']")
     WebElement submitAddendumBtn;
-    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[1]/pre")
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[1]/div[2]/pre")
     WebElement extensionRequestLable;
-    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[3]/pre")
+    @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[3]/div[2]/pre")
     WebElement locationLable;
     @FindBy(xpath = ".//*[@id='summaryModal']/div[1]/div/div[5]/pre")
     WebElement fileLable;
@@ -563,6 +563,7 @@ public class TenderPage extends PageObject {
         vendorSaveButton.click();
         commonPage.wait(getDriver(), 2);
         vendorSubmitButton.click();
+        commonPage.wait(getDriver(), 2);
         contractorSubmitInfo.click();
         Actions actions = new Actions(getDriver());
         actions.sendKeys(Keys.TAB).perform();
